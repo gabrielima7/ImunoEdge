@@ -10,11 +10,14 @@ filho pelo ProcessOrchestrator.
 
 from __future__ import annotations
 
+import contextlib
 import json
+import os
 import random
 import sys
 import time
 from datetime import UTC, datetime
+from pathlib import Path
 
 
 def simulate_sensor_reading() -> dict[str, float | str]:
@@ -50,6 +53,12 @@ def main() -> None:
             output = json.dumps(reading)
             sys.stdout.write(output + "\n")
             sys.stdout.flush()
+
+            # Heartbeat (se configurado)
+            heartbeat_file = os.getenv("IMUNOEDGE_HEARTBEAT_FILE")
+            if heartbeat_file:
+                with contextlib.suppress(OSError):
+                    Path(heartbeat_file).touch()
 
             time.sleep(interval)
 

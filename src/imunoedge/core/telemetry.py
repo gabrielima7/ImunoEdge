@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import threading
 import time
 import uuid
@@ -265,6 +266,7 @@ class TelemetryClient:
 
         """
         try:
+            self._enforce_buffer_limit()
             filepath = self._buffer_dir / f"{payload.payload_id}.json"
             filepath.write_text(
                 json.dumps(asdict(payload), indent=2, default=str),
@@ -274,6 +276,73 @@ class TelemetryClient:
             logger.debug("Payload armazenado em %s", filepath)
         except OSError:
             logger.exception("Erro ao armazenar payload localmente")
+
+    def _enforce_buffer_limit(self) -> None:
+        """Enforce log rotation (FIFO) to keep buffer size under limit.
+
+        If buffer exceeds 50MB, removes oldest .json files until size drops
+        below 45MB (hysteresis to prevent constant deletion/writing).
+        """
+        max_size_mb = float(os.getenv("IMUNOEDGE_MAX_BUFFER_MB", "50"))
+        cleanup_target_mb = max(0.0, max_size_mb - 5.0)  # Target 45MB
+
+        max_size_bytes = int(max_size_mb * 1024 * 1024)
+        target_size_bytes = int(cleanup_target_mb * 1024 * 1024)
+
+        try:
+            # 1. List all files and calculate total size
+            files = list(self._buffer_dir.glob("*.json"))
+            if not files:
+                return
+
+            # Stat once to avoid race conditions/multiple calls
+            file_stats = []
+            total_size = 0
+            for p in files:
+                try:
+                    st = p.stat()
+                    file_stats.append((p, st.st_size, st.st_mtime))
+                    total_size += st.st_size
+                except OSError:
+                    # File might have been deleted
+                    pass
+
+            if total_size <= max_size_bytes:
+                return
+
+            # 2. Sort by mtime (oldest first)
+            file_stats.sort(key=lambda x: x[2])
+
+            bytes_to_free = total_size - target_size_bytes
+            freed = 0
+            deleted_count = 0
+
+            # 3. Delete files until target reached
+            for p, size, _ in file_stats:
+                if freed >= bytes_to_free:
+                    break
+
+                try:
+                    p.unlink()
+                    freed += size
+                    deleted_count += 1
+                except OSError:
+                    continue
+
+            if deleted_count > 0:
+                logger.warning(
+                    "HARDENING: Rotação de buffer acionada. "
+                    "Tamanho: %.2fMB > %.2fMB. "
+                    "Removidos %d arquivos (%.2fMB). Nova ocupação: %.2fMB.",
+                    total_size / (1024 * 1024),
+                    max_size_mb,
+                    deleted_count,
+                    freed / (1024 * 1024),
+                    (total_size - freed) / (1024 * 1024),
+                )
+
+        except Exception:
+            logger.exception("Erro crítico durante rotação de buffer (Hardening)")
 
     def _flush_buffer(self) -> int:
         """Tenta reenviar todos os payloads armazenados.

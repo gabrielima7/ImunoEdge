@@ -8,6 +8,7 @@ Utiliza `run_safe_command` do TaipanStack para execução segura.
 
 from __future__ import annotations
 
+import contextlib
 import logging
 import os
 import signal
@@ -59,6 +60,8 @@ class WorkerProcess:
     essential: bool = False
     max_restarts: int = 10
     process: subprocess.Popen[str] | None = field(default=None, repr=False)
+    enable_heartbeat: bool = False
+    heartbeat_file: Path | None = None
 
 
 # Whitelist expandida para incluir python3 (workers são scripts Python)
@@ -112,8 +115,10 @@ class ProcessOrchestrator:
         name: str,
         command: list[str],
         *,
+
         essential: bool = False,
         max_restarts: int = 10,
+        enable_heartbeat: bool = False,
     ) -> None:
         """Registra um novo worker para ser gerenciado.
 
@@ -137,8 +142,14 @@ class ProcessOrchestrator:
                 command=command,
                 essential=essential,
                 max_restarts=max_restarts,
+                enable_heartbeat=enable_heartbeat,
             )
-            logger.info("Worker registrado: %s → %s", name, " ".join(command))
+            logger.info(
+                "Worker registrado: %s → %s (Heartbeat: %s)",
+                name,
+                " ".join(command),
+                enable_heartbeat,
+            )
 
     def _start_worker(self, worker: WorkerProcess) -> bool:
         """Inicia um worker individual usando subprocess direto.
@@ -154,12 +165,35 @@ class ProcessOrchestrator:
 
         """
         try:
+            # SECURITY: shell=False prevents shell injection attacks
+            # Arguments are passed as a list, ensuring they are not interpreted by shell
+            if not isinstance(worker.command, list):
+                raise ValueError(
+                    "Command must be a list of strings (security requirement)"
+                )
+
+            env = os.environ.copy()
+
+            if worker.enable_heartbeat:
+                beat_path = f"/tmp/imunoedge_{worker.name}.beat"  # noqa: S108
+                worker.heartbeat_file = Path(beat_path)
+
+                # Cleanup old heartbeat file to ensure fresh start
+                with contextlib.suppress(OSError):
+                    worker.heartbeat_file.unlink()
+
+                # Initialize heartbeat file
+                worker.heartbeat_file.touch()
+                env["IMUNOEDGE_HEARTBEAT_FILE"] = str(worker.heartbeat_file)
+
             proc = subprocess.Popen(
                 worker.command,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
                 cwd=str(self._cwd) if self._cwd else None,
+                shell=False,  # SECURITY: Explicitly disable shell
+                env=env,
             )
             worker.process = proc
             worker.pid = proc.pid
@@ -199,7 +233,31 @@ class ProcessOrchestrator:
             return False
 
         # Usa poll() do Popen — retorna None se ainda está rodando
-        return worker.process.poll() is None
+        # Usa poll() do Popen — retorna None se ainda está rodando
+        is_running = worker.process.poll() is None
+
+        if not is_running:
+            return False
+
+        # Zombie Check (Heartbeat)
+        if worker.enable_heartbeat and worker.heartbeat_file:
+            try:
+                last_beat = worker.heartbeat_file.stat().st_mtime
+                if time.time() - last_beat > 30.0:
+                    logger.error(
+                        "ZOMBIE DETECTED: Worker '%s' (PID %s) não responde há >30s. "
+                        "Matando...",
+                        worker.name,
+                        worker.pid,
+                    )
+                    self._stop_worker(worker)
+                    return False
+            except OSError:
+                # Se o arquivo sumiu, algo está errado, mas assumimos vivo
+                # ou morto na próxima iteração
+                pass
+
+        return True
 
     def start_all(self) -> dict[str, bool]:
         """Inicia todos os workers registrados e o watchdog.
@@ -247,7 +305,7 @@ class ProcessOrchestrator:
             worker: Worker a parar.
 
         """
-        if worker.process is not None and self._is_alive(worker):
+        if worker.process is not None and worker.process.poll() is None:
             try:
                 worker.process.terminate()
                 worker.process.wait(timeout=5)
@@ -260,6 +318,11 @@ class ProcessOrchestrator:
         worker.state = WorkerState.STOPPED
         worker.pid = None
         worker.process = None
+
+        # Cleanup heartbeat file
+        if worker.heartbeat_file and worker.heartbeat_file.exists():
+            with contextlib.suppress(OSError):
+                worker.heartbeat_file.unlink()
 
     def pause_worker(self, name: str) -> bool:
         """Pausa um worker não essencial (envia SIGSTOP).

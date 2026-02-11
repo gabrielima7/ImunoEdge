@@ -246,6 +246,7 @@ class ImunoEdgeRuntime:
                 ["python3", sensor_script],
                 essential=False,
                 max_restarts=_env_int("IMUNOEDGE_MAX_RESTARTS", 10),
+                enable_heartbeat=True,
             )
             return
 
