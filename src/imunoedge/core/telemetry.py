@@ -33,10 +33,22 @@ from taipanstack.utils.metrics import MetricsCollector
 
 logger = logging.getLogger("imunoedge.core.telemetry")
 
-# Caminho padrão FHS para o banco de telemetria
-DEFAULT_DB_PATH = (
-    Path(os.getenv("IMUNOEDGE_DATA_DIR", "/var/lib/imunoedge")) / "buffer.db"
-)
+
+# Caminho padrão para o banco de telemetria (FHS com fallback)
+def _default_db_path() -> Path:
+    """Resolve path do buffer.db com fallback para ./data."""
+    env = os.getenv("IMUNOEDGE_DATA_DIR")
+    if env:
+        return Path(env) / "buffer.db"
+    fhs = Path("/var/lib/imunoedge")
+    try:
+        fhs.mkdir(parents=True, exist_ok=True)
+        return fhs / "buffer.db"
+    except PermissionError:
+        return Path("data") / "buffer.db"
+
+
+DEFAULT_DB_PATH = _default_db_path()
 
 # Limite máximo de linhas no buffer (FIFO)
 MAX_BUFFER_ROWS = int(os.getenv("IMUNOEDGE_MAX_BUFFER_ROWS", "10000"))

@@ -23,9 +23,40 @@ from taipanstack.utils.metrics import MetricsCollector
 
 logger = logging.getLogger("imunoedge.main")
 
-# ─── Caminhos FHS ────────────────────────────────────────────
-FHS_DATA_DIR = Path(os.getenv("IMUNOEDGE_DATA_DIR", "/var/lib/imunoedge"))
-FHS_LOG_DIR = Path(os.getenv("IMUNOEDGE_LOG_DIR", "/var/log/imunoedge"))
+
+# ─── Caminhos FHS (com fallback para dev/CI) ────────────────
+def _resolve_data_dir() -> Path:
+    """Resolve o diretório de dados.
+
+    Usa env var se definida, senão tenta FHS,
+    com fallback para './data' se sem permissão.
+    """
+    env = os.getenv("IMUNOEDGE_DATA_DIR")
+    if env:
+        return Path(env)
+    fhs = Path("/var/lib/imunoedge")
+    try:
+        fhs.mkdir(parents=True, exist_ok=True)
+        return fhs
+    except PermissionError:
+        return Path("data")
+
+
+def _resolve_log_dir() -> Path:
+    """Resolve o diretório de logs."""
+    env = os.getenv("IMUNOEDGE_LOG_DIR")
+    if env:
+        return Path(env)
+    fhs = Path("/var/log/imunoedge")
+    try:
+        fhs.mkdir(parents=True, exist_ok=True)
+        return fhs
+    except PermissionError:
+        return Path("logs")
+
+
+FHS_DATA_DIR = _resolve_data_dir()
+FHS_LOG_DIR = _resolve_log_dir()
 
 # ─── Banner ──────────────────────────────────────────────────────
 BANNER = r"""
