@@ -1,0 +1,39 @@
+﻿2026-02-11T15:30:51.9026029Z ##[group]Run bandit -r src/imunoedge/ -ll --skip B603,B311
+2026-02-11T15:30:51.9026703Z [36;1mbandit -r src/imunoedge/ -ll --skip B603,B311[0m
+2026-02-11T15:30:51.9058630Z shell: /usr/bin/bash -e {0}
+2026-02-11T15:30:51.9058870Z env:
+2026-02-11T15:30:51.9059045Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:51.9059346Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:51.9059775Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+2026-02-11T15:30:51.9060177Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:51.9060526Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:51.9060884Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:51.9061230Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+2026-02-11T15:30:51.9061524Z ##[endgroup]
+2026-02-11T15:30:52.0993041Z [main]	INFO	profile include tests: None
+2026-02-11T15:30:52.0993608Z [main]	INFO	profile exclude tests: None
+2026-02-11T15:30:52.0994132Z [main]	INFO	cli include tests: None
+2026-02-11T15:30:52.0994467Z [main]	INFO	cli exclude tests: B603,B311
+2026-02-11T15:30:52.0996657Z [main]	INFO	running on Python 3.11.14
+2026-02-11T15:30:52.1846063Z Run started:2026-02-11 15:30:52.184357+00:00
+2026-02-11T15:30:52.1846783Z 
+2026-02-11T15:30:52.1846952Z Test results:
+2026-02-11T15:30:52.1847216Z 	No issues identified.
+2026-02-11T15:30:52.1847392Z 
+2026-02-11T15:30:52.1847478Z Code scanned:
+2026-02-11T15:30:52.1847703Z 	Total lines of code: 1201
+2026-02-11T15:30:52.1847993Z 	Total lines skipped (#nosec): 1
+2026-02-11T15:30:52.1848501Z 	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+2026-02-11T15:30:52.1849365Z 
+2026-02-11T15:30:52.1849453Z Run metrics:
+2026-02-11T15:30:52.1849688Z 	Total issues (by severity):
+2026-02-11T15:30:52.1849949Z 		Undefined: 0
+2026-02-11T15:30:52.1850158Z 		Low: 1
+2026-02-11T15:30:52.1850345Z 		Medium: 0
+2026-02-11T15:30:52.1850541Z 		High: 0
+2026-02-11T15:30:52.1850767Z 	Total issues (by confidence):
+2026-02-11T15:30:52.1851033Z 		Undefined: 0
+2026-02-11T15:30:52.1851230Z 		Low: 0
+2026-02-11T15:30:52.1851417Z 		Medium: 0
+2026-02-11T15:30:52.1851600Z 		High: 1
+2026-02-11T15:30:52.1851801Z Files skipped (0):

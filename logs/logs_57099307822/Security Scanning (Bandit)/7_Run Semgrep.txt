@@ -1,0 +1,55 @@
+﻿2026-02-11T15:30:52.2204733Z ##[group]Run semgrep/semgrep-action@v1
+2026-02-11T15:30:52.2205036Z with:
+2026-02-11T15:30:52.2205208Z   config: auto
+2026-02-11T15:30:52.2205375Z env:
+2026-02-11T15:30:52.2205545Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:52.2205836Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:52.2206248Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+2026-02-11T15:30:52.2206911Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:52.2207271Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:52.2207625Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:52.2207974Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+2026-02-11T15:30:52.2208267Z ##[endgroup]
+2026-02-11T15:30:52.2304091Z ##[command]/usr/bin/docker run --name returntocorpsemgrepagentv1_b4f94e --label eac1de --workdir /github/workspace --rm -e "PYTHON_VERSION_DEFAULT" -e "pythonLocation" -e "PKG_CONFIG_PATH" -e "Python_ROOT_DIR" -e "Python2_ROOT_DIR" -e "Python3_ROOT_DIR" -e "LD_LIBRARY_PATH" -e "INPUT_CONFIG" -e "INPUT_PUBLISHTOKEN" -e "HOME" -e "GITHUB_JOB" -e "GITHUB_REF" -e "GITHUB_SHA" -e "GITHUB_REPOSITORY" -e "GITHUB_REPOSITORY_OWNER" -e "GITHUB_REPOSITORY_OWNER_ID" -e "GITHUB_RUN_ID" -e "GITHUB_RUN_NUMBER" -e "GITHUB_RETENTION_DAYS" -e "GITHUB_RUN_ATTEMPT" -e "GITHUB_ACTOR_ID" -e "GITHUB_ACTOR" -e "GITHUB_WORKFLOW" -e "GITHUB_HEAD_REF" -e "GITHUB_BASE_REF" -e "GITHUB_EVENT_NAME" -e "GITHUB_SERVER_URL" -e "GITHUB_API_URL" -e "GITHUB_GRAPHQL_URL" -e "GITHUB_REF_NAME" -e "GITHUB_REF_PROTECTED" -e "GITHUB_REF_TYPE" -e "GITHUB_WORKFLOW_REF" -e "GITHUB_WORKFLOW_SHA" -e "GITHUB_REPOSITORY_ID" -e "GITHUB_TRIGGERING_ACTOR" -e "GITHUB_WORKSPACE" -e "GITHUB_ACTION" -e "GITHUB_EVENT_PATH" -e "GITHUB_ACTION_REPOSITORY" -e "GITHUB_ACTION_REF" -e "GITHUB_PATH" -e "GITHUB_ENV" -e "GITHUB_STEP_SUMMARY" -e "GITHUB_STATE" -e "GITHUB_OUTPUT" -e "RUNNER_OS" -e "RUNNER_ARCH" -e "RUNNER_NAME" -e "RUNNER_ENVIRONMENT" -e "RUNNER_TOOL_CACHE" -e "RUNNER_TEMP" -e "RUNNER_WORKSPACE" -e "ACTIONS_RUNTIME_URL" -e "ACTIONS_RUNTIME_TOKEN" -e "ACTIONS_CACHE_URL" -e "ACTIONS_RESULTS_URL" -e "ACTIONS_ORCHESTRATION_ID" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work/_temp":"/github/runner_temp" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" -v "/home/runner/work/_temp/_runner_file_commands":"/github/file_commands" -v "/home/runner/work/ImunoEdge/ImunoEdge":"/github/workspace" returntocorp/semgrep-agent:v1
+2026-02-11T15:30:52.8329508Z === Running: SEMGREP_RULES="auto" semgrep ci
+2026-02-11T15:30:53.5975679Z                   
+2026-02-11T15:30:53.5976079Z                   
+2026-02-11T15:30:53.5976857Z ┌────────────────┐
+2026-02-11T15:30:53.5977085Z │ Debugging Info │
+2026-02-11T15:30:53.5977291Z └────────────────┘
+2026-02-11T15:30:53.5980698Z                   
+2026-02-11T15:30:53.5980925Z   SCAN ENVIRONMENT
+2026-02-11T15:30:53.6001446Z   versions    - semgrep 1.36.0 on python 3.11.4                                
+2026-02-11T15:30:53.6002186Z   environment - running in environment github-actions, triggering event is push
+2026-02-11T15:30:53.9606761Z                
+2026-02-11T15:30:53.9607248Z                
+2026-02-11T15:30:53.9607898Z ┌─────────────┐
+2026-02-11T15:30:53.9608724Z │ Scan Status │
+2026-02-11T15:30:53.9609133Z └─────────────┘
+2026-02-11T15:30:54.1109670Z   Scanning 119 files tracked by git with 1064 Code rules:
+2026-02-11T15:30:54.1174367Z                                                                                 
+2026-02-11T15:30:54.1175287Z   Language      Rules   Files          Origin      Rules                        
+2026-02-11T15:30:54.1176749Z  ─────────────────────────────        ───────────────────                       
+2026-02-11T15:30:54.1177574Z   <multilang>      48     238          Community    1064                        
+2026-02-11T15:30:54.1178160Z   python          243       8                                                   
+2026-02-11T15:30:54.1179115Z   yaml             31       1                                                   
+2026-02-11T15:30:54.1179572Z   bash              4       1                                                   
+2026-02-11T15:30:54.1180020Z                                                                                 
+2026-02-11T15:30:56.4178129Z                 
+2026-02-11T15:30:56.4178522Z                 
+2026-02-11T15:30:56.4179051Z ┌──────────────┐
+2026-02-11T15:30:56.4179308Z │ Scan Summary │
+2026-02-11T15:30:56.4179528Z └──────────────┘
+2026-02-11T15:30:56.4179791Z Some files were skipped or only partially analyzed.
+2026-02-11T15:30:56.4180151Z   Scan was limited to files tracked by git.
+2026-02-11T15:30:56.4180643Z   Partially scanned: 1 files only partially analyzed due to parsing or internal Semgrep errors
+2026-02-11T15:30:56.4181042Z 
+2026-02-11T15:30:56.4181300Z (need more rules? `semgrep login` for additional free Semgrep Registry rules)
+2026-02-11T15:30:56.4181677Z 
+2026-02-11T15:30:56.4181776Z CI scan completed successfully.
+2026-02-11T15:30:56.4182058Z   Found 0 findings (0 blocking) from 1064 rules.
+2026-02-11T15:30:56.4182391Z   No blocking findings so exiting with code 0
+2026-02-11T15:30:56.4224276Z 
+2026-02-11T15:30:56.4225066Z A new version of Semgrep is available. See https://semgrep.dev/docs/upgrading
+2026-02-11T15:30:56.4225747Z 
+2026-02-11T15:30:56.4226098Z Versions prior to 1.76.0 are no longer supported by Semgrep.dev, please upgrade.

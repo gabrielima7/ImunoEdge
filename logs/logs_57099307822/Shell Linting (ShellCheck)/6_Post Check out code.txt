@@ -1,0 +1,32 @@
+﻿2026-02-11T15:30:38.5664348Z Post job cleanup.
+2026-02-11T15:30:38.6438976Z [command]/usr/bin/git version
+2026-02-11T15:30:38.6505992Z git version 2.52.0
+2026-02-11T15:30:38.6547442Z Temporarily overriding HOME='/home/runner/work/_temp/157c54d8-601e-4fba-bc0f-8657ee899049' before making global git config changes
+2026-02-11T15:30:38.6548989Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:30:38.6554278Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:30:38.6588860Z Removing SSH command configuration
+2026-02-11T15:30:38.6595654Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:30:38.6631940Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:30:38.6853844Z Removing HTTP extra header
+2026-02-11T15:30:38.6858325Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:30:38.6889469Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:30:38.7101472Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:30:38.7107959Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:30:38.7129045Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:30:38.7130211Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:30:38.7131126Z includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:30:38.7131882Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:30:38.7140466Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:30:38.7160564Z /home/runner/work/_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7170634Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path /home/runner/work/_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7202528Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:30:38.7223131Z /home/runner/work/_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7232484Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7261694Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:30:38.7282590Z /github/runner_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7291119Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7321895Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:30:38.7341833Z /github/runner_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7351929Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config
+2026-02-11T15:30:38.7382811Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:30:38.7596861Z Removing credentials config '/home/runner/work/_temp/git-credentials-284e3ef2-cbea-400c-bb4a-97c097e5963d.config'

@@ -1,0 +1,40 @@
+﻿2026-02-11T15:30:35.6673726Z ##[group]Checking docker version
+2026-02-11T15:30:35.6687135Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:30:35.7293952Z '1.48'
+2026-02-11T15:30:35.7305625Z Docker daemon API version: '1.48'
+2026-02-11T15:30:35.7306463Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:30:35.7481165Z '1.48'
+2026-02-11T15:30:35.7493870Z Docker client API version: '1.48'
+2026-02-11T15:30:35.7499510Z ##[endgroup]
+2026-02-11T15:30:35.7502744Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:30:35.7508247Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=9b0359"
+2026-02-11T15:30:35.7658565Z ##[command]/usr/bin/docker network prune --force --filter "label=9b0359"
+2026-02-11T15:30:35.7796604Z ##[endgroup]
+2026-02-11T15:30:35.7797190Z ##[group]Create local container network
+2026-02-11T15:30:35.7807880Z ##[command]/usr/bin/docker network create --label 9b0359 github_network_58ceaa96575f4059ae94084693b365b5
+2026-02-11T15:30:35.8323014Z eedc7007b432f2c1c3f0096a9149c5507bc6a3f384525282f65074903eb91ce0
+2026-02-11T15:30:35.8343749Z ##[endgroup]
+2026-02-11T15:30:35.8368233Z ##[group]Starting job container
+2026-02-11T15:30:35.8390061Z ##[command]/usr/bin/docker pull alpine:3.20
+2026-02-11T15:30:36.4807360Z 3.20: Pulling from library/alpine
+2026-02-11T15:30:36.6734749Z 76eb174b37c3: Pulling fs layer
+2026-02-11T15:30:36.8096314Z 76eb174b37c3: Verifying Checksum
+2026-02-11T15:30:36.8100083Z 76eb174b37c3: Download complete
+2026-02-11T15:30:36.9181510Z 76eb174b37c3: Pull complete
+2026-02-11T15:30:36.9227285Z Digest: sha256:a4f4213abb84c497377b8544c81b3564f313746700372ec4fe84653e4fb03805
+2026-02-11T15:30:36.9242293Z Status: Downloaded newer image for alpine:3.20
+2026-02-11T15:30:36.9250672Z docker.io/library/alpine:3.20
+2026-02-11T15:30:36.9355125Z ##[command]/usr/bin/docker create --name b37ff8fa695f400b88173e45d3189013_alpine320_cd02eb --label 9b0359 --workdir /__w/ImunoEdge/ImunoEdge --network github_network_58ceaa96575f4059ae94084693b365b5  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" alpine:3.20 "-f" "/dev/null"
+2026-02-11T15:30:37.6485825Z 8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359
+2026-02-11T15:30:37.6515029Z ##[command]/usr/bin/docker start 8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359
+2026-02-11T15:30:37.8278178Z 8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359
+2026-02-11T15:30:37.8300154Z ##[command]/usr/bin/docker ps --all --filter id=8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:30:37.8432897Z 8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359 Up Less than a second
+2026-02-11T15:30:37.8454595Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 8fb85abd649823f6eb6e253c1baf5d0775be7c3df40da0a4497ecf2ab2f2c359
+2026-02-11T15:30:37.8584630Z HOME=/github/home
+2026-02-11T15:30:37.8586190Z GITHUB_ACTIONS=true
+2026-02-11T15:30:37.8587514Z CI=true
+2026-02-11T15:30:37.8589172Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:30:37.8608110Z ##[endgroup]
+2026-02-11T15:30:37.8618752Z ##[group]Waiting for all services to be ready
+2026-02-11T15:30:37.8621241Z ##[endgroup]

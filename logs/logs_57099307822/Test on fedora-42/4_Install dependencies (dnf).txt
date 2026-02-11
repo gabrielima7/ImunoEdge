@@ -1,0 +1,276 @@
+﻿2026-02-11T15:30:42.0988810Z ##[group]Run dnf install -y python3 python3-pip git
+2026-02-11T15:30:42.0989354Z [36;1mdnf install -y python3 python3-pip git[0m
+2026-02-11T15:30:42.0992850Z shell: sh -e {0}
+2026-02-11T15:30:42.0993541Z env:
+2026-02-11T15:30:42.0993820Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:42.0994139Z ##[endgroup]
+2026-02-11T15:30:42.1921848Z Updating and loading repositories:
+2026-02-11T15:30:44.8957258Z  Fedora 42 openh264 (From Cisco) - x86_ 100% |   2.6 KiB/s |   5.8 KiB |  00m02s
+2026-02-11T15:30:45.2477207Z  Fedora 42 - x86_64                     100% |  11.6 MiB/s |  35.4 MiB |  00m03s
+2026-02-11T15:30:45.9067600Z  Fedora 42 - x86_64 - Updates           100% |   4.0 MiB/s |  11.0 MiB |  00m03s
+2026-02-11T15:30:49.8747085Z Repositories loaded.
+2026-02-11T15:30:51.3409199Z Package                     Arch   Version                 Repository      Size
+2026-02-11T15:30:51.3409903Z Installing:
+2026-02-11T15:30:51.3410327Z  git                        x86_64 2.53.0-1.fc42           updates     56.4 KiB
+2026-02-11T15:30:51.3411103Z  python3                    x86_64 3.13.11-2.fc42          updates     28.7 KiB
+2026-02-11T15:30:51.3411825Z  python3-pip                noarch 24.3.1-5.fc42           updates     11.3 MiB
+2026-02-11T15:30:51.3412527Z Installing dependencies:
+2026-02-11T15:30:51.3413259Z  expat                      x86_64 2.7.3-1.fc42            updates    301.1 KiB
+2026-02-11T15:30:51.3414061Z  git-core                   x86_64 2.53.0-1.fc42           updates     24.1 MiB
+2026-02-11T15:30:51.3414785Z  git-core-doc               noarch 2.53.0-1.fc42           updates     18.5 MiB
+2026-02-11T15:30:51.3415581Z  groff-base                 x86_64 1.23.0-8.fc42           fedora       3.9 MiB
+2026-02-11T15:30:51.3416241Z  less                       x86_64 679-1.fc42              updates    406.1 KiB
+2026-02-11T15:30:51.3416912Z  libb2                      x86_64 0.98.1-13.fc42          fedora      46.1 KiB
+2026-02-11T15:30:51.3417545Z  libcbor                    x86_64 0.11.0-3.fc42           fedora      77.8 KiB
+2026-02-11T15:30:51.3418226Z  libedit                    x86_64 3.1-56.20251016cvs.fc42 updates    240.2 KiB
+2026-02-11T15:30:51.3418921Z  libfdisk                   x86_64 2.40.4-8.fc42           updates    372.3 KiB
+2026-02-11T15:30:51.3419591Z  libfido2                   x86_64 1.15.0-3.fc42           fedora     242.1 KiB
+2026-02-11T15:30:51.3420289Z  mpdecimal                  x86_64 4.0.1-1.fc42            updates    217.2 KiB
+2026-02-11T15:30:51.3421508Z  ncurses                    x86_64 6.5-5.20250125.fc42     fedora     608.1 KiB
+2026-02-11T15:30:51.3422144Z  openssh                    x86_64 9.9p1-12.fc42           updates      1.4 MiB
+2026-02-11T15:30:51.3422824Z  openssh-clients            x86_64 9.9p1-12.fc42           updates      2.7 MiB
+2026-02-11T15:30:51.3423785Z  perl-AutoLoader            noarch 5.74-519.fc42           updates     20.5 KiB
+2026-02-11T15:30:51.3424534Z  perl-B                     x86_64 1.89-519.fc42           updates    498.0 KiB
+2026-02-11T15:30:51.3425227Z  perl-Carp                  noarch 1.54-512.fc42           fedora      46.6 KiB
+2026-02-11T15:30:51.3426022Z  perl-Class-Struct          noarch 0.68-519.fc42           updates     25.4 KiB
+2026-02-11T15:30:51.3426834Z  perl-Data-Dumper           x86_64 2.189-513.fc42          fedora     115.6 KiB
+2026-02-11T15:30:51.3427635Z  perl-Digest                noarch 1.20-512.fc42           fedora      35.3 KiB
+2026-02-11T15:30:51.3428461Z  perl-Digest-MD5            x86_64 2.59-6.fc42             fedora      59.7 KiB
+2026-02-11T15:30:51.3429232Z  perl-DynaLoader            x86_64 1.56-519.fc42           updates     32.1 KiB
+2026-02-11T15:30:51.3429982Z  perl-Encode                x86_64 4:3.21-512.fc42         fedora       4.7 MiB
+2026-02-11T15:30:51.3430701Z  perl-Errno                 x86_64 1.38-519.fc42           updates      8.3 KiB
+2026-02-11T15:30:51.3431423Z  perl-Error                 noarch 1:0.17030-1.fc42        fedora      76.7 KiB
+2026-02-11T15:30:51.3432190Z  perl-Exporter              noarch 5.78-512.fc42           fedora      54.3 KiB
+2026-02-11T15:30:51.3433504Z  perl-Fcntl                 x86_64 1.18-519.fc42           updates     48.9 KiB
+2026-02-11T15:30:51.3434311Z  perl-File-Basename         noarch 2.86-519.fc42           updates     14.0 KiB
+2026-02-11T15:30:51.3435219Z  perl-File-Path             noarch 2.18-512.fc42           fedora      63.5 KiB
+2026-02-11T15:30:51.3435976Z  perl-File-Temp             noarch 1:0.231.100-512.fc42    fedora     162.3 KiB
+2026-02-11T15:30:51.3436764Z  perl-File-stat             noarch 1.14-519.fc42           updates     12.5 KiB
+2026-02-11T15:30:51.3437557Z  perl-FileHandle            noarch 2.05-519.fc42           updates      9.3 KiB
+2026-02-11T15:30:51.3438364Z  perl-Getopt-Long           noarch 1:2.58-3.fc42           fedora     144.5 KiB
+2026-02-11T15:30:51.3439159Z  perl-Getopt-Std            noarch 1.14-519.fc42           updates     11.2 KiB
+2026-02-11T15:30:51.3439906Z  perl-Git                   noarch 2.53.0-1.fc42           updates     64.4 KiB
+2026-02-11T15:30:51.3440658Z  perl-HTTP-Tiny             noarch 0.090-2.fc42            fedora     154.4 KiB
+2026-02-11T15:30:51.3441360Z  perl-IO                    x86_64 1.55-519.fc42           updates    147.0 KiB
+2026-02-11T15:30:51.3442081Z  perl-IO-Socket-IP          noarch 0.43-2.fc42             fedora     100.3 KiB
+2026-02-11T15:30:51.3442859Z  perl-IO-Socket-SSL         noarch 2.089-2.fc42            fedora     703.3 KiB
+2026-02-11T15:30:51.3443887Z  perl-IPC-Open3             noarch 1.22-519.fc42           updates     22.5 KiB
+2026-02-11T15:30:51.3444677Z  perl-MIME-Base32           noarch 1.303-23.fc42           fedora      30.7 KiB
+2026-02-11T15:30:51.3445449Z  perl-MIME-Base64           x86_64 3.16-512.fc42           fedora      42.0 KiB
+2026-02-11T15:30:51.3446239Z  perl-Net-SSLeay            x86_64 1.94-8.fc42             fedora       1.3 MiB
+2026-02-11T15:30:51.3446968Z  perl-POSIX                 x86_64 2.20-519.fc42           updates    231.0 KiB
+2026-02-11T15:30:51.3447733Z  perl-PathTools             x86_64 3.91-513.fc42           fedora     180.0 KiB
+2026-02-11T15:30:51.3448530Z  perl-Pod-Escapes           noarch 1:1.07-512.fc42         fedora      24.9 KiB
+2026-02-11T15:30:51.3449376Z Total size of inbound packages is 33 MiB. Need to download 33 MiB.
+2026-02-11T15:30:51.3450157Z After this operation, 131 MiB extra will be used (install 131 MiB, remove 0 B).
+2026-02-11T15:30:51.3450965Z  perl-Pod-Perldoc           noarch 3.28.01-513.fc42        fedora     163.7 KiB
+2026-02-11T15:30:51.3451960Z  perl-Pod-Simple            noarch 1:3.45-512.fc42         fedora     560.8 KiB
+2026-02-11T15:30:51.3452707Z  perl-Pod-Usage             noarch 4:2.05-1.fc42           fedora      86.3 KiB
+2026-02-11T15:30:51.3453678Z  perl-Scalar-List-Utils     x86_64 5:1.70-1.fc42           updates    144.9 KiB
+2026-02-11T15:30:51.3454481Z  perl-SelectSaver           noarch 1.02-519.fc42           updates      2.2 KiB
+2026-02-11T15:30:51.3455205Z  perl-Socket                x86_64 4:2.038-512.fc42        fedora     119.9 KiB
+2026-02-11T15:30:51.3455919Z  perl-Storable              x86_64 1:3.32-512.fc42         fedora     232.3 KiB
+2026-02-11T15:30:51.3456620Z  perl-Symbol                noarch 1.09-519.fc42           updates      6.8 KiB
+2026-02-11T15:30:51.3457372Z  perl-Term-ANSIColor        noarch 5.01-513.fc42           fedora      97.5 KiB
+2026-02-11T15:30:51.3458126Z  perl-Term-Cap              noarch 1.18-512.fc42           fedora      29.3 KiB
+2026-02-11T15:30:51.3458850Z  perl-TermReadKey           x86_64 2.38-24.fc42            fedora      64.0 KiB
+2026-02-11T15:30:51.3459621Z  perl-Text-ParseWords       noarch 3.31-512.fc42           fedora      13.6 KiB
+2026-02-11T15:30:51.3460436Z  perl-Text-Tabs+Wrap        noarch 2024.001-512.fc42       fedora      22.6 KiB
+2026-02-11T15:30:51.3461212Z  perl-Time-Local            noarch 2:1.350-512.fc42        fedora      68.9 KiB
+2026-02-11T15:30:51.3461927Z  perl-URI                   noarch 5.31-2.fc42             fedora     257.0 KiB
+2026-02-11T15:30:51.3462614Z  perl-base                  noarch 2.27-519.fc42           updates     12.5 KiB
+2026-02-11T15:30:51.3463788Z  perl-constant              noarch 1.33-513.fc42           fedora      26.2 KiB
+2026-02-11T15:30:51.3464497Z  perl-if                    noarch 0.61.000-519.fc42       updates      5.8 KiB
+2026-02-11T15:30:51.3465216Z  perl-interpreter           x86_64 4:5.40.3-519.fc42       updates    118.4 KiB
+2026-02-11T15:30:51.3465927Z  perl-lib                   x86_64 0.65-519.fc42           updates      8.5 KiB
+2026-02-11T15:30:51.3466613Z  perl-libnet                noarch 3.15-513.fc42           fedora     289.4 KiB
+2026-02-11T15:30:51.3467306Z  perl-libs                  x86_64 4:5.40.3-519.fc42       updates      9.8 MiB
+2026-02-11T15:30:51.3467988Z  perl-locale                noarch 1.12-519.fc42           updates      6.5 KiB
+2026-02-11T15:30:51.3468672Z  perl-mro                   x86_64 1.29-519.fc42           updates     41.5 KiB
+2026-02-11T15:30:51.3469413Z  perl-overload              noarch 1.37-519.fc42           updates     71.5 KiB
+2026-02-11T15:30:51.3470172Z  perl-overloading           noarch 0.02-519.fc42           updates      4.8 KiB
+2026-02-11T15:30:51.3470900Z  perl-parent                noarch 1:0.244-2.fc42          fedora      10.3 KiB
+2026-02-11T15:30:51.3471608Z  perl-podlators             noarch 1:6.0.2-3.fc42          fedora     317.5 KiB
+2026-02-11T15:30:51.3472346Z  perl-vars                  noarch 1.05-519.fc42           updates      3.9 KiB
+2026-02-11T15:30:51.3473260Z  python-pip-wheel           noarch 24.3.1-5.fc42           updates      1.2 MiB
+2026-02-11T15:30:51.3474053Z  python3-libs               x86_64 3.13.11-2.fc42          updates     40.1 MiB
+2026-02-11T15:30:51.3474763Z  util-linux                 x86_64 2.40.4-8.fc42           updates      3.4 MiB
+2026-02-11T15:30:51.3475360Z Installing weak dependencies:
+2026-02-11T15:30:51.3475908Z  perl-NDBM_File             x86_64 1.17-519.fc42           updates     28.4 KiB
+2026-02-11T15:30:51.3476732Z  python-unversioned-command noarch 3.13.11-2.fc42          updates     23.0   B
+2026-02-11T15:30:51.3477289Z 
+2026-02-11T15:30:51.3477431Z Transaction Summary:
+2026-02-11T15:30:51.3477774Z  Installing:        83 packages
+2026-02-11T15:30:51.3478045Z 
+2026-02-11T15:30:51.3613414Z [ 1/83] libb2-0:0.98.1-13.fc42.x86_64   100% |   3.5 MiB/s |  25.4 KiB |  00m00s
+2026-02-11T15:30:51.5506789Z [ 2/83] python3-0:3.13.11-2.fc42.x86_64 100% | 156.0 KiB/s |  30.6 KiB |  00m00s
+2026-02-11T15:30:52.0049652Z [ 3/83] git-0:2.53.0-1.fc42.x86_64      100% |  89.3 KiB/s |  40.4 KiB |  00m00s
+2026-02-11T15:30:52.0096111Z [ 4/83] perl-Getopt-Long-1:2.58-3.fc42. 100% |  15.6 MiB/s |  63.7 KiB |  00m00s
+2026-02-11T15:30:52.0128836Z [ 5/83] perl-PathTools-0:3.91-513.fc42. 100% |  28.4 MiB/s |  87.3 KiB |  00m00s
+2026-02-11T15:30:52.0160138Z [ 6/83] perl-TermReadKey-0:2.38-24.fc42 100% |  17.3 MiB/s |  35.4 KiB |  00m00s
+2026-02-11T15:30:52.3445264Z [ 7/83] python3-pip-0:24.3.1-5.fc42.noa 100% |   2.8 MiB/s |   2.7 MiB |  00m01s
+2026-02-11T15:30:52.3730139Z [ 8/83] python3-libs-0:3.13.11-2.fc42.x 100% |   9.0 MiB/s |   9.2 MiB |  00m01s
+2026-02-11T15:30:52.4222131Z [ 9/83] git-core-0:2.53.0-1.fc42.x86_64 100% |  12.8 MiB/s |   5.2 MiB |  00m00s
+2026-02-11T15:30:52.4237719Z [10/83] perl-Git-0:2.53.0-1.fc42.noarch 100% | 750.6 KiB/s |  37.5 KiB |  00m00s
+2026-02-11T15:30:52.4270932Z [11/83] perl-Exporter-0:5.78-512.fc42.n 100% |   7.6 MiB/s |  31.0 KiB |  00m00s
+2026-02-11T15:30:52.4304643Z [12/83] perl-Text-ParseWords-0:3.31-512 100% |   5.4 MiB/s |  16.5 KiB |  00m00s
+2026-02-11T15:30:52.4326995Z [13/83] perl-Pod-Usage-4:2.05-1.fc42.no 100% |   4.9 MiB/s |  40.5 KiB |  00m00s
+2026-02-11T15:30:52.4338311Z [14/83] perl-constant-0:1.33-513.fc42.n 100% |   7.5 MiB/s |  23.0 KiB |  00m00s
+2026-02-11T15:30:52.4356989Z [15/83] perl-Carp-0:1.54-512.fc42.noarc 100% |  14.1 MiB/s |  28.9 KiB |  00m00s
+2026-02-11T15:30:52.4378377Z [16/83] perl-Error-1:0.17030-1.fc42.noa 100% |  13.1 MiB/s |  40.4 KiB |  00m00s
+2026-02-11T15:30:52.4448980Z [17/83] git-core-doc-0:2.53.0-1.fc42.no 100% |  31.4 MiB/s |   3.1 MiB |  00m00s
+2026-02-11T15:30:52.4459625Z [18/83] perl-Pod-Perldoc-0:3.28.01-513. 100% |   9.3 MiB/s |  85.8 KiB |  00m00s
+2026-02-11T15:30:52.4492069Z [19/83] perl-podlators-1:6.0.2-3.fc42.n 100% |  12.6 MiB/s | 128.6 KiB |  00m00s
+2026-02-11T15:30:52.4527102Z [20/83] perl-HTTP-Tiny-0:0.090-2.fc42.n 100% |  18.4 MiB/s |  56.5 KiB |  00m00s
+2026-02-11T15:30:52.4579006Z [21/83] groff-base-0:1.23.0-8.fc42.x86_ 100% | 100.4 MiB/s |   1.1 MiB |  00m00s
+2026-02-11T15:30:52.4595032Z [22/83] perl-File-Temp-1:0.231.100-512. 100% |   4.8 MiB/s |  59.2 KiB |  00m00s
+2026-02-11T15:30:52.4612046Z [23/83] perl-Pod-Simple-1:3.45-512.fc42 100% |  26.7 MiB/s | 219.0 KiB |  00m00s
+2026-02-11T15:30:52.4623354Z [24/83] perl-parent-1:0.244-2.fc42.noar 100% |   5.0 MiB/s |  15.2 KiB |  00m00s
+2026-02-11T15:30:52.4636647Z [25/83] perl-Term-ANSIColor-0:5.01-513. 100% |  15.5 MiB/s |  47.7 KiB |  00m00s
+2026-02-11T15:30:52.4647778Z [26/83] perl-Term-Cap-0:1.18-512.fc42.n 100% |   7.2 MiB/s |  22.2 KiB |  00m00s
+2026-02-11T15:30:52.4663618Z [27/83] perl-File-Path-0:2.18-512.fc42. 100% |  11.5 MiB/s |  35.2 KiB |  00m00s
+2026-02-11T15:30:52.4681166Z [28/83] perl-IO-Socket-SSL-0:2.089-2.fc 100% |  56.2 MiB/s | 230.2 KiB |  00m00s
+2026-02-11T15:30:52.4696388Z [29/83] perl-MIME-Base64-0:3.16-512.fc4 100% |   7.3 MiB/s |  29.9 KiB |  00m00s
+2026-02-11T15:30:52.4730018Z [30/83] perl-Time-Local-2:1.350-512.fc4 100% |  16.8 MiB/s |  34.5 KiB |  00m00s
+2026-02-11T15:30:52.4743894Z [31/83] perl-Socket-4:2.038-512.fc42.x8 100% |  10.7 MiB/s |  54.8 KiB |  00m00s
+2026-02-11T15:30:52.4766932Z [32/83] perl-Net-SSLeay-0:1.94-8.fc42.x 100% |  40.8 MiB/s | 376.0 KiB |  00m00s
+2026-02-11T15:30:52.4775369Z [33/83] perl-Pod-Escapes-1:1.07-512.fc4 100% |   4.8 MiB/s |  19.8 KiB |  00m00s
+2026-02-11T15:30:52.4789173Z [34/83] perl-Text-Tabs+Wrap-0:2024.001- 100% |   5.3 MiB/s |  21.8 KiB |  00m00s
+2026-02-11T15:30:52.4820581Z [35/83] perl-IO-Socket-IP-0:0.43-2.fc42 100% |  13.8 MiB/s |  42.4 KiB |  00m00s
+2026-02-11T15:30:52.4839891Z [36/83] perl-URI-0:5.31-2.fc42.noarch   100% |  34.4 MiB/s | 140.7 KiB |  00m00s
+2026-02-11T15:30:52.4859381Z [37/83] ncurses-0:6.5-5.20250125.fc42.x 100% |  59.2 MiB/s | 424.5 KiB |  00m00s
+2026-02-11T15:30:52.4873780Z [38/83] perl-Data-Dumper-0:2.189-513.fc 100% |  13.8 MiB/s |  56.7 KiB |  00m00s
+2026-02-11T15:30:52.4882183Z [39/83] perl-MIME-Base32-0:1.303-23.fc4 100% |   6.7 MiB/s |  20.5 KiB |  00m00s
+2026-02-11T15:30:52.4900054Z [40/83] perl-libnet-0:3.15-513.fc42.noa 100% |  41.8 MiB/s | 128.4 KiB |  00m00s
+2026-02-11T15:30:52.4915418Z [41/83] perl-Digest-0:1.20-512.fc42.noa 100% |  12.2 MiB/s |  24.9 KiB |  00m00s
+2026-02-11T15:30:52.4928126Z [42/83] perl-Digest-MD5-0:2.59-6.fc42.x 100% |  11.7 MiB/s |  36.0 KiB |  00m00s
+2026-02-11T15:30:52.5364217Z [43/83] expat-0:2.7.3-1.fc42.x86_64     100% |   2.6 MiB/s | 119.9 KiB |  00m00s
+2026-02-11T15:30:52.5379936Z [44/83] mpdecimal-0:4.0.1-1.fc42.x86_64 100% |   2.1 MiB/s |  97.1 KiB |  00m00s
+2026-02-11T15:30:52.5473393Z [45/83] python-pip-wheel-0:24.3.1-5.fc4 100% |  22.3 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:30:52.5842340Z [46/83] perl-interpreter-4:5.40.3-519.f 100% |   1.6 MiB/s |  72.0 KiB |  00m00s
+2026-02-11T15:30:52.5930238Z [47/83] perl-Errno-0:1.38-519.fc42.x86_ 100% | 328.3 KiB/s |  14.8 KiB |  00m00s
+2026-02-11T15:30:52.6047298Z [48/83] perl-libs-4:5.40.3-519.fc42.x86 100% |  34.8 MiB/s |   2.3 MiB |  00m00s
+2026-02-11T15:30:52.6079329Z [49/83] libfido2-0:1.15.0-3.fc42.x86_64 100% |  48.0 MiB/s |  98.4 KiB |  00m00s
+2026-02-11T15:30:52.6500937Z [50/83] less-0:679-1.fc42.x86_64        100% |   2.9 MiB/s | 195.3 KiB |  00m00s
+2026-02-11T15:30:52.6528089Z [51/83] libcbor-0:0.11.0-3.fc42.x86_64  100% |  16.2 MiB/s |  33.3 KiB |  00m00s
+2026-02-11T15:30:52.6759540Z [52/83] openssh-clients-0:9.9p1-12.fc42 100% |   9.1 MiB/s | 766.9 KiB |  00m00s
+2026-02-11T15:30:52.6847116Z [53/83] openssh-0:9.9p1-12.fc42.x86_64  100% |   4.5 MiB/s | 350.8 KiB |  00m00s
+2026-02-11T15:30:52.6984890Z [54/83] perl-File-Basename-0:2.86-519.f 100% | 377.4 KiB/s |  17.0 KiB |  00m00s
+2026-02-11T15:30:52.7062111Z [55/83] perl-Encode-4:3.21-512.fc42.x86 100% | 150.3 MiB/s |   1.1 MiB |  00m00s
+2026-02-11T15:30:52.7118478Z [56/83] perl-Storable-1:3.32-512.fc42.x 100% |  19.5 MiB/s |  99.6 KiB |  00m00s
+2026-02-11T15:30:52.7218631Z [57/83] perl-IPC-Open3-0:1.22-519.fc42. 100% | 481.9 KiB/s |  21.7 KiB |  00m00s
+2026-02-11T15:30:52.7300780Z [58/83] perl-lib-0:0.65-519.fc42.x86_64 100% | 328.5 KiB/s |  14.8 KiB |  00m00s
+2026-02-11T15:30:52.7580168Z [59/83] perl-POSIX-0:2.20-519.fc42.x86_ 100% |   2.1 MiB/s |  97.4 KiB |  00m00s
+2026-02-11T15:30:52.7677499Z [60/83] perl-Fcntl-0:1.18-519.fc42.x86_ 100% | 659.0 KiB/s |  29.7 KiB |  00m00s
+2026-02-11T15:30:52.7751820Z [61/83] perl-FileHandle-0:2.05-519.fc42 100% | 348.4 KiB/s |  15.3 KiB |  00m00s
+2026-02-11T15:30:52.8040241Z [62/83] perl-IO-0:1.55-519.fc42.x86_64  100% |   1.8 MiB/s |  81.6 KiB |  00m00s
+2026-02-11T15:30:52.8133588Z [63/83] perl-Symbol-0:1.09-519.fc42.noa 100% | 312.0 KiB/s |  14.0 KiB |  00m00s
+2026-02-11T15:30:52.8205335Z [64/83] perl-Scalar-List-Utils-5:1.70-1 100% |   1.6 MiB/s |  74.6 KiB |  00m00s
+2026-02-11T15:30:52.8496231Z [65/83] perl-base-0:2.27-519.fc42.noarc 100% | 356.5 KiB/s |  16.0 KiB |  00m00s
+2026-02-11T15:30:52.8592465Z [66/83] perl-overload-0:1.37-519.fc42.n 100% |   1.0 MiB/s |  45.4 KiB |  00m00s
+2026-02-11T15:30:52.8656637Z [67/83] perl-DynaLoader-0:1.56-519.fc42 100% | 588.2 KiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:30:52.8951009Z [68/83] perl-vars-0:1.05-519.fc42.noarc 100% | 285.2 KiB/s |  12.8 KiB |  00m00s
+2026-02-11T15:30:52.9050085Z [69/83] perl-if-0:0.61.000-519.fc42.noa 100% | 307.4 KiB/s |  13.8 KiB |  00m00s
+2026-02-11T15:30:52.9109527Z [70/83] perl-AutoLoader-0:5.74-519.fc42 100% | 468.0 KiB/s |  21.1 KiB |  00m00s
+2026-02-11T15:30:52.9408408Z [71/83] perl-Getopt-Std-0:1.14-519.fc42 100% | 344.8 KiB/s |  15.5 KiB |  00m00s
+2026-02-11T15:30:52.9531271Z [72/83] perl-B-0:1.89-519.fc42.x86_64   100% |   3.7 MiB/s | 176.5 KiB |  00m00s
+2026-02-11T15:30:52.9561401Z [73/83] perl-mro-0:1.29-519.fc42.x86_64 100% | 675.4 KiB/s |  29.7 KiB |  00m00s
+2026-02-11T15:30:52.9864092Z [74/83] perl-overloading-0:0.02-519.fc4 100% | 283.0 KiB/s |  12.7 KiB |  00m00s
+2026-02-11T15:30:52.9991144Z [75/83] perl-locale-0:1.12-519.fc42.noa 100% | 299.0 KiB/s |  13.5 KiB |  00m00s
+2026-02-11T15:30:53.0016218Z [76/83] perl-File-stat-0:1.14-519.fc42. 100% | 375.1 KiB/s |  16.9 KiB |  00m00s
+2026-02-11T15:30:53.0319546Z [77/83] perl-SelectSaver-0:1.02-519.fc4 100% | 256.7 KiB/s |  11.6 KiB |  00m00s
+2026-02-11T15:30:53.0449511Z [78/83] perl-Class-Struct-0:0.68-519.fc 100% | 486.7 KiB/s |  21.9 KiB |  00m00s
+2026-02-11T15:30:53.0473227Z [79/83] libedit-0:3.1-56.20251016cvs.fc 100% |   2.3 MiB/s | 105.1 KiB |  00m00s
+2026-02-11T15:30:53.0885625Z [80/83] util-linux-0:2.40.4-8.fc42.x86_ 100% |  20.6 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:30:53.0915759Z [81/83] libfdisk-0:2.40.4-8.fc42.x86_64 100% |   3.4 MiB/s | 158.0 KiB |  00m00s
+2026-02-11T15:30:53.0924332Z [82/83] python-unversioned-command-0:3. 100% | 289.9 KiB/s |  12.8 KiB |  00m00s
+2026-02-11T15:30:53.1342067Z [83/83] perl-NDBM_File-0:1.17-519.fc42. 100% | 499.0 KiB/s |  22.5 KiB |  00m00s
+2026-02-11T15:30:53.1343409Z --------------------------------------------------------------------------------
+2026-02-11T15:30:53.1344075Z [83/83] Total                           100% |  18.2 MiB/s |  32.7 MiB |  00m02s
+2026-02-11T15:30:53.1354590Z Running transaction
+2026-02-11T15:30:53.7857802Z [ 1/85] Verify package files            100% | 747.0   B/s |  83.0   B |  00m00s
+2026-02-11T15:30:53.7944709Z [ 2/85] Prepare transaction             100% |   1.0 KiB/s |  83.0   B |  00m00s
+2026-02-11T15:30:53.8114331Z [ 3/85] Installing expat-0:2.7.3-1.fc42 100% |  13.5 MiB/s | 303.2 KiB |  00m00s
+2026-02-11T15:30:53.8986095Z [ 4/85] Installing libfdisk-0:2.40.4-8. 100% |  72.9 MiB/s | 373.4 KiB |  00m00s
+2026-02-11T15:30:53.9249067Z [ 5/85] Installing util-linux-0:2.40.4- 100% |  32.4 MiB/s |   3.5 MiB |  00m00s
+2026-02-11T15:30:53.9474969Z [ 6/85] Installing openssh-0:9.9p1-12.f 100% |  69.1 MiB/s |   1.4 MiB |  00m00s
+2026-02-11T15:30:53.9501148Z [ 7/85] Installing libedit-0:3.1-56.202 100% |  78.7 MiB/s | 241.9 KiB |  00m00s
+2026-02-11T15:30:53.9536145Z [ 8/85] Installing libcbor-0:0.11.0-3.f 100% |  38.7 MiB/s |  79.2 KiB |  00m00s
+2026-02-11T15:30:53.9698517Z [ 9/85] Installing libfido2-0:1.15.0-3. 100% |  79.3 MiB/s | 243.6 KiB |  00m00s
+2026-02-11T15:30:53.9976984Z [10/85] Installing openssh-clients-0:9. 100% |  75.2 MiB/s |   2.7 MiB |  00m00s
+2026-02-11T15:30:54.0260569Z [11/85] Installing less-0:679-1.fc42.x8 100% |  19.0 MiB/s | 409.4 KiB |  00m00s
+2026-02-11T15:30:54.1132828Z [12/85] Installing git-core-0:2.53.0-1. 100% | 280.2 MiB/s |  24.1 MiB |  00m00s
+2026-02-11T15:30:54.1223385Z [13/85] Installing git-core-doc-0:2.53. 100% | 985.9 MiB/s |  18.7 MiB |  00m00s
+2026-02-11T15:30:54.1259606Z [14/85] Installing python-pip-wheel-0:2 100% | 311.1 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:30:54.1281170Z [15/85] Installing mpdecimal-0:4.0.1-1. 100% |  53.4 MiB/s | 218.8 KiB |  00m00s
+2026-02-11T15:30:54.1911790Z [16/85] Installing ncurses-0:6.5-5.2025 100% |  22.2 MiB/s | 614.7 KiB |  00m00s
+2026-02-11T15:30:54.2199684Z [17/85] Installing groff-base-0:1.23.0- 100% |  62.8 MiB/s |   3.9 MiB |  00m00s
+2026-02-11T15:30:54.2235156Z [18/85] Installing perl-Digest-0:1.20-5 100% |  12.1 MiB/s |  37.1 KiB |  00m00s
+2026-02-11T15:30:54.2289334Z [19/85] Installing perl-Digest-MD5-0:2. 100% |  20.0 MiB/s |  61.6 KiB |  00m00s
+2026-02-11T15:30:54.2316440Z [20/85] Installing perl-B-0:1.89-519.fc 100% |  81.6 MiB/s | 501.3 KiB |  00m00s
+2026-02-11T15:30:54.2347457Z [21/85] Installing perl-FileHandle-0:2. 100% |   4.8 MiB/s |   9.8 KiB |  00m00s
+2026-02-11T15:30:54.2382238Z [22/85] Installing perl-MIME-Base32-0:1 100% |  15.7 MiB/s |  32.2 KiB |  00m00s
+2026-02-11T15:30:54.2433263Z [23/85] Installing perl-Data-Dumper-0:2 100% |  28.7 MiB/s | 117.5 KiB |  00m00s
+2026-02-11T15:30:54.2461682Z [24/85] Installing perl-libnet-0:3.15-5 100% |  57.6 MiB/s | 294.7 KiB |  00m00s
+2026-02-11T15:30:54.2487008Z [25/85] Installing perl-AutoLoader-0:5. 100% |  20.5 MiB/s |  20.9 KiB |  00m00s
+2026-02-11T15:30:54.2573761Z [26/85] Installing perl-IO-Socket-IP-0: 100% |  49.9 MiB/s | 102.2 KiB |  00m00s
+2026-02-11T15:30:54.2613428Z [27/85] Installing perl-URI-0:5.31-2.fc 100% |  26.3 MiB/s | 269.6 KiB |  00m00s
+2026-02-11T15:30:54.2634847Z [28/85] Installing perl-Time-Local-2:1. 100% |  34.5 MiB/s |  70.6 KiB |  00m00s
+2026-02-11T15:30:54.2656386Z [29/85] Installing perl-Text-Tabs+Wrap- 100% |  11.7 MiB/s |  23.9 KiB |  00m00s
+2026-02-11T15:30:54.2676165Z [30/85] Installing perl-File-Path-0:2.1 100% |  31.5 MiB/s |  64.5 KiB |  00m00s
+2026-02-11T15:30:54.2703412Z [31/85] Installing perl-Pod-Escapes-1:1 100% |  12.7 MiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:30:54.2837140Z [32/85] Installing perl-if-0:0.61.000-5 100% |   3.0 MiB/s |   6.2 KiB |  00m00s
+2026-02-11T15:30:54.2871200Z [33/85] Installing perl-Net-SSLeay-0:1. 100% |  97.1 MiB/s |   1.4 MiB |  00m00s
+2026-02-11T15:30:54.2910515Z [34/85] Installing perl-locale-0:1.12-5 100% |   6.7 MiB/s |   6.9 KiB |  00m00s
+2026-02-11T15:30:54.2940914Z [35/85] Installing perl-IO-Socket-SSL-0 100% | 172.7 MiB/s | 707.4 KiB |  00m00s
+2026-02-11T15:30:54.2964320Z [36/85] Installing perl-Term-ANSIColor- 100% |  48.4 MiB/s |  99.2 KiB |  00m00s
+2026-02-11T15:30:54.3040437Z [37/85] Installing perl-Term-Cap-0:1.18 100% |   7.5 MiB/s |  30.6 KiB |  00m00s
+2026-02-11T15:30:54.3077914Z [38/85] Installing perl-Pod-Simple-1:3. 100% |  92.8 MiB/s | 570.4 KiB |  00m00s
+2026-02-11T15:30:54.3107771Z [39/85] Installing perl-POSIX-0:2.20-51 100% |  75.6 MiB/s | 232.3 KiB |  00m00s
+2026-02-11T15:30:54.3130414Z [40/85] Installing perl-File-Temp-1:0.2 100% |  80.1 MiB/s | 164.1 KiB |  00m00s
+2026-02-11T15:30:54.3157193Z [41/85] Installing perl-IPC-Open3-0:1.2 100% |  11.4 MiB/s |  23.3 KiB |  00m00s
+2026-02-11T15:30:54.3179274Z [42/85] Installing perl-HTTP-Tiny-0:0.0 100% |  76.4 MiB/s | 156.4 KiB |  00m00s
+2026-02-11T15:30:54.3210673Z [43/85] Installing perl-Class-Struct-0: 100% |  25.3 MiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:30:54.3236077Z [44/85] Installing perl-Socket-4:2.038- 100% |  39.7 MiB/s | 122.0 KiB |  00m00s
+2026-02-11T15:30:54.3252132Z [45/85] Installing perl-Symbol-0:1.09-5 100% |   7.0 MiB/s |   7.2 KiB |  00m00s
+2026-02-11T15:30:54.3290284Z [46/85] Installing perl-SelectSaver-0:1 100% |   2.5 MiB/s |   2.6 KiB |  00m00s
+2026-02-11T15:30:54.3450854Z [47/85] Installing perl-podlators-1:6.0 100% |  17.4 MiB/s | 321.4 KiB |  00m00s
+2026-02-11T15:30:54.3629337Z [48/85] Installing perl-Pod-Perldoc-0:3 100% |   9.7 MiB/s | 169.2 KiB |  00m00s
+2026-02-11T15:30:54.3649467Z [49/85] Installing perl-File-stat-0:1.1 100% |   6.4 MiB/s |  13.1 KiB |  00m00s
+2026-02-11T15:30:54.3682268Z [50/85] Installing perl-Text-ParseWords 100% |   7.1 MiB/s |  14.6 KiB |  00m00s
+2026-02-11T15:30:54.3703343Z [51/85] Installing perl-Fcntl-0:1.18-51 100% |  16.3 MiB/s |  50.0 KiB |  00m00s
+2026-02-11T15:30:54.3733513Z [52/85] Installing perl-base-0:2.27-519 100% |  12.6 MiB/s |  12.9 KiB |  00m00s
+2026-02-11T15:30:54.3759865Z [53/85] Installing perl-mro-0:1.29-519. 100% |  13.9 MiB/s |  42.6 KiB |  00m00s
+2026-02-11T15:30:54.3787441Z [54/85] Installing perl-overloading-0:0 100% |   2.7 MiB/s |   5.5 KiB |  00m00s
+2026-02-11T15:30:54.3967599Z [55/85] Installing perl-Pod-Usage-4:2.0 100% |   5.4 MiB/s |  87.9 KiB |  00m00s
+2026-02-11T15:30:54.3993775Z [56/85] Installing perl-IO-0:1.55-519.f 100% |  29.5 MiB/s | 151.3 KiB |  00m00s
+2026-02-11T15:30:54.4015190Z [57/85] Installing perl-constant-0:1.33 100% |  13.4 MiB/s |  27.4 KiB |  00m00s
+2026-02-11T15:30:54.4044785Z [58/85] Installing perl-parent-1:0.244- 100% |  10.7 MiB/s |  11.0 KiB |  00m00s
+2026-02-11T15:30:54.4069896Z [59/85] Installing perl-MIME-Base64-0:3 100% |  14.4 MiB/s |  44.3 KiB |  00m00s
+2026-02-11T15:30:54.4089435Z [60/85] Installing perl-Errno-0:1.38-51 100% |   8.5 MiB/s |   8.7 KiB |  00m00s
+2026-02-11T15:30:54.4138269Z [61/85] Installing perl-File-Basename-0 100% |   7.1 MiB/s |  14.6 KiB |  00m00s
+2026-02-11T15:30:54.4161378Z [62/85] Installing perl-Scalar-List-Uti 100% |  29.0 MiB/s | 148.6 KiB |  00m00s
+2026-02-11T15:30:54.4181331Z [63/85] Installing perl-vars-0:1.05-519 100% |   4.2 MiB/s |   4.3 KiB |  00m00s
+2026-02-11T15:30:54.4200197Z [64/85] Installing perl-Getopt-Std-0:1. 100% |  11.5 MiB/s |  11.7 KiB |  00m00s
+2026-02-11T15:30:54.4234758Z [65/85] Installing perl-overload-0:1.37 100% |  70.3 MiB/s |  71.9 KiB |  00m00s
+2026-02-11T15:30:54.4271285Z [66/85] Installing perl-Storable-1:3.32 100% |  57.1 MiB/s | 233.9 KiB |  00m00s
+2026-02-11T15:30:54.4295185Z [67/85] Installing perl-Getopt-Long-1:2 100% |  71.9 MiB/s | 147.2 KiB |  00m00s
+2026-02-11T15:30:54.4317284Z [68/85] Installing perl-Exporter-0:5.78 100% |  27.2 MiB/s |  55.6 KiB |  00m00s
+2026-02-11T15:30:54.4366938Z [69/85] Installing perl-Carp-0:1.54-512 100% |  23.3 MiB/s |  47.7 KiB |  00m00s
+2026-02-11T15:30:54.4394181Z [70/85] Installing perl-PathTools-0:3.9 100% |  36.0 MiB/s | 184.5 KiB |  00m00s
+2026-02-11T15:30:54.4460709Z [71/85] Installing perl-DynaLoader-0:1. 100% |  15.9 MiB/s |  32.5 KiB |  00m00s
+2026-02-11T15:30:54.5472001Z [72/85] Installing perl-Encode-4:3.21-5 100% | 114.5 MiB/s |   4.7 MiB |  00m00s
+2026-02-11T15:30:54.5918632Z [73/85] Installing perl-libs-4:5.40.3-5 100% |  91.6 MiB/s |   9.9 MiB |  00m00s
+2026-02-11T15:30:54.6090456Z [74/85] Installing perl-interpreter-4:5 100% |   7.3 MiB/s | 120.1 KiB |  00m00s
+2026-02-11T15:30:54.6123359Z [75/85] Installing perl-TermReadKey-0:2 100% |  16.2 MiB/s |  66.2 KiB |  00m00s
+2026-02-11T15:30:54.6144249Z [76/85] Installing perl-Error-1:0.17030 100% |  39.0 MiB/s |  80.0 KiB |  00m00s
+2026-02-11T15:30:54.6167466Z [77/85] Installing perl-lib-0:0.65-519. 100% |   8.7 MiB/s |   8.9 KiB |  00m00s
+2026-02-11T15:30:54.6194937Z [78/85] Installing perl-Git-0:2.53.0-1. 100% |  31.9 MiB/s |  65.4 KiB |  00m00s
+2026-02-11T15:30:54.6223238Z [79/85] Installing git-0:2.53.0-1.fc42. 100% |  28.2 MiB/s |  57.7 KiB |  00m00s
+2026-02-11T15:30:54.6484871Z [80/85] Installing libb2-0:0.98.1-13.fc 100% |   6.6 MiB/s |  47.2 KiB |  00m00s
+2026-02-11T15:30:54.9734692Z [81/85] Installing python3-libs-0:3.13. 100% | 118.1 MiB/s |  40.5 MiB |  00m00s
+2026-02-11T15:30:55.0610817Z [82/85] Installing python3-0:3.13.11-2. 100% |   1.6 MiB/s |  30.5 KiB |  00m00s
+2026-02-11T15:30:55.1784106Z [83/85] Installing python3-pip-0:24.3.1 100% |  62.5 MiB/s |  11.6 MiB |  00m00s
+2026-02-11T15:30:55.1949211Z [84/85] Installing python-unversioned-c 100% |  29.6 KiB/s | 424.0   B |  00m00s
+2026-02-11T15:30:55.3955662Z [85/85] Installing perl-NDBM_File-0:1.1 100% | 146.4 KiB/s |  29.6 KiB |  00m00s
+2026-02-11T15:30:55.3957210Z Complete!

@@ -1,0 +1,58 @@
+﻿2026-02-11T15:30:37.8929888Z ##[group]Run apk add --no-cache python3 py3-pip py3-virtualenv git bash
+2026-02-11T15:30:37.8931722Z [36;1mapk add --no-cache python3 py3-pip py3-virtualenv git bash[0m
+2026-02-11T15:30:37.8936768Z shell: sh -e {0}
+2026-02-11T15:30:37.8937829Z env:
+2026-02-11T15:30:37.8938584Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:37.8939481Z ##[endgroup]
+2026-02-11T15:30:37.9668283Z fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/main/x86_64/APKINDEX.tar.gz
+2026-02-11T15:30:38.0361904Z fetch https://dl-cdn.alpinelinux.org/alpine/v3.20/community/x86_64/APKINDEX.tar.gz
+2026-02-11T15:30:38.3017349Z (1/46) Installing ncurses-terminfo-base (6.4_p20240420-r2)
+2026-02-11T15:30:38.3097008Z (2/46) Installing libncursesw (6.4_p20240420-r2)
+2026-02-11T15:30:38.3168468Z (3/46) Installing readline (8.2.10-r0)
+2026-02-11T15:30:38.3221753Z (4/46) Installing bash (5.2.26-r0)
+2026-02-11T15:30:38.3366512Z Executing bash-5.2.26-r0.post-install
+2026-02-11T15:30:38.3398545Z (5/46) Installing ca-certificates (20250911-r0)
+2026-02-11T15:30:38.3625528Z (6/46) Installing brotli-libs (1.1.0-r2)
+2026-02-11T15:30:38.3716715Z (7/46) Installing c-ares (1.33.1-r0)
+2026-02-11T15:30:38.3753934Z (8/46) Installing libunistring (1.2-r0)
+2026-02-11T15:30:38.3865969Z (9/46) Installing libidn2 (2.3.7-r0)
+2026-02-11T15:30:38.3907011Z (10/46) Installing nghttp2-libs (1.62.1-r0)
+2026-02-11T15:30:38.3945414Z (11/46) Installing libpsl (0.21.5-r1)
+2026-02-11T15:30:38.3980469Z (12/46) Installing zstd-libs (1.5.6-r0)
+2026-02-11T15:30:38.4069204Z (13/46) Installing libcurl (8.14.1-r2)
+2026-02-11T15:30:38.4143060Z (14/46) Installing libexpat (2.7.4-r0)
+2026-02-11T15:30:38.4180626Z (15/46) Installing pcre2 (10.43-r0)
+2026-02-11T15:30:38.4254628Z (16/46) Installing git (2.45.4-r0)
+2026-02-11T15:30:38.4906457Z (17/46) Installing git-init-template (2.45.4-r0)
+2026-02-11T15:30:38.4957709Z (18/46) Installing libbz2 (1.0.8-r6)
+2026-02-11T15:30:38.4989626Z (19/46) Installing libffi (3.4.6-r0)
+2026-02-11T15:30:38.5019733Z (20/46) Installing gdbm (1.23-r1)
+2026-02-11T15:30:38.5081615Z (21/46) Installing xz-libs (5.6.2-r1)
+2026-02-11T15:30:38.5129965Z (22/46) Installing libgcc (13.2.1_git20240309-r1)
+2026-02-11T15:30:38.5178673Z (23/46) Installing libstdc++ (13.2.1_git20240309-r1)
+2026-02-11T15:30:38.5380981Z (24/46) Installing mpdecimal (4.0.0-r0)
+2026-02-11T15:30:38.5421695Z (25/46) Installing libpanelw (6.4_p20240420-r2)
+2026-02-11T15:30:38.5447186Z (26/46) Installing sqlite-libs (3.45.3-r3)
+2026-02-11T15:30:38.5582110Z (27/46) Installing python3 (3.12.12-r0)
+2026-02-11T15:30:38.7454679Z (28/46) Installing python3-pycache-pyc0 (3.12.12-r0)
+2026-02-11T15:30:38.8759333Z (29/46) Installing pyc (3.12.12-r0)
+2026-02-11T15:30:38.8783558Z (30/46) Installing py3-setuptools-pyc (70.3.0-r0)
+2026-02-11T15:30:38.9301666Z (31/46) Installing py3-pip-pyc (24.0-r2)
+2026-02-11T15:30:39.0240922Z (32/46) Installing py3-parsing (3.1.2-r1)
+2026-02-11T15:30:39.0309966Z (33/46) Installing py3-parsing-pyc (3.1.2-r1)
+2026-02-11T15:30:39.0384086Z (34/46) Installing py3-packaging-pyc (24.0-r1)
+2026-02-11T15:30:39.0435737Z (35/46) Installing python3-pyc (3.12.12-r0)
+2026-02-11T15:30:39.0464108Z (36/46) Installing py3-packaging (24.0-r1)
+2026-02-11T15:30:39.0519439Z (37/46) Installing py3-setuptools (70.3.0-r0)
+2026-02-11T15:30:39.0941505Z (38/46) Installing py3-pip (24.0-r2)
+2026-02-11T15:30:39.1786718Z (39/46) Installing py3-platformdirs (4.2.2-r0)
+2026-02-11T15:30:39.1839663Z (40/46) Installing py3-platformdirs-pyc (4.2.2-r0)
+2026-02-11T15:30:39.1890755Z (41/46) Installing py3-distlib (0.3.8-r1)
+2026-02-11T15:30:39.1968113Z (42/46) Installing py3-distlib-pyc (0.3.8-r1)
+2026-02-11T15:30:39.2049420Z (43/46) Installing py3-filelock (3.13.1-r1)
+2026-02-11T15:30:39.2100025Z (44/46) Installing py3-filelock-pyc (3.13.1-r1)
+2026-02-11T15:30:39.2159751Z (45/46) Installing py3-virtualenv (20.28.0-r0)
+2026-02-11T15:30:39.2613181Z (46/46) Installing py3-virtualenv-pyc (20.28.0-r0)
+2026-02-11T15:30:39.2817959Z Executing busybox-1.36.1-r31.trigger
+2026-02-11T15:30:39.2866911Z Executing ca-certificates-20250911-r0.trigger
+2026-02-11T15:30:39.3297919Z OK: 96 MiB in 60 packages

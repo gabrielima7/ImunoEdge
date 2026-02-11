@@ -1,0 +1,114 @@
+﻿2026-02-11T15:30:36.8025369Z ##[group]Run actions/checkout@v6
+2026-02-11T15:30:36.8026470Z with:
+2026-02-11T15:30:36.8026953Z   submodules: recursive
+2026-02-11T15:30:36.8027506Z   repository: gabrielima7/ImunoEdge
+2026-02-11T15:30:36.8028543Z   token: ***
+2026-02-11T15:30:36.8029123Z   ssh-strict: true
+2026-02-11T15:30:36.8029583Z   ssh-user: git
+2026-02-11T15:30:36.8030116Z   persist-credentials: true
+2026-02-11T15:30:36.8030728Z   clean: true
+2026-02-11T15:30:36.8031206Z   sparse-checkout-cone-mode: true
+2026-02-11T15:30:36.8031808Z   fetch-depth: 1
+2026-02-11T15:30:36.8032271Z   fetch-tags: false
+2026-02-11T15:30:36.8032810Z   show-progress: true
+2026-02-11T15:30:36.8033294Z   lfs: false
+2026-02-11T15:30:36.8033811Z   set-safe-directory: true
+2026-02-11T15:30:36.8034597Z env:
+2026-02-11T15:30:36.8035103Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:36.8035697Z ##[endgroup]
+2026-02-11T15:30:36.8970258Z Syncing repository: gabrielima7/ImunoEdge
+2026-02-11T15:30:36.8972765Z ##[group]Getting Git version info
+2026-02-11T15:30:36.8973827Z Working directory is '/home/runner/work/ImunoEdge/ImunoEdge'
+2026-02-11T15:30:36.8975607Z [command]/usr/bin/git version
+2026-02-11T15:30:36.9009125Z git version 2.52.0
+2026-02-11T15:30:36.9030527Z ##[endgroup]
+2026-02-11T15:30:36.9043782Z Temporarily overriding HOME='/home/runner/work/_temp/cf0e4242-92c6-4961-96e4-6f83c8794da6' before making global git config changes
+2026-02-11T15:30:36.9045497Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:30:36.9048516Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:30:36.9086061Z Deleting the contents of '/home/runner/work/ImunoEdge/ImunoEdge'
+2026-02-11T15:30:36.9089310Z ##[group]Initializing the repository
+2026-02-11T15:30:36.9093418Z [command]/usr/bin/git init /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:30:36.9204733Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-02-11T15:30:36.9206298Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-02-11T15:30:36.9208920Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-02-11T15:30:36.9210651Z hint: call:
+2026-02-11T15:30:36.9211730Z hint:
+2026-02-11T15:30:36.9212881Z hint: 	git config --global init.defaultBranch <name>
+2026-02-11T15:30:36.9213686Z hint:
+2026-02-11T15:30:36.9214508Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-02-11T15:30:36.9215706Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-02-11T15:30:36.9217699Z hint:
+2026-02-11T15:30:36.9218570Z hint: 	git branch -m <name>
+2026-02-11T15:30:36.9219224Z hint:
+2026-02-11T15:30:36.9220056Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-02-11T15:30:36.9221358Z Initialized empty Git repository in /home/runner/work/ImunoEdge/ImunoEdge/.git/
+2026-02-11T15:30:36.9223737Z [command]/usr/bin/git remote add origin https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:30:36.9249223Z ##[endgroup]
+2026-02-11T15:30:36.9250131Z ##[group]Disabling automatic garbage collection
+2026-02-11T15:30:36.9252268Z [command]/usr/bin/git config --local gc.auto 0
+2026-02-11T15:30:36.9276279Z ##[endgroup]
+2026-02-11T15:30:36.9277443Z ##[group]Setting up auth
+2026-02-11T15:30:36.9278166Z Removing SSH command configuration
+2026-02-11T15:30:36.9282696Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:30:36.9310755Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:30:36.9632502Z Removing HTTP extra header
+2026-02-11T15:30:36.9638454Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:30:36.9665171Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:30:36.9839167Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:30:36.9844706Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:30:36.9871427Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:30:37.0052551Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:30:37.0085317Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.0108700Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.0131944Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.0153290Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.0172825Z ##[endgroup]
+2026-02-11T15:30:37.0173693Z ##[group]Fetching the repository
+2026-02-11T15:30:37.0180889Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +22797f30b775dab08a63282bfc3c092003bdea47:refs/remotes/origin/main
+2026-02-11T15:30:37.3510592Z From https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:30:37.3511497Z  * [new ref]         22797f30b775dab08a63282bfc3c092003bdea47 -> origin/main
+2026-02-11T15:30:37.3547671Z [command]/usr/bin/git branch --list --remote origin/main
+2026-02-11T15:30:37.3575314Z   origin/main
+2026-02-11T15:30:37.3582901Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-02-11T15:30:37.3601705Z 22797f30b775dab08a63282bfc3c092003bdea47
+2026-02-11T15:30:37.3605451Z ##[endgroup]
+2026-02-11T15:30:37.3606612Z ##[group]Determining the checkout info
+2026-02-11T15:30:37.3608092Z ##[endgroup]
+2026-02-11T15:30:37.3611980Z [command]/usr/bin/git sparse-checkout disable
+2026-02-11T15:30:37.3646462Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-02-11T15:30:37.3668487Z ##[group]Checking out the ref
+2026-02-11T15:30:37.3671792Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-02-11T15:30:37.3776336Z Switched to a new branch 'main'
+2026-02-11T15:30:37.3777337Z branch 'main' set up to track 'origin/main'.
+2026-02-11T15:30:37.3781764Z ##[endgroup]
+2026-02-11T15:30:37.3782509Z ##[group]Setting up auth for fetching submodules
+2026-02-11T15:30:37.3788233Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:30:37.3819227Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.3843421Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2026-02-11T15:30:37.3868383Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2026-02-11T15:30:37.3892919Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-230595838@github.com:
+2026-02-11T15:30:37.3914137Z ##[endgroup]
+2026-02-11T15:30:37.3914950Z ##[group]Fetching submodules
+2026-02-11T15:30:37.3918145Z [command]/usr/bin/git submodule sync --recursive
+2026-02-11T15:30:37.4103087Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+2026-02-11T15:30:37.4277982Z Submodule 'TaipanStack' (https://github.com/gabrielima7/TaipanStack.git) registered for path 'TaipanStack'
+2026-02-11T15:30:37.4300723Z Cloning into '/home/runner/work/ImunoEdge/ImunoEdge/TaipanStack'...
+2026-02-11T15:30:37.8524938Z Submodule path 'TaipanStack': checked out '788267ef00de0831d0cbe7423802ecc040dd79f8'
+2026-02-11T15:30:37.8548751Z [command]/usr/bin/git submodule foreach --recursive git config --local gc.auto 0
+2026-02-11T15:30:37.8718308Z Entering 'TaipanStack'
+2026-02-11T15:30:37.8757897Z ##[endgroup]
+2026-02-11T15:30:37.8760043Z ##[group]Persisting credentials for submodules
+2026-02-11T15:30:37.8766434Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2026-02-11T15:30:37.8922929Z Entering 'TaipanStack'
+2026-02-11T15:30:37.8965300Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:30:37.9121811Z Entering 'TaipanStack'
+2026-02-11T15:30:37.9137901Z file:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:30:37.9164784Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /home/runner/work/_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.9190022Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-c378a9ba-592c-4808-a3bc-4aa94f7a4fdd.config
+2026-02-11T15:30:37.9215517Z [command]/usr/bin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2026-02-11T15:30:37.9374304Z Entering 'TaipanStack'
+2026-02-11T15:30:37.9415718Z [command]/usr/bin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'org-230595838@github.com:'
+2026-02-11T15:30:37.9572475Z Entering 'TaipanStack'
+2026-02-11T15:30:37.9610762Z ##[endgroup]
+2026-02-11T15:30:37.9641961Z [command]/usr/bin/git log -1 --format=%H
+2026-02-11T15:30:37.9661196Z 22797f30b775dab08a63282bfc3c092003bdea47

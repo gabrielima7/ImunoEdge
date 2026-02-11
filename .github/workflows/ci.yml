@@ -187,19 +187,19 @@ jobs:
         if: matrix.pkg_manager == 'apt'
         run: |
           apt-get update
-          apt-get install -y python3 python3-pip python3-venv git
+          apt-get install -y python3 python3-pip python3-venv python3-setuptools python3-wheel git
 
       - name: Install dependencies (dnf)
         if: matrix.pkg_manager == 'dnf'
-        run: dnf install -y python3 python3-pip git
+        run: dnf install -y python3 python3-pip python3-setuptools python3-wheel git
 
       - name: Install dependencies (pacman)
         if: matrix.pkg_manager == 'pacman'
-        run: pacman -Syu --noconfirm python python-pip git
+        run: pacman -Syu --noconfirm python python-pip python-setuptools python-wheel git
 
       - name: Install dependencies (apk)
         if: matrix.pkg_manager == 'apk'
-        run: apk add --no-cache python3 py3-pip py3-virtualenv git bash
+        run: apk add --no-cache python3 py3-pip py3-virtualenv py3-setuptools py3-wheel git bash
 
       - name: Check out code
         uses: actions/checkout@v6

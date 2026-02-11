@@ -1,0 +1,45 @@
+﻿2026-02-11T15:30:37.1703552Z ##[group]Checking docker version
+2026-02-11T15:30:37.1716691Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:30:37.2291101Z '1.48'
+2026-02-11T15:30:37.2303239Z Docker daemon API version: '1.48'
+2026-02-11T15:30:37.2304133Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:30:37.2479031Z '1.48'
+2026-02-11T15:30:37.2494345Z Docker client API version: '1.48'
+2026-02-11T15:30:37.2500259Z ##[endgroup]
+2026-02-11T15:30:37.2504017Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:30:37.2508740Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=d55ab3"
+2026-02-11T15:30:37.2660793Z ##[command]/usr/bin/docker network prune --force --filter "label=d55ab3"
+2026-02-11T15:30:37.2805783Z ##[endgroup]
+2026-02-11T15:30:37.2806380Z ##[group]Create local container network
+2026-02-11T15:30:37.2817190Z ##[command]/usr/bin/docker network create --label d55ab3 github_network_197df05d72cf48c08daefd88ea974c6a
+2026-02-11T15:30:37.3357954Z 22479c5fa5319c5e53e82870cf03d26359dec74a5d8c0d1052312fdf45098fa8
+2026-02-11T15:30:37.3376731Z ##[endgroup]
+2026-02-11T15:30:37.3400251Z ##[group]Starting job container
+2026-02-11T15:30:37.3419868Z ##[command]/usr/bin/docker pull archlinux:latest
+2026-02-11T15:30:37.7876555Z latest: Pulling from library/archlinux
+2026-02-11T15:30:37.9068476Z 2efc828fc4c1: Pulling fs layer
+2026-02-11T15:30:38.0060715Z d92388da7a72: Pulling fs layer
+2026-02-11T15:30:38.0061412Z d92388da7a72: Verifying Checksum
+2026-02-11T15:30:38.0061967Z d92388da7a72: Download complete
+2026-02-11T15:30:40.0839149Z 2efc828fc4c1: Verifying Checksum
+2026-02-11T15:30:40.0839866Z 2efc828fc4c1: Download complete
+2026-02-11T15:30:45.1222459Z 2efc828fc4c1: Pull complete
+2026-02-11T15:30:46.4638994Z d92388da7a72: Pull complete
+2026-02-11T15:30:46.4676185Z Digest: sha256:644b416048d39616bbaca93ce768ba492655c83fba80ceca65a4f59dcabdcac0
+2026-02-11T15:30:46.4685832Z Status: Downloaded newer image for archlinux:latest
+2026-02-11T15:30:46.4693804Z docker.io/library/archlinux:latest
+2026-02-11T15:30:46.4781474Z ##[command]/usr/bin/docker create --name f9758ae731544cb1801e7410694a6889_archlinuxlatest_66c719 --label d55ab3 --workdir /__w/ImunoEdge/ImunoEdge --network github_network_197df05d72cf48c08daefd88ea974c6a  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" archlinux:latest "-f" "/dev/null"
+2026-02-11T15:30:46.5028494Z 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:46.5055443Z ##[command]/usr/bin/docker start 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:46.6655174Z 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:46.6673790Z ##[command]/usr/bin/docker ps --all --filter id=7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:30:46.6796528Z 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3 Up Less than a second
+2026-02-11T15:30:46.6817051Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:46.6942013Z GITHUB_ACTIONS=true
+2026-02-11T15:30:46.6942855Z CI=true
+2026-02-11T15:30:46.6943190Z HOME=/github/home
+2026-02-11T15:30:46.6943729Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:30:46.6944342Z LANG=C.UTF-8
+2026-02-11T15:30:46.6965956Z ##[endgroup]
+2026-02-11T15:30:46.6975237Z ##[group]Waiting for all services to be ready
+2026-02-11T15:30:46.6976921Z ##[endgroup]

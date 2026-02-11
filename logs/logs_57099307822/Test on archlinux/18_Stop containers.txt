@@ -1,0 +1,6 @@
+﻿2026-02-11T15:30:57.0494490Z Stop and remove container: f9758ae731544cb1801e7410694a6889_archlinuxlatest_66c719
+2026-02-11T15:30:57.0499181Z ##[command]/usr/bin/docker rm --force 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:57.5641924Z 7026abc42d51d539aae0c60eb41684fc456aef5b9ccd16c702ea16cbb9e2c8d3
+2026-02-11T15:30:57.5672190Z Remove container network: github_network_197df05d72cf48c08daefd88ea974c6a
+2026-02-11T15:30:57.5676755Z ##[command]/usr/bin/docker network rm github_network_197df05d72cf48c08daefd88ea974c6a
+2026-02-11T15:30:57.6788521Z github_network_197df05d72cf48c08daefd88ea974c6a

@@ -1,0 +1,13 @@
+﻿2026-02-11T15:30:41.6026175Z ##[group]Run ruff format --check src/
+2026-02-11T15:30:41.6026494Z [36;1mruff format --check src/[0m
+2026-02-11T15:30:41.6058178Z shell: /usr/bin/bash -e {0}
+2026-02-11T15:30:41.6058463Z env:
+2026-02-11T15:30:41.6058658Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:30:41.6059203Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:41.6059629Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+2026-02-11T15:30:41.6060050Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:41.6060598Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:41.6060970Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:30:41.6061324Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+2026-02-11T15:30:41.6061616Z ##[endgroup]
+2026-02-11T15:30:41.6201770Z 8 files already formatted

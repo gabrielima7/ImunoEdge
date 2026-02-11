@@ -1,0 +1,32 @@
+﻿2026-02-11T15:30:35.3947772Z Current runner version: '2.331.0'
+2026-02-11T15:30:35.3972296Z ##[group]Runner Image Provisioner
+2026-02-11T15:30:35.3973099Z Hosted Compute Agent
+2026-02-11T15:30:35.3973602Z Version: 20260123.484
+2026-02-11T15:30:35.3974113Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-11T15:30:35.3974740Z Build Date: 2026-01-23T19:41:17Z
+2026-02-11T15:30:35.3975360Z Worker ID: {a8987f1b-6f43-41bc-9870-92fce92dae7c}
+2026-02-11T15:30:35.3975968Z Azure Region: northcentralus
+2026-02-11T15:30:35.3976521Z ##[endgroup]
+2026-02-11T15:30:35.3977790Z ##[group]Operating System
+2026-02-11T15:30:35.3978316Z Ubuntu
+2026-02-11T15:30:35.3978997Z 24.04.3
+2026-02-11T15:30:35.3979416Z LTS
+2026-02-11T15:30:35.3979896Z ##[endgroup]
+2026-02-11T15:30:35.3980389Z ##[group]Runner Image
+2026-02-11T15:30:35.3980888Z Image: ubuntu-24.04
+2026-02-11T15:30:35.3981310Z Version: 20260201.15.1
+2026-02-11T15:30:35.3982210Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260201.15/images/ubuntu/Ubuntu2404-Readme.md
+2026-02-11T15:30:35.3983626Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260201.15
+2026-02-11T15:30:35.3984432Z ##[endgroup]
+2026-02-11T15:30:35.3985339Z ##[group]GITHUB_TOKEN Permissions
+2026-02-11T15:30:35.3987425Z Contents: read
+2026-02-11T15:30:35.3987935Z Metadata: read
+2026-02-11T15:30:35.3988339Z Packages: read
+2026-02-11T15:30:35.3988908Z ##[endgroup]
+2026-02-11T15:30:35.3990960Z Secret source: Actions
+2026-02-11T15:30:35.3991837Z Prepare workflow directory
+2026-02-11T15:30:35.4351001Z Prepare all required actions
+2026-02-11T15:30:35.4390599Z Getting action download info
+2026-02-11T15:30:35.8026028Z Download action repository 'actions/checkout@v6' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-02-11T15:30:35.9099032Z Download action repository 'actions/setup-python@v6' (SHA:a309ff8b426b58ec0e2a45f0f869d46889d02405)
+2026-02-11T15:30:36.4194084Z Complete job name: Smoke Test (Python 3.13)
