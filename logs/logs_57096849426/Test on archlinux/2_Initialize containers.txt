@@ -1,0 +1,44 @@
+﻿2026-02-11T15:10:17.9306237Z ##[group]Checking docker version
+2026-02-11T15:10:17.9320560Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:10:17.9973595Z '1.48'
+2026-02-11T15:10:17.9985044Z Docker daemon API version: '1.48'
+2026-02-11T15:10:17.9986603Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:10:18.0160777Z '1.48'
+2026-02-11T15:10:18.0175105Z Docker client API version: '1.48'
+2026-02-11T15:10:18.0181125Z ##[endgroup]
+2026-02-11T15:10:18.0185301Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:10:18.0191061Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=1af40f"
+2026-02-11T15:10:18.0336592Z ##[command]/usr/bin/docker network prune --force --filter "label=1af40f"
+2026-02-11T15:10:18.0473536Z ##[endgroup]
+2026-02-11T15:10:18.0474827Z ##[group]Create local container network
+2026-02-11T15:10:18.0486524Z ##[command]/usr/bin/docker network create --label 1af40f github_network_a6c1d60e7d744c2494344be82d08ffe8
+2026-02-11T15:10:18.0997563Z 191d6e3ced3b500e7692aa3c29c985672e33bb596d1d942fb48211276113b046
+2026-02-11T15:10:18.1017219Z ##[endgroup]
+2026-02-11T15:10:18.1043143Z ##[group]Starting job container
+2026-02-11T15:10:18.1066282Z ##[command]/usr/bin/docker pull archlinux:latest
+2026-02-11T15:10:18.5377122Z latest: Pulling from library/archlinux
+2026-02-11T15:10:18.6551316Z 2efc828fc4c1: Pulling fs layer
+2026-02-11T15:10:18.6552252Z d92388da7a72: Pulling fs layer
+2026-02-11T15:10:18.9044342Z d92388da7a72: Verifying Checksum
+2026-02-11T15:10:18.9045098Z d92388da7a72: Download complete
+2026-02-11T15:10:20.8857282Z 2efc828fc4c1: Download complete
+2026-02-11T15:10:25.9079360Z 2efc828fc4c1: Pull complete
+2026-02-11T15:10:27.2387619Z d92388da7a72: Pull complete
+2026-02-11T15:10:27.2429360Z Digest: sha256:644b416048d39616bbaca93ce768ba492655c83fba80ceca65a4f59dcabdcac0
+2026-02-11T15:10:27.2443885Z Status: Downloaded newer image for archlinux:latest
+2026-02-11T15:10:27.2453569Z docker.io/library/archlinux:latest
+2026-02-11T15:10:27.2550973Z ##[command]/usr/bin/docker create --name 73dd655330a643a5a1335a0d9cb8567c_archlinuxlatest_1cca0b --label 1af40f --workdir /__w/ImunoEdge/ImunoEdge --network github_network_a6c1d60e7d744c2494344be82d08ffe8  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" archlinux:latest "-f" "/dev/null"
+2026-02-11T15:10:27.2828071Z b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48
+2026-02-11T15:10:27.2853127Z ##[command]/usr/bin/docker start b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48
+2026-02-11T15:10:27.4638668Z b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48
+2026-02-11T15:10:27.4658155Z ##[command]/usr/bin/docker ps --all --filter id=b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:10:27.4775399Z b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48 Up Less than a second
+2026-02-11T15:10:27.4795522Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" b39c97ea987c379fc80a26dd8705e536cf60d52fffe299a1f852e77911837c48
+2026-02-11T15:10:27.4915649Z HOME=/github/home
+2026-02-11T15:10:27.4916174Z GITHUB_ACTIONS=true
+2026-02-11T15:10:27.4916614Z CI=true
+2026-02-11T15:10:27.4917080Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:10:27.4917653Z LANG=C.UTF-8
+2026-02-11T15:10:27.4939218Z ##[endgroup]
+2026-02-11T15:10:27.4948682Z ##[group]Waiting for all services to be ready
+2026-02-11T15:10:27.4950443Z ##[endgroup]

@@ -1,0 +1,43 @@
+﻿2026-02-11T15:10:15.4983594Z ##[group]Checking docker version
+2026-02-11T15:10:15.4996795Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:10:15.5559242Z '1.48'
+2026-02-11T15:10:15.5573926Z Docker daemon API version: '1.48'
+2026-02-11T15:10:15.5574779Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:10:15.5746865Z '1.48'
+2026-02-11T15:10:15.5762740Z Docker client API version: '1.48'
+2026-02-11T15:10:15.5768240Z ##[endgroup]
+2026-02-11T15:10:15.5771352Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:10:15.5777130Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=e06598"
+2026-02-11T15:10:15.5934042Z ##[command]/usr/bin/docker network prune --force --filter "label=e06598"
+2026-02-11T15:10:15.6075404Z ##[endgroup]
+2026-02-11T15:10:15.6075987Z ##[group]Create local container network
+2026-02-11T15:10:15.6086037Z ##[command]/usr/bin/docker network create --label e06598 github_network_c11392d78317481dbe812148704437ad
+2026-02-11T15:10:15.6687421Z 190d7021f1b15a0ca3843263c1a559f3899d61e10f43cff7259269eece87a5df
+2026-02-11T15:10:15.6708012Z ##[endgroup]
+2026-02-11T15:10:15.6732614Z ##[group]Starting job container
+2026-02-11T15:10:15.6754069Z ##[command]/usr/bin/docker pull fedora:42
+2026-02-11T15:10:16.3099740Z 42: Pulling from library/fedora
+2026-02-11T15:10:16.4747076Z bcbfb8588268: Pulling fs layer
+2026-02-11T15:10:17.8376292Z bcbfb8588268: Verifying Checksum
+2026-02-11T15:10:17.8376980Z bcbfb8588268: Download complete
+2026-02-11T15:10:19.8223559Z bcbfb8588268: Pull complete
+2026-02-11T15:10:19.8265427Z Digest: sha256:eb167a7adffa1489a205c83a7b9324e4cb0fae5c54645f263e70ac13f661f0e8
+2026-02-11T15:10:19.8275288Z Status: Downloaded newer image for fedora:42
+2026-02-11T15:10:19.8283319Z docker.io/library/fedora:42
+2026-02-11T15:10:19.8368963Z ##[command]/usr/bin/docker create --name 3e11c9bb748c4be0888286ee5cf1b915_fedora42_324f0e --label e06598 --workdir /__w/ImunoEdge/ImunoEdge --network github_network_c11392d78317481dbe812148704437ad  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" fedora:42 "-f" "/dev/null"
+2026-02-11T15:10:21.1967822Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.1996882Z ##[command]/usr/bin/docker start 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.3767401Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.3788588Z ##[command]/usr/bin/docker ps --all --filter id=2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:10:21.3906103Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 Up Less than a second
+2026-02-11T15:10:21.3926669Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.4045036Z HOME=/github/home
+2026-02-11T15:10:21.4045425Z GITHUB_ACTIONS=true
+2026-02-11T15:10:21.4045731Z CI=true
+2026-02-11T15:10:21.4046034Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:10:21.4046381Z DISTTAG=f42container
+2026-02-11T15:10:21.4046601Z FGC=f42
+2026-02-11T15:10:21.4046781Z FBR=f42
+2026-02-11T15:10:21.4066962Z ##[endgroup]
+2026-02-11T15:10:21.4076140Z ##[group]Waiting for all services to be ready
+2026-02-11T15:10:21.4077857Z ##[endgroup]

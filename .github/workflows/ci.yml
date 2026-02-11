@@ -105,7 +105,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.11", "3.12", "3.13"]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
 
     steps:
       - name: Check out code
@@ -117,10 +117,12 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
+          pip install setuptools wheel
           pip install -e .
 
       - name: Verify core imports
@@ -207,6 +209,7 @@ jobs:
       - name: Install project
         run: |
           python3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true
+          python3 -m pip install setuptools wheel --break-system-packages || python3 -m pip install setuptools wheel || true
           python3 -m pip install -e . --break-system-packages || python3 -m pip install -e .
 
       - name: Run smoke test

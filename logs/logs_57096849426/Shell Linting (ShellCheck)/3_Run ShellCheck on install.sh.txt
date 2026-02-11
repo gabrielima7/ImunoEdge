@@ -1,0 +1,6 @@
+﻿2026-02-11T15:10:16.7085680Z ##[group]Run shellcheck install.sh
+2026-02-11T15:10:16.7086858Z [36;1mshellcheck install.sh[0m
+2026-02-11T15:10:16.7110003Z shell: /usr/bin/bash -e {0}
+2026-02-11T15:10:16.7111136Z env:
+2026-02-11T15:10:16.7111915Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:16.7112877Z ##[endgroup]

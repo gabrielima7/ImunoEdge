@@ -1,0 +1,295 @@
+﻿2026-02-11T15:10:15.1591129Z Current runner version: '2.331.0'
+2026-02-11T15:10:15.1614543Z ##[group]Runner Image Provisioner
+2026-02-11T15:10:15.1615360Z Hosted Compute Agent
+2026-02-11T15:10:15.1615880Z Version: 20260123.484
+2026-02-11T15:10:15.1616603Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-11T15:10:15.1617280Z Build Date: 2026-01-23T19:41:17Z
+2026-02-11T15:10:15.1617927Z Worker ID: {59f0e3b0-a42d-4118-8acf-15b1e83c0a1a}
+2026-02-11T15:10:15.1618699Z Azure Region: westus
+2026-02-11T15:10:15.1619256Z ##[endgroup]
+2026-02-11T15:10:15.1620593Z ##[group]Operating System
+2026-02-11T15:10:15.1621280Z Ubuntu
+2026-02-11T15:10:15.1621758Z 24.04.3
+2026-02-11T15:10:15.1622557Z LTS
+2026-02-11T15:10:15.1623149Z ##[endgroup]
+2026-02-11T15:10:15.1623625Z ##[group]Runner Image
+2026-02-11T15:10:15.1624182Z Image: ubuntu-24.04
+2026-02-11T15:10:15.1624727Z Version: 20260201.15.1
+2026-02-11T15:10:15.1625972Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260201.15/images/ubuntu/Ubuntu2404-Readme.md
+2026-02-11T15:10:15.1627602Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260201.15
+2026-02-11T15:10:15.1628549Z ##[endgroup]
+2026-02-11T15:10:15.1629601Z ##[group]GITHUB_TOKEN Permissions
+2026-02-11T15:10:15.1631459Z Contents: read
+2026-02-11T15:10:15.1632333Z Metadata: read
+2026-02-11T15:10:15.1632855Z Packages: read
+2026-02-11T15:10:15.1633497Z ##[endgroup]
+2026-02-11T15:10:15.1635613Z Secret source: Actions
+2026-02-11T15:10:15.1636255Z Prepare workflow directory
+2026-02-11T15:10:15.2023377Z Prepare all required actions
+2026-02-11T15:10:15.2075771Z Getting action download info
+2026-02-11T15:10:15.8039609Z Download action repository 'actions/checkout@v6' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-02-11T15:10:15.9198309Z Download action repository 'actions/setup-python@v6' (SHA:a309ff8b426b58ec0e2a45f0f869d46889d02405)
+2026-02-11T15:10:17.0562317Z Complete job name: Smoke Test (Python 3.12)
+2026-02-11T15:10:17.1222891Z ##[group]Run actions/checkout@v6
+2026-02-11T15:10:17.1223913Z with:
+2026-02-11T15:10:17.1224372Z   submodules: recursive
+2026-02-11T15:10:17.1224893Z   repository: gabrielima7/ImunoEdge
+2026-02-11T15:10:17.1225981Z   token: ***
+2026-02-11T15:10:17.1226428Z   ssh-strict: true
+2026-02-11T15:10:17.1226884Z   ssh-user: git
+2026-02-11T15:10:17.1227348Z   persist-credentials: true
+2026-02-11T15:10:17.1227872Z   clean: true
+2026-02-11T15:10:17.1228327Z   sparse-checkout-cone-mode: true
+2026-02-11T15:10:17.1228888Z   fetch-depth: 1
+2026-02-11T15:10:17.1229351Z   fetch-tags: false
+2026-02-11T15:10:17.1229827Z   show-progress: true
+2026-02-11T15:10:17.1230314Z   lfs: false
+2026-02-11T15:10:17.1230773Z   set-safe-directory: true
+2026-02-11T15:10:17.1231531Z env:
+2026-02-11T15:10:17.1232172Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:17.1232726Z ##[endgroup]
+2026-02-11T15:10:17.2243832Z Syncing repository: gabrielima7/ImunoEdge
+2026-02-11T15:10:17.2245887Z ##[group]Getting Git version info
+2026-02-11T15:10:17.2246719Z Working directory is '/home/runner/work/ImunoEdge/ImunoEdge'
+2026-02-11T15:10:17.2248045Z [command]/usr/bin/git version
+2026-02-11T15:10:17.2329398Z git version 2.52.0
+2026-02-11T15:10:17.2354549Z ##[endgroup]
+2026-02-11T15:10:17.2371826Z Temporarily overriding HOME='/home/runner/work/_temp/7ac5dedd-d3cb-41f8-a19b-6d9b1c1cb1c8' before making global git config changes
+2026-02-11T15:10:17.2374815Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:10:17.2378260Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:10:17.2422359Z Deleting the contents of '/home/runner/work/ImunoEdge/ImunoEdge'
+2026-02-11T15:10:17.2427483Z ##[group]Initializing the repository
+2026-02-11T15:10:17.2433719Z [command]/usr/bin/git init /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:10:17.2557391Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-02-11T15:10:17.2559262Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-02-11T15:10:17.2562407Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-02-11T15:10:17.2564421Z hint: call:
+2026-02-11T15:10:17.2565184Z hint:
+2026-02-11T15:10:17.2566010Z hint: 	git config --global init.defaultBranch <name>
+2026-02-11T15:10:17.2567073Z hint:
+2026-02-11T15:10:17.2567774Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-02-11T15:10:17.2569431Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-02-11T15:10:17.2570771Z hint:
+2026-02-11T15:10:17.2571530Z hint: 	git branch -m <name>
+2026-02-11T15:10:17.2572482Z hint:
+2026-02-11T15:10:17.2573244Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-02-11T15:10:17.2574532Z Initialized empty Git repository in /home/runner/work/ImunoEdge/ImunoEdge/.git/
+2026-02-11T15:10:17.2578580Z [command]/usr/bin/git remote add origin https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:10:17.2617859Z ##[endgroup]
+2026-02-11T15:10:17.2618725Z ##[group]Disabling automatic garbage collection
+2026-02-11T15:10:17.2623635Z [command]/usr/bin/git config --local gc.auto 0
+2026-02-11T15:10:17.2655073Z ##[endgroup]
+2026-02-11T15:10:17.2656034Z ##[group]Setting up auth
+2026-02-11T15:10:17.2657029Z Removing SSH command configuration
+2026-02-11T15:10:17.2664635Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:10:17.2701415Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:10:17.3092251Z Removing HTTP extra header
+2026-02-11T15:10:17.3099349Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:10:17.3134023Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:10:17.3347653Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:10:17.3355855Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:17.3387544Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:17.3610829Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:10:17.3646066Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:17.3675693Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:17.3707710Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:17.3739538Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:17.3767019Z ##[endgroup]
+2026-02-11T15:10:17.3768612Z ##[group]Fetching the repository
+2026-02-11T15:10:17.3778203Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +986309715c873a9d0321898c95101bb9865bc9d0:refs/remotes/origin/main
+2026-02-11T15:10:17.8876702Z From https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:10:17.8878478Z  * [new ref]         986309715c873a9d0321898c95101bb9865bc9d0 -> origin/main
+2026-02-11T15:10:17.8917556Z [command]/usr/bin/git branch --list --remote origin/main
+2026-02-11T15:10:17.8948777Z   origin/main
+2026-02-11T15:10:17.8956776Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-02-11T15:10:17.8977848Z 986309715c873a9d0321898c95101bb9865bc9d0
+2026-02-11T15:10:17.8982494Z ##[endgroup]
+2026-02-11T15:10:17.8983787Z ##[group]Determining the checkout info
+2026-02-11T15:10:17.8985214Z ##[endgroup]
+2026-02-11T15:10:17.8988521Z [command]/usr/bin/git sparse-checkout disable
+2026-02-11T15:10:17.9028587Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-02-11T15:10:17.9053747Z ##[group]Checking out the ref
+2026-02-11T15:10:17.9057402Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-02-11T15:10:17.9119490Z Switched to a new branch 'main'
+2026-02-11T15:10:17.9123037Z branch 'main' set up to track 'origin/main'.
+2026-02-11T15:10:17.9128900Z ##[endgroup]
+2026-02-11T15:10:17.9130644Z ##[group]Setting up auth for fetching submodules
+2026-02-11T15:10:17.9135348Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:10:17.9168938Z [command]/usr/bin/git config --global include.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:17.9199768Z [command]/usr/bin/git config --global --unset-all url.https://github.com/.insteadOf
+2026-02-11T15:10:17.9230740Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2026-02-11T15:10:17.9262370Z [command]/usr/bin/git config --global --add url.https://github.com/.insteadOf org-230595838@github.com:
+2026-02-11T15:10:17.9289838Z ##[endgroup]
+2026-02-11T15:10:17.9291147Z ##[group]Fetching submodules
+2026-02-11T15:10:17.9294707Z [command]/usr/bin/git submodule sync --recursive
+2026-02-11T15:10:17.9548604Z [command]/usr/bin/git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+2026-02-11T15:10:17.9785766Z Submodule 'TaipanStack' (https://github.com/gabrielima7/TaipanStack.git) registered for path 'TaipanStack'
+2026-02-11T15:10:17.9811888Z Cloning into '/home/runner/work/ImunoEdge/ImunoEdge/TaipanStack'...
+2026-02-11T15:10:18.7111258Z Submodule path 'TaipanStack': checked out '788267ef00de0831d0cbe7423802ecc040dd79f8'
+2026-02-11T15:10:18.7142383Z [command]/usr/bin/git submodule foreach --recursive git config --local gc.auto 0
+2026-02-11T15:10:18.7358392Z Entering 'TaipanStack'
+2026-02-11T15:10:18.7405011Z ##[endgroup]
+2026-02-11T15:10:18.7406839Z ##[group]Persisting credentials for submodules
+2026-02-11T15:10:18.7414558Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2026-02-11T15:10:18.7624080Z Entering 'TaipanStack'
+2026-02-11T15:10:18.7681247Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:18.7895394Z Entering 'TaipanStack'
+2026-02-11T15:10:18.7915148Z file:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:10:18.7950741Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:18.7991700Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:18.8023776Z [command]/usr/bin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2026-02-11T15:10:18.8234349Z Entering 'TaipanStack'
+2026-02-11T15:10:18.8287464Z [command]/usr/bin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'org-230595838@github.com:'
+2026-02-11T15:10:18.8499868Z Entering 'TaipanStack'
+2026-02-11T15:10:18.8589173Z ##[endgroup]
+2026-02-11T15:10:18.8592629Z [command]/usr/bin/git log -1 --format=%H
+2026-02-11T15:10:18.8616358Z 986309715c873a9d0321898c95101bb9865bc9d0
+2026-02-11T15:10:18.8939271Z ##[group]Run actions/setup-python@v6
+2026-02-11T15:10:18.8940337Z with:
+2026-02-11T15:10:18.8941036Z   python-version: 3.12
+2026-02-11T15:10:18.8941892Z   check-latest: false
+2026-02-11T15:10:18.8943164Z   token: ***
+2026-02-11T15:10:18.8943922Z   update-environment: true
+2026-02-11T15:10:18.8944857Z   allow-prereleases: false
+2026-02-11T15:10:18.8945786Z   freethreaded: false
+2026-02-11T15:10:18.8946573Z env:
+2026-02-11T15:10:18.8947295Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:18.8948232Z ##[endgroup]
+2026-02-11T15:10:19.0210117Z ##[group]Installed versions
+2026-02-11T15:10:19.0353669Z Successfully set up CPython (3.12.12)
+2026-02-11T15:10:19.0355809Z ##[endgroup]
+2026-02-11T15:10:19.0489370Z ##[group]Run python -m pip install --upgrade pip
+2026-02-11T15:10:19.0490623Z [36;1mpython -m pip install --upgrade pip[0m
+2026-02-11T15:10:19.0491639Z [36;1mpip install -e .[0m
+2026-02-11T15:10:19.0543647Z shell: /usr/bin/bash -e {0}
+2026-02-11T15:10:19.0544465Z env:
+2026-02-11T15:10:19.0545103Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:19.0546174Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.12/x64
+2026-02-11T15:10:19.0547654Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.12/x64/lib/pkgconfig
+2026-02-11T15:10:19.0549133Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.12/x64
+2026-02-11T15:10:19.0550467Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.12/x64
+2026-02-11T15:10:19.0551794Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.12/x64
+2026-02-11T15:10:19.0553285Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.12/x64/lib
+2026-02-11T15:10:19.0554380Z ##[endgroup]
+2026-02-11T15:10:19.9424214Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages (26.0)
+2026-02-11T15:10:20.0510381Z Collecting pip
+2026-02-11T15:10:20.1092143Z   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+2026-02-11T15:10:20.1189650Z Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+2026-02-11T15:10:20.2023665Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 31.5 MB/s  0:00:00
+2026-02-11T15:10:20.2214412Z Installing collected packages: pip
+2026-02-11T15:10:20.2216232Z   Attempting uninstall: pip
+2026-02-11T15:10:20.2235901Z     Found existing installation: pip 26.0
+2026-02-11T15:10:20.2831442Z     Uninstalling pip-26.0:
+2026-02-11T15:10:20.2898620Z       Successfully uninstalled pip-26.0
+2026-02-11T15:10:21.1771292Z Successfully installed pip-26.0.1
+2026-02-11T15:10:21.6363753Z Obtaining file:///home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:10:21.6382673Z   Installing build dependencies: started
+2026-02-11T15:10:22.3816549Z   Installing build dependencies: finished with status 'done'
+2026-02-11T15:10:22.3822820Z   Checking if build backend supports build_editable: started
+2026-02-11T15:10:22.6890037Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-02-11T15:10:22.7016032Z ERROR: Exception:
+2026-02-11T15:10:22.7016630Z Traceback (most recent call last):
+2026-02-11T15:10:22.7027161Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+2026-02-11T15:10:22.7028266Z     status = _inner_run()
+2026-02-11T15:10:22.7028625Z              ^^^^^^^^^^^^
+2026-02-11T15:10:22.7029636Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+2026-02-11T15:10:22.7030659Z     return self.run(options, args)
+2026-02-11T15:10:22.7031061Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7032259Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/cli/req_command.py", line 96, in wrapper
+2026-02-11T15:10:22.7033606Z     return func(self, options, args)
+2026-02-11T15:10:22.7034056Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7035045Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/commands/install.py", line 392, in run
+2026-02-11T15:10:22.7036037Z     requirement_set = resolver.resolve(
+2026-02-11T15:10:22.7036475Z                       ^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7037556Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 79, in resolve
+2026-02-11T15:10:22.7038788Z     collected = self.factory.collect_root_requirements(root_reqs)
+2026-02-11T15:10:22.7039408Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7040712Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 538, in collect_root_requirements
+2026-02-11T15:10:22.7042405Z     reqs = list(
+2026-02-11T15:10:22.7042753Z            ^^^^^
+2026-02-11T15:10:22.7043993Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 494, in _make_requirements_from_install_req
+2026-02-11T15:10:22.7045326Z     cand = self._make_base_candidate_from_link(
+2026-02-11T15:10:22.7045796Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7047091Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 205, in _make_base_candidate_from_link
+2026-02-11T15:10:22.7048457Z     self._editable_candidate_cache[link] = EditableCandidate(
+2026-02-11T15:10:22.7049030Z                                            ^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7050267Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 343, in __init__
+2026-02-11T15:10:22.7137972Z     super().__init__(
+2026-02-11T15:10:22.7139358Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 161, in __init__
+2026-02-11T15:10:22.7140569Z     self.dist = self._prepare()
+2026-02-11T15:10:22.7140968Z                 ^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7142242Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 238, in _prepare
+2026-02-11T15:10:22.7143443Z     dist = self._prepare_distribution()
+2026-02-11T15:10:22.7143889Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7145121Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 353, in _prepare_distribution
+2026-02-11T15:10:22.7146543Z     return self._factory.preparer.prepare_editable_requirement(self._ireq)
+2026-02-11T15:10:22.7147240Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7148492Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/operations/prepare.py", line 713, in prepare_editable_requirement
+2026-02-11T15:10:22.7149650Z     dist = _get_prepared_distribution(
+2026-02-11T15:10:22.7150080Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7151257Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/operations/prepare.py", line 77, in _get_prepared_distribution
+2026-02-11T15:10:22.7152677Z     abstract_dist.prepare_distribution_metadata(
+2026-02-11T15:10:22.7154037Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/distributions/sdist.py", line 53, in prepare_distribution_metadata
+2026-02-11T15:10:22.7155197Z     self.req.editable_sanity_check()
+2026-02-11T15:10:22.7156304Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/req/req_install.py", line 501, in editable_sanity_check
+2026-02-11T15:10:22.7157742Z     if self.editable and not self.supports_pyproject_editable:
+2026-02-11T15:10:22.7158312Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7159143Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/functools.py", line 998, in __get__
+2026-02-11T15:10:22.7159917Z     val = self.func(instance)
+2026-02-11T15:10:22.7160290Z           ^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7161379Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_internal/req/req_install.py", line 237, in supports_pyproject_editable
+2026-02-11T15:10:22.7163008Z     return "build_editable" in self.pep517_backend._supported_features()
+2026-02-11T15:10:22.7163531Z                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7164464Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 180, in _supported_features
+2026-02-11T15:10:22.7165582Z     return self._call_hook("_supported_features", {})
+2026-02-11T15:10:22.7165977Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:22.7166785Z   File "/opt/hostedtoolcache/Python/3.12.12/x64/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
+2026-02-11T15:10:22.7167591Z     raise BackendUnavailable(
+2026-02-11T15:10:22.7168179Z pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'setuptools.backends._legacy'
+2026-02-11T15:10:22.7560177Z ##[error]Process completed with exit code 2.
+2026-02-11T15:10:22.7672196Z Post job cleanup.
+2026-02-11T15:10:22.8448876Z [command]/usr/bin/git version
+2026-02-11T15:10:22.8485578Z git version 2.52.0
+2026-02-11T15:10:22.8524965Z Temporarily overriding HOME='/home/runner/work/_temp/73c33737-dd7f-4384-8feb-c4ea0f6e8b63' before making global git config changes
+2026-02-11T15:10:22.8526310Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:10:22.8531050Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:10:22.8561206Z Removing SSH command configuration
+2026-02-11T15:10:22.8569050Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:10:22.8602493Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:10:22.8813648Z Entering 'TaipanStack'
+2026-02-11T15:10:22.8868942Z Removing HTTP extra header
+2026-02-11T15:10:22.8873423Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:10:22.8905950Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:10:22.9121135Z Entering 'TaipanStack'
+2026-02-11T15:10:22.9175716Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:10:22.9183422Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:22.9207877Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:22.9209922Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:22.9210706Z includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:22.9211355Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:22.9220485Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:22.9243006Z /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9253753Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9319333Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:22.9341520Z /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9351481Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9384185Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:22.9406048Z /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9416476Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9449500Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:22.9471699Z /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9485596Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9521771Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:22.9748857Z Entering 'TaipanStack'
+2026-02-11T15:10:22.9769017Z file:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:10:22.9805258Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:22.9833452Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.9834368Z includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.9842898Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.9863502Z /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9872860Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9903054Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.9924903Z /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9932571Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config
+2026-02-11T15:10:22.9960202Z Removing credentials config '/home/runner/work/_temp/git-credentials-29a4670a-9dc0-4895-ba0f-a65a0b6f6a7e.config'
+2026-02-11T15:10:23.0099102Z Cleaning up orphan processes

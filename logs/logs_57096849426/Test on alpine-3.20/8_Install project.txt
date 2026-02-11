@@ -1,0 +1,114 @@
+﻿2026-02-11T15:10:20.0462005Z ##[group]Run python3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true
+2026-02-11T15:10:20.0462899Z [36;1mpython3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true[0m
+2026-02-11T15:10:20.0463769Z [36;1mpython3 -m pip install -e . --break-system-packages || python3 -m pip install -e .[0m
+2026-02-11T15:10:20.0464280Z shell: sh -e {0}
+2026-02-11T15:10:20.0464735Z env:
+2026-02-11T15:10:20.0464970Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:20.0465196Z ##[endgroup]
+2026-02-11T15:10:21.3387650Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:21.3818888Z Requirement already satisfied: pip in /usr/lib/python3.12/site-packages (24.0)
+2026-02-11T15:10:21.4563189Z Collecting pip
+2026-02-11T15:10:21.4814315Z   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+2026-02-11T15:10:21.4883429Z Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+2026-02-11T15:10:21.5054993Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 121.3 MB/s eta 0:00:00
+2026-02-11T15:10:21.5966748Z Installing collected packages: pip
+2026-02-11T15:10:21.5967987Z   Attempting uninstall: pip
+2026-02-11T15:10:21.6002101Z     Found existing installation: pip 24.0
+2026-02-11T15:10:21.6025007Z     Uninstalling pip-24.0:
+2026-02-11T15:10:21.6167224Z       Successfully uninstalled pip-24.0
+2026-02-11T15:10:22.7657232Z Successfully installed pip-26.0.1
+2026-02-11T15:10:22.7659596Z WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+2026-02-11T15:10:23.2017099Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:23.2380695Z Obtaining file:///__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:23.2404704Z   Installing build dependencies: started
+2026-02-11T15:10:23.9434798Z   Installing build dependencies: finished with status 'done'
+2026-02-11T15:10:23.9440921Z   Checking if build backend supports build_editable: started
+2026-02-11T15:10:24.3119878Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-02-11T15:10:24.3201678Z ERROR: Exception:
+2026-02-11T15:10:24.3202172Z Traceback (most recent call last):
+2026-02-11T15:10:24.3203152Z   File "/usr/lib/python3.12/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+2026-02-11T15:10:24.3204220Z     status = _inner_run()
+2026-02-11T15:10:24.3204821Z              ^^^^^^^^^^^^
+2026-02-11T15:10:24.3205726Z   File "/usr/lib/python3.12/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+2026-02-11T15:10:24.3206651Z     return self.run(options, args)
+2026-02-11T15:10:24.3206970Z            ^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3207557Z   File "/usr/lib/python3.12/site-packages/pip/_internal/cli/req_command.py", line 96, in wrapper
+2026-02-11T15:10:24.3208217Z     return func(self, options, args)
+2026-02-11T15:10:24.3208547Z            ^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3209125Z   File "/usr/lib/python3.12/site-packages/pip/_internal/commands/install.py", line 392, in run
+2026-02-11T15:10:24.3209763Z     requirement_set = resolver.resolve(
+2026-02-11T15:10:24.3210100Z                       ^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3210760Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 79, in resolve
+2026-02-11T15:10:24.3211585Z     collected = self.factory.collect_root_requirements(root_reqs)
+2026-02-11T15:10:24.3212076Z                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3213223Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 538, in collect_root_requirements
+2026-02-11T15:10:24.3214073Z     reqs = list(
+2026-02-11T15:10:24.3214301Z            ^^^^^
+2026-02-11T15:10:24.3215442Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 494, in _make_requirements_from_install_req
+2026-02-11T15:10:24.3216094Z     cand = self._make_base_candidate_from_link(
+2026-02-11T15:10:24.3216362Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3216923Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 205, in _make_base_candidate_from_link
+2026-02-11T15:10:24.3217584Z     self._editable_candidate_cache[link] = EditableCandidate(
+2026-02-11T15:10:24.3217904Z                                            ^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3218402Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 343, in __init__
+2026-02-11T15:10:24.3218893Z     super().__init__(
+2026-02-11T15:10:24.3219314Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 161, in __init__
+2026-02-11T15:10:24.3219811Z     self.dist = self._prepare()
+2026-02-11T15:10:24.3220018Z                 ^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3220447Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 238, in _prepare
+2026-02-11T15:10:24.3220941Z     dist = self._prepare_distribution()
+2026-02-11T15:10:24.3221198Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3221752Z   File "/usr/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 353, in _prepare_distribution
+2026-02-11T15:10:24.3222392Z     return self._factory.preparer.prepare_editable_requirement(self._ireq)
+2026-02-11T15:10:24.3222760Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3223291Z   File "/usr/lib/python3.12/site-packages/pip/_internal/operations/prepare.py", line 713, in prepare_editable_requirement
+2026-02-11T15:10:24.3223809Z     dist = _get_prepared_distribution(
+2026-02-11T15:10:24.3224041Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3224684Z   File "/usr/lib/python3.12/site-packages/pip/_internal/operations/prepare.py", line 77, in _get_prepared_distribution
+2026-02-11T15:10:24.3225238Z     abstract_dist.prepare_distribution_metadata(
+2026-02-11T15:10:24.3225772Z   File "/usr/lib/python3.12/site-packages/pip/_internal/distributions/sdist.py", line 53, in prepare_distribution_metadata
+2026-02-11T15:10:24.3226286Z     self.req.editable_sanity_check()
+2026-02-11T15:10:24.3226737Z   File "/usr/lib/python3.12/site-packages/pip/_internal/req/req_install.py", line 501, in editable_sanity_check
+2026-02-11T15:10:24.3227261Z     if self.editable and not self.supports_pyproject_editable:
+2026-02-11T15:10:24.3227578Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3227881Z   File "/usr/lib/python3.12/functools.py", line 998, in __get__
+2026-02-11T15:10:24.3228199Z     val = self.func(instance)
+2026-02-11T15:10:24.3228397Z           ^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3228839Z   File "/usr/lib/python3.12/site-packages/pip/_internal/req/req_install.py", line 237, in supports_pyproject_editable
+2026-02-11T15:10:24.3229438Z     return "build_editable" in self.pep517_backend._supported_features()
+2026-02-11T15:10:24.3229794Z                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3230294Z   File "/usr/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 180, in _supported_features
+2026-02-11T15:10:24.3230802Z     return self._call_hook("_supported_features", {})
+2026-02-11T15:10:24.3231080Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:24.3231512Z   File "/usr/lib/python3.12/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
+2026-02-11T15:10:24.3232113Z     raise BackendUnavailable(
+2026-02-11T15:10:24.3232527Z pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'setuptools.backends._legacy'
+2026-02-11T15:10:24.6717159Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:24.7020834Z error: externally-managed-environment
+2026-02-11T15:10:24.7021202Z 
+2026-02-11T15:10:24.7021596Z × This environment is externally managed
+2026-02-11T15:10:24.7022004Z ╰─> 
+2026-02-11T15:10:24.7022446Z     The system-wide python installation should be maintained using the system
+2026-02-11T15:10:24.7023018Z     package manager (apk) only.
+2026-02-11T15:10:24.7023334Z     
+2026-02-11T15:10:24.7023739Z     If the package in question is not packaged already (and hence installable via
+2026-02-11T15:10:24.7024789Z     "apk add py3-somepackage"), please consider installing it inside a virtual
+2026-02-11T15:10:24.7025342Z     environment, e.g.:
+2026-02-11T15:10:24.7025609Z     
+2026-02-11T15:10:24.7025840Z     python3 -m venv /path/to/venv
+2026-02-11T15:10:24.7026206Z     . /path/to/venv/bin/activate
+2026-02-11T15:10:24.7026533Z     pip install mypackage
+2026-02-11T15:10:24.7026818Z     
+2026-02-11T15:10:24.7027066Z     To exit the virtual environment, run:
+2026-02-11T15:10:24.7027432Z     
+2026-02-11T15:10:24.7027643Z     deactivate
+2026-02-11T15:10:24.7027878Z     
+2026-02-11T15:10:24.7028299Z     The virtual environment is not deleted, and can be re-entered by re-sourcing
+2026-02-11T15:10:24.7028860Z     the activate file.
+2026-02-11T15:10:24.7029143Z     
+2026-02-11T15:10:24.7029561Z     To automatically manage virtual environments, consider using pipx (from the
+2026-02-11T15:10:24.7030113Z     pipx package).
+2026-02-11T15:10:24.7030271Z 
+2026-02-11T15:10:24.7031355Z note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+2026-02-11T15:10:24.7032758Z hint: See PEP 668 for the detailed specification.
+2026-02-11T15:10:24.7403717Z ##[error]Process completed with exit code 1.

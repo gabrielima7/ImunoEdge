@@ -1,0 +1,721 @@
+﻿2026-02-11T15:10:14.8780570Z Current runner version: '2.331.0'
+2026-02-11T15:10:14.8807332Z ##[group]Runner Image Provisioner
+2026-02-11T15:10:14.8808125Z Hosted Compute Agent
+2026-02-11T15:10:14.8808689Z Version: 20260123.484
+2026-02-11T15:10:14.8809387Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-11T15:10:14.8810090Z Build Date: 2026-01-23T19:41:17Z
+2026-02-11T15:10:14.8810789Z Worker ID: {76d10505-1e5c-404a-b28b-3b401d87ad46}
+2026-02-11T15:10:14.8811567Z Azure Region: centralus
+2026-02-11T15:10:14.8812377Z ##[endgroup]
+2026-02-11T15:10:14.8813950Z ##[group]Operating System
+2026-02-11T15:10:14.8814708Z Ubuntu
+2026-02-11T15:10:14.8815145Z 24.04.3
+2026-02-11T15:10:14.8815598Z LTS
+2026-02-11T15:10:14.8816152Z ##[endgroup]
+2026-02-11T15:10:14.8816662Z ##[group]Runner Image
+2026-02-11T15:10:14.8817186Z Image: ubuntu-24.04
+2026-02-11T15:10:14.8817736Z Version: 20260201.15.1
+2026-02-11T15:10:14.8818913Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260201.15/images/ubuntu/Ubuntu2404-Readme.md
+2026-02-11T15:10:14.8820483Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260201.15
+2026-02-11T15:10:14.8821346Z ##[endgroup]
+2026-02-11T15:10:14.8822797Z ##[group]GITHUB_TOKEN Permissions
+2026-02-11T15:10:14.8824705Z Contents: read
+2026-02-11T15:10:14.8825327Z Metadata: read
+2026-02-11T15:10:14.8825927Z Packages: read
+2026-02-11T15:10:14.8826455Z ##[endgroup]
+2026-02-11T15:10:14.8828955Z Secret source: Actions
+2026-02-11T15:10:14.8829966Z Prepare workflow directory
+2026-02-11T15:10:14.9380251Z Prepare all required actions
+2026-02-11T15:10:14.9419478Z Getting action download info
+2026-02-11T15:10:15.2769819Z Download action repository 'actions/checkout@v6' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-02-11T15:10:15.4415205Z Complete job name: Test on fedora-42
+2026-02-11T15:10:15.4983634Z ##[group]Checking docker version
+2026-02-11T15:10:15.4996826Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:10:15.5559364Z '1.48'
+2026-02-11T15:10:15.5573966Z Docker daemon API version: '1.48'
+2026-02-11T15:10:15.5574787Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:10:15.5746945Z '1.48'
+2026-02-11T15:10:15.5762760Z Docker client API version: '1.48'
+2026-02-11T15:10:15.5768271Z ##[endgroup]
+2026-02-11T15:10:15.5771380Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:10:15.5777158Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=e06598"
+2026-02-11T15:10:15.5934110Z ##[command]/usr/bin/docker network prune --force --filter "label=e06598"
+2026-02-11T15:10:15.6075457Z ##[endgroup]
+2026-02-11T15:10:15.6076012Z ##[group]Create local container network
+2026-02-11T15:10:15.6086154Z ##[command]/usr/bin/docker network create --label e06598 github_network_c11392d78317481dbe812148704437ad
+2026-02-11T15:10:15.6687529Z 190d7021f1b15a0ca3843263c1a559f3899d61e10f43cff7259269eece87a5df
+2026-02-11T15:10:15.6708045Z ##[endgroup]
+2026-02-11T15:10:15.6732632Z ##[group]Starting job container
+2026-02-11T15:10:15.6754099Z ##[command]/usr/bin/docker pull fedora:42
+2026-02-11T15:10:16.3099844Z 42: Pulling from library/fedora
+2026-02-11T15:10:16.4747165Z bcbfb8588268: Pulling fs layer
+2026-02-11T15:10:17.8376377Z bcbfb8588268: Verifying Checksum
+2026-02-11T15:10:17.8376986Z bcbfb8588268: Download complete
+2026-02-11T15:10:19.8223651Z bcbfb8588268: Pull complete
+2026-02-11T15:10:19.8265488Z Digest: sha256:eb167a7adffa1489a205c83a7b9324e4cb0fae5c54645f263e70ac13f661f0e8
+2026-02-11T15:10:19.8275329Z Status: Downloaded newer image for fedora:42
+2026-02-11T15:10:19.8283353Z docker.io/library/fedora:42
+2026-02-11T15:10:19.8369025Z ##[command]/usr/bin/docker create --name 3e11c9bb748c4be0888286ee5cf1b915_fedora42_324f0e --label e06598 --workdir /__w/ImunoEdge/ImunoEdge --network github_network_c11392d78317481dbe812148704437ad  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" fedora:42 "-f" "/dev/null"
+2026-02-11T15:10:21.1967880Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.1996902Z ##[command]/usr/bin/docker start 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.3767444Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.3788634Z ##[command]/usr/bin/docker ps --all --filter id=2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:10:21.3906140Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 Up Less than a second
+2026-02-11T15:10:21.3926686Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:21.4045073Z HOME=/github/home
+2026-02-11T15:10:21.4045454Z GITHUB_ACTIONS=true
+2026-02-11T15:10:21.4045736Z CI=true
+2026-02-11T15:10:21.4046038Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:10:21.4046385Z DISTTAG=f42container
+2026-02-11T15:10:21.4046604Z FGC=f42
+2026-02-11T15:10:21.4046784Z FBR=f42
+2026-02-11T15:10:21.4066980Z ##[endgroup]
+2026-02-11T15:10:21.4076158Z ##[group]Waiting for all services to be ready
+2026-02-11T15:10:21.4077868Z ##[endgroup]
+2026-02-11T15:10:21.4283814Z ##[group]Run dnf install -y python3 python3-pip git
+2026-02-11T15:10:21.4284281Z [36;1mdnf install -y python3 python3-pip git[0m
+2026-02-11T15:10:21.4287467Z shell: sh -e {0}
+2026-02-11T15:10:21.4287862Z env:
+2026-02-11T15:10:21.4288044Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:21.4288287Z ##[endgroup]
+2026-02-11T15:10:21.5279484Z Updating and loading repositories:
+2026-02-11T15:10:22.8517152Z  Fedora 42 openh264 (From Cisco) - x86_ 100% |   5.3 KiB/s |   5.8 KiB |  00m01s
+2026-02-11T15:10:23.6995165Z  Fedora 42 - x86_64 - Updates           100% |   6.8 MiB/s |  12.1 MiB |  00m02s
+2026-02-11T15:10:35.7918845Z  Fedora 42 - x86_64                     100% |   2.5 MiB/s |  35.4 MiB |  00m14s
+2026-02-11T15:10:38.5668362Z Repositories loaded.
+2026-02-11T15:10:40.0796490Z Package                     Arch   Version                 Repository      Size
+2026-02-11T15:10:40.0797018Z Installing:
+2026-02-11T15:10:40.0797473Z  git                        x86_64 2.53.0-1.fc42           updates     56.4 KiB
+2026-02-11T15:10:40.0798027Z  python3                    x86_64 3.13.11-2.fc42          updates     28.7 KiB
+2026-02-11T15:10:40.0798635Z  python3-pip                noarch 24.3.1-5.fc42           updates     11.3 MiB
+2026-02-11T15:10:40.0799155Z Installing dependencies:
+2026-02-11T15:10:40.0799614Z  expat                      x86_64 2.7.3-1.fc42            updates    301.1 KiB
+2026-02-11T15:10:40.0800394Z  git-core                   x86_64 2.53.0-1.fc42           updates     24.1 MiB
+2026-02-11T15:10:40.0800996Z  git-core-doc               noarch 2.53.0-1.fc42           updates     18.5 MiB
+2026-02-11T15:10:40.0801912Z  groff-base                 x86_64 1.23.0-8.fc42           fedora       3.9 MiB
+2026-02-11T15:10:40.0802626Z  less                       x86_64 679-1.fc42              updates    406.1 KiB
+2026-02-11T15:10:40.0803181Z  libb2                      x86_64 0.98.1-13.fc42          fedora      46.1 KiB
+2026-02-11T15:10:40.0803767Z  libcbor                    x86_64 0.11.0-3.fc42           fedora      77.8 KiB
+2026-02-11T15:10:40.0804359Z  libedit                    x86_64 3.1-56.20251016cvs.fc42 updates    240.2 KiB
+2026-02-11T15:10:40.0804962Z  libfdisk                   x86_64 2.40.4-8.fc42           updates    372.3 KiB
+2026-02-11T15:10:40.0805547Z  libfido2                   x86_64 1.15.0-3.fc42           fedora     242.1 KiB
+2026-02-11T15:10:40.0806160Z  mpdecimal                  x86_64 4.0.1-1.fc42            updates    217.2 KiB
+2026-02-11T15:10:40.0807244Z  ncurses                    x86_64 6.5-5.20250125.fc42     fedora     608.1 KiB
+2026-02-11T15:10:40.0807822Z  openssh                    x86_64 9.9p1-12.fc42           updates      1.4 MiB
+2026-02-11T15:10:40.0808454Z  openssh-clients            x86_64 9.9p1-12.fc42           updates      2.7 MiB
+2026-02-11T15:10:40.0809113Z  perl-AutoLoader            noarch 5.74-519.fc42           updates     20.5 KiB
+2026-02-11T15:10:40.0809726Z  perl-B                     x86_64 1.89-519.fc42           updates    498.0 KiB
+2026-02-11T15:10:40.0810311Z  perl-Carp                  noarch 1.54-512.fc42           fedora      46.6 KiB
+2026-02-11T15:10:40.0810935Z  perl-Class-Struct          noarch 0.68-519.fc42           updates     25.4 KiB
+2026-02-11T15:10:40.0811625Z  perl-Data-Dumper           x86_64 2.189-513.fc42          fedora     115.6 KiB
+2026-02-11T15:10:40.0812526Z  perl-Digest                noarch 1.20-512.fc42           fedora      35.3 KiB
+2026-02-11T15:10:40.0813257Z  perl-Digest-MD5            x86_64 2.59-6.fc42             fedora      59.7 KiB
+2026-02-11T15:10:40.0813899Z  perl-DynaLoader            x86_64 1.56-519.fc42           updates     32.1 KiB
+2026-02-11T15:10:40.0814538Z  perl-Encode                x86_64 4:3.21-512.fc42         fedora       4.7 MiB
+2026-02-11T15:10:40.0815142Z  perl-Errno                 x86_64 1.38-519.fc42           updates      8.3 KiB
+2026-02-11T15:10:40.0815738Z  perl-Error                 noarch 1:0.17030-1.fc42        fedora      76.7 KiB
+2026-02-11T15:10:40.0816659Z  perl-Exporter              noarch 5.78-512.fc42           fedora      54.3 KiB
+2026-02-11T15:10:40.0817305Z  perl-Fcntl                 x86_64 1.18-519.fc42           updates     48.9 KiB
+2026-02-11T15:10:40.0818054Z  perl-File-Basename         noarch 2.86-519.fc42           updates     14.0 KiB
+2026-02-11T15:10:40.0818523Z  perl-File-Path             noarch 2.18-512.fc42           fedora      63.5 KiB
+2026-02-11T15:10:40.0819053Z  perl-File-Temp             noarch 1:0.231.100-512.fc42    fedora     162.3 KiB
+2026-02-11T15:10:40.0819507Z  perl-File-stat             noarch 1.14-519.fc42           updates     12.5 KiB
+2026-02-11T15:10:40.0819914Z  perl-FileHandle            noarch 2.05-519.fc42           updates      9.3 KiB
+2026-02-11T15:10:40.0820328Z  perl-Getopt-Long           noarch 1:2.58-3.fc42           fedora     144.5 KiB
+2026-02-11T15:10:40.0820731Z  perl-Getopt-Std            noarch 1.14-519.fc42           updates     11.2 KiB
+2026-02-11T15:10:40.0821121Z  perl-Git                   noarch 2.53.0-1.fc42           updates     64.4 KiB
+2026-02-11T15:10:40.0821524Z  perl-HTTP-Tiny             noarch 0.090-2.fc42            fedora     154.4 KiB
+2026-02-11T15:10:40.0822080Z  perl-IO                    x86_64 1.55-519.fc42           updates    147.0 KiB
+2026-02-11T15:10:40.0822486Z  perl-IO-Socket-IP          noarch 0.43-2.fc42             fedora     100.3 KiB
+2026-02-11T15:10:40.0822909Z  perl-IO-Socket-SSL         noarch 2.089-2.fc42            fedora     703.3 KiB
+2026-02-11T15:10:40.0823335Z  perl-IPC-Open3             noarch 1.22-519.fc42           updates     22.5 KiB
+2026-02-11T15:10:40.0823737Z  perl-MIME-Base32           noarch 1.303-23.fc42           fedora      30.7 KiB
+2026-02-11T15:10:40.0824130Z  perl-MIME-Base64           x86_64 3.16-512.fc42           fedora      42.0 KiB
+2026-02-11T15:10:40.0824542Z  perl-Net-SSLeay            x86_64 1.94-8.fc42             fedora       1.3 MiB
+2026-02-11T15:10:40.0824920Z  perl-POSIX                 x86_64 2.20-519.fc42           updates    231.0 KiB
+2026-02-11T15:10:40.0825357Z  perl-PathTools             x86_64 3.91-513.fc42           fedora     180.0 KiB
+2026-02-11T15:10:40.0825852Z  perl-Pod-Escapes           noarch 1:1.07-512.fc42         fedora      24.9 KiB
+2026-02-11T15:10:40.0826350Z Total size of inbound packages is 33 MiB. Need to download 33 MiB.
+2026-02-11T15:10:40.0826815Z After this operation, 131 MiB extra will be used (install 131 MiB, remove 0 B).
+2026-02-11T15:10:40.0827274Z  perl-Pod-Perldoc           noarch 3.28.01-513.fc42        fedora     163.7 KiB
+2026-02-11T15:10:40.0827912Z  perl-Pod-Simple            noarch 1:3.45-512.fc42         fedora     560.8 KiB
+2026-02-11T15:10:40.0828345Z  perl-Pod-Usage             noarch 4:2.05-1.fc42           fedora      86.3 KiB
+2026-02-11T15:10:40.0828785Z  perl-Scalar-List-Utils     x86_64 5:1.70-1.fc42           updates    144.9 KiB
+2026-02-11T15:10:40.0829239Z  perl-SelectSaver           noarch 1.02-519.fc42           updates      2.2 KiB
+2026-02-11T15:10:40.0829661Z  perl-Socket                x86_64 4:2.038-512.fc42        fedora     119.9 KiB
+2026-02-11T15:10:40.0830080Z  perl-Storable              x86_64 1:3.32-512.fc42         fedora     232.3 KiB
+2026-02-11T15:10:40.0830483Z  perl-Symbol                noarch 1.09-519.fc42           updates      6.8 KiB
+2026-02-11T15:10:40.0830918Z  perl-Term-ANSIColor        noarch 5.01-513.fc42           fedora      97.5 KiB
+2026-02-11T15:10:40.0831352Z  perl-Term-Cap              noarch 1.18-512.fc42           fedora      29.3 KiB
+2026-02-11T15:10:40.0831952Z  perl-TermReadKey           x86_64 2.38-24.fc42            fedora      64.0 KiB
+2026-02-11T15:10:40.0832409Z  perl-Text-ParseWords       noarch 3.31-512.fc42           fedora      13.6 KiB
+2026-02-11T15:10:40.0832879Z  perl-Text-Tabs+Wrap        noarch 2024.001-512.fc42       fedora      22.6 KiB
+2026-02-11T15:10:40.0833362Z  perl-Time-Local            noarch 2:1.350-512.fc42        fedora      68.9 KiB
+2026-02-11T15:10:40.0833786Z  perl-URI                   noarch 5.31-2.fc42             fedora     257.0 KiB
+2026-02-11T15:10:40.0834319Z  perl-base                  noarch 2.27-519.fc42           updates     12.5 KiB
+2026-02-11T15:10:40.0834752Z  perl-constant              noarch 1.33-513.fc42           fedora      26.2 KiB
+2026-02-11T15:10:40.0835155Z  perl-if                    noarch 0.61.000-519.fc42       updates      5.8 KiB
+2026-02-11T15:10:40.0835572Z  perl-interpreter           x86_64 4:5.40.3-519.fc42       updates    118.4 KiB
+2026-02-11T15:10:40.0835979Z  perl-lib                   x86_64 0.65-519.fc42           updates      8.5 KiB
+2026-02-11T15:10:40.0836376Z  perl-libnet                noarch 3.15-513.fc42           fedora     289.4 KiB
+2026-02-11T15:10:40.0836774Z  perl-libs                  x86_64 4:5.40.3-519.fc42       updates      9.8 MiB
+2026-02-11T15:10:40.0837174Z  perl-locale                noarch 1.12-519.fc42           updates      6.5 KiB
+2026-02-11T15:10:40.0837582Z  perl-mro                   x86_64 1.29-519.fc42           updates     41.5 KiB
+2026-02-11T15:10:40.0837990Z  perl-overload              noarch 1.37-519.fc42           updates     71.5 KiB
+2026-02-11T15:10:40.0838415Z  perl-overloading           noarch 0.02-519.fc42           updates      4.8 KiB
+2026-02-11T15:10:40.0838834Z  perl-parent                noarch 1:0.244-2.fc42          fedora      10.3 KiB
+2026-02-11T15:10:40.0839252Z  perl-podlators             noarch 1:6.0.2-3.fc42          fedora     317.5 KiB
+2026-02-11T15:10:40.0839663Z  perl-vars                  noarch 1.05-519.fc42           updates      3.9 KiB
+2026-02-11T15:10:40.0840087Z  python-pip-wheel           noarch 24.3.1-5.fc42           updates      1.2 MiB
+2026-02-11T15:10:40.0840514Z  python3-libs               x86_64 3.13.11-2.fc42          updates     40.1 MiB
+2026-02-11T15:10:40.0840912Z  util-linux                 x86_64 2.40.4-8.fc42           updates      3.4 MiB
+2026-02-11T15:10:40.0841247Z Installing weak dependencies:
+2026-02-11T15:10:40.0841587Z  perl-NDBM_File             x86_64 1.17-519.fc42           updates     28.4 KiB
+2026-02-11T15:10:40.0842258Z  python-unversioned-command noarch 3.13.11-2.fc42          updates     23.0   B
+2026-02-11T15:10:40.0842556Z 
+2026-02-11T15:10:40.0842654Z Transaction Summary:
+2026-02-11T15:10:40.0842872Z  Installing:        83 packages
+2026-02-11T15:10:40.0843028Z 
+2026-02-11T15:10:40.2193400Z [ 1/83] libb2-0:0.98.1-13.fc42.x86_64   100% | 199.9 KiB/s |  25.4 KiB |  00m00s
+2026-02-11T15:10:40.3102075Z [ 2/83] python3-0:3.13.11-2.fc42.x86_64 100% | 140.3 KiB/s |  30.6 KiB |  00m00s
+2026-02-11T15:10:40.3949513Z [ 3/83] git-0:2.53.0-1.fc42.x86_64      100% | 481.5 KiB/s |  40.4 KiB |  00m00s
+2026-02-11T15:10:40.7074760Z [ 4/83] python3-libs-0:3.13.11-2.fc42.x 100% |  15.0 MiB/s |   9.2 MiB |  00m01s
+2026-02-11T15:10:40.7163957Z [ 5/83] python3-pip-0:24.3.1-5.fc42.noa 100% |   5.5 MiB/s |   2.7 MiB |  00m00s
+2026-02-11T15:10:40.7737611Z [ 6/83] git-core-0:2.53.0-1.fc42.x86_64 100% |  13.7 MiB/s |   5.2 MiB |  00m00s
+2026-02-11T15:10:40.7751160Z [ 7/83] perl-Git-0:2.53.0-1.fc42.noarch 100% | 647.0 KiB/s |  37.5 KiB |  00m00s
+2026-02-11T15:10:40.7844798Z [ 8/83] git-core-doc-0:2.53.0-1.fc42.no 100% |  40.8 MiB/s |   3.1 MiB |  00m00s
+2026-02-11T15:10:40.8718814Z [ 9/83] perl-Getopt-Long-1:2.58-3.fc42. 100% | 656.8 KiB/s |  63.7 KiB |  00m00s
+2026-02-11T15:10:40.9132155Z [10/83] perl-TermReadKey-0:2.38-24.fc42 100% | 276.7 KiB/s |  35.4 KiB |  00m00s
+2026-02-11T15:10:40.9270941Z [11/83] perl-Error-1:0.17030-1.fc42.noa 100% | 734.1 KiB/s |  40.4 KiB |  00m00s
+2026-02-11T15:10:40.9649167Z [12/83] perl-PathTools-0:3.91-513.fc42. 100% | 462.0 KiB/s |  87.3 KiB |  00m00s
+2026-02-11T15:10:40.9732428Z [13/83] perl-constant-0:1.33-513.fc42.n 100% | 510.7 KiB/s |  23.0 KiB |  00m00s
+2026-02-11T15:10:40.9752885Z [14/83] perl-Exporter-0:5.78-512.fc42.n 100% | 508.0 KiB/s |  31.0 KiB |  00m00s
+2026-02-11T15:10:41.0176392Z [15/83] perl-Text-ParseWords-0:3.31-512 100% | 374.5 KiB/s |  16.5 KiB |  00m00s
+2026-02-11T15:10:41.0185470Z [16/83] perl-Pod-Usage-4:2.05-1.fc42.no 100% | 764.3 KiB/s |  40.5 KiB |  00m00s
+2026-02-11T15:10:41.0308918Z [17/83] perl-Carp-0:1.54-512.fc42.noarc 100% | 524.8 KiB/s |  28.9 KiB |  00m00s
+2026-02-11T15:10:41.0857185Z [18/83] perl-Pod-Perldoc-0:3.28.01-513. 100% |   1.3 MiB/s |  85.8 KiB |  00m00s
+2026-02-11T15:10:41.1063266Z [19/83] perl-podlators-1:6.0.2-3.fc42.n 100% |   1.4 MiB/s | 128.6 KiB |  00m00s
+2026-02-11T15:10:41.1405140Z [20/83] perl-File-Temp-1:0.231.100-512. 100% |   1.1 MiB/s |  59.2 KiB |  00m00s
+2026-02-11T15:10:41.1524584Z [21/83] perl-HTTP-Tiny-0:0.090-2.fc42.n 100% |   1.2 MiB/s |  56.5 KiB |  00m00s
+2026-02-11T15:10:41.1930571Z [22/83] perl-parent-1:0.244-2.fc42.noar 100% | 380.6 KiB/s |  15.2 KiB |  00m00s
+2026-02-11T15:10:41.2373793Z [23/83] perl-Term-ANSIColor-0:5.01-513. 100% |   1.1 MiB/s |  47.7 KiB |  00m00s
+2026-02-11T15:10:41.2388815Z [24/83] perl-Pod-Simple-1:3.45-512.fc42 100% |   2.2 MiB/s | 219.0 KiB |  00m00s
+2026-02-11T15:10:41.2527345Z [25/83] groff-base-0:1.23.0-8.fc42.x86_ 100% |   5.0 MiB/s |   1.1 MiB |  00m00s
+2026-02-11T15:10:41.2778922Z [26/83] perl-Term-Cap-0:1.18-512.fc42.n 100% | 553.9 KiB/s |  22.2 KiB |  00m00s
+2026-02-11T15:10:41.2817580Z [27/83] perl-File-Path-0:2.18-512.fc42. 100% | 837.5 KiB/s |  35.2 KiB |  00m00s
+2026-02-11T15:10:41.2953570Z [28/83] perl-IO-Socket-SSL-0:2.089-2.fc 100% |   5.4 MiB/s | 230.2 KiB |  00m00s
+2026-02-11T15:10:41.3193686Z [29/83] perl-MIME-Base64-0:3.16-512.fc4 100% | 728.1 KiB/s |  29.9 KiB |  00m00s
+2026-02-11T15:10:41.3339169Z [30/83] perl-Socket-4:2.038-512.fc42.x8 100% |   1.4 MiB/s |  54.8 KiB |  00m00s
+2026-02-11T15:10:41.3609707Z [31/83] perl-Time-Local-2:1.350-512.fc4 100% | 840.5 KiB/s |  34.5 KiB |  00m00s
+2026-02-11T15:10:41.3697659Z [32/83] perl-Net-SSLeay-0:1.94-8.fc42.x 100% |   4.2 MiB/s | 376.0 KiB |  00m00s
+2026-02-11T15:10:41.3726121Z [33/83] perl-Pod-Escapes-1:1.07-512.fc4 100% | 521.5 KiB/s |  19.8 KiB |  00m00s
+2026-02-11T15:10:41.4013610Z [34/83] perl-Text-Tabs+Wrap-0:2024.001- 100% | 545.0 KiB/s |  21.8 KiB |  00m00s
+2026-02-11T15:10:41.4109644Z [35/83] perl-IO-Socket-IP-0:0.43-2.fc42 100% |   1.1 MiB/s |  42.4 KiB |  00m00s
+2026-02-11T15:10:41.4282916Z [36/83] ncurses-0:6.5-5.20250125.fc42.x 100% |   7.1 MiB/s | 424.5 KiB |  00m00s
+2026-02-11T15:10:41.4495923Z [37/83] perl-Data-Dumper-0:2.189-513.fc 100% |   1.5 MiB/s |  56.7 KiB |  00m00s
+2026-02-11T15:10:41.4529270Z [38/83] perl-URI-0:5.31-2.fc42.noarch   100% |   2.7 MiB/s | 140.7 KiB |  00m00s
+2026-02-11T15:10:41.4677404Z [39/83] perl-MIME-Base32-0:1.303-23.fc4 100% | 526.0 KiB/s |  20.5 KiB |  00m00s
+2026-02-11T15:10:41.4906756Z [40/83] perl-libnet-0:3.15-513.fc42.noa 100% |   3.1 MiB/s | 128.4 KiB |  00m00s
+2026-02-11T15:10:41.4943326Z [41/83] perl-Digest-MD5-0:2.59-6.fc42.x 100% | 877.7 KiB/s |  36.0 KiB |  00m00s
+2026-02-11T15:10:41.5073967Z [42/83] perl-Digest-0:1.20-512.fc42.noa 100% | 639.3 KiB/s |  24.9 KiB |  00m00s
+2026-02-11T15:10:41.5368952Z [43/83] perl-File-Basename-0:2.86-519.f 100% | 377.4 KiB/s |  17.0 KiB |  00m00s
+2026-02-11T15:10:41.5409897Z [44/83] perl-POSIX-0:2.20-519.fc42.x86_ 100% |   2.1 MiB/s |  97.4 KiB |  00m00s
+2026-02-11T15:10:41.5542264Z [45/83] perl-interpreter-4:5.40.3-519.f 100% |   1.5 MiB/s |  72.0 KiB |  00m00s
+2026-02-11T15:10:41.5875693Z [46/83] perl-Errno-0:1.38-519.fc42.x86_ 100% | 321.2 KiB/s |  14.8 KiB |  00m00s
+2026-02-11T15:10:41.6032862Z [47/83] perl-libs-4:5.40.3-519.fc42.x86 100% |  35.3 MiB/s |   2.3 MiB |  00m00s
+2026-02-11T15:10:41.6306080Z [48/83] perl-Storable-1:3.32-512.fc42.x 100% |   2.3 MiB/s |  99.6 KiB |  00m00s
+2026-02-11T15:10:41.6496411Z [49/83] perl-Fcntl-0:1.18-519.fc42.x86_ 100% | 659.0 KiB/s |  29.7 KiB |  00m00s
+2026-02-11T15:10:41.6797225Z [50/83] perl-Encode-4:3.21-512.fc42.x86 100% |   8.4 MiB/s |   1.1 MiB |  00m00s
+2026-02-11T15:10:41.6806738Z [51/83] perl-FileHandle-0:2.05-519.fc42 100% | 312.8 KiB/s |  15.3 KiB |  00m00s
+2026-02-11T15:10:41.6962303Z [52/83] perl-IO-0:1.55-519.fc42.x86_64  100% |   1.7 MiB/s |  81.6 KiB |  00m00s
+2026-02-11T15:10:41.7264296Z [53/83] perl-Symbol-0:1.09-519.fc42.noa 100% | 305.2 KiB/s |  14.0 KiB |  00m00s
+2026-02-11T15:10:41.7275229Z [54/83] perl-Scalar-List-Utils-5:1.70-1 100% |   1.6 MiB/s |  74.6 KiB |  00m00s
+2026-02-11T15:10:41.7423244Z [55/83] perl-base-0:2.27-519.fc42.noarc 100% | 356.5 KiB/s |  16.0 KiB |  00m00s
+2026-02-11T15:10:41.7728566Z [56/83] perl-overload-0:1.37-519.fc42.n 100% | 986.3 KiB/s |  45.4 KiB |  00m00s
+2026-02-11T15:10:41.7739396Z [57/83] perl-DynaLoader-0:1.56-519.fc42 100% | 562.7 KiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:10:41.7883144Z [58/83] perl-vars-0:1.05-519.fc42.noarc 100% | 285.2 KiB/s |  12.8 KiB |  00m00s
+2026-02-11T15:10:41.8193248Z [59/83] perl-if-0:0.61.000-519.fc42.noa 100% | 300.7 KiB/s |  13.8 KiB |  00m00s
+2026-02-11T15:10:41.8203674Z [60/83] perl-IPC-Open3-0:1.22-519.fc42. 100% | 471.4 KiB/s |  21.7 KiB |  00m00s
+2026-02-11T15:10:41.8343009Z [61/83] perl-AutoLoader-0:5.74-519.fc42 100% | 468.0 KiB/s |  21.1 KiB |  00m00s
+2026-02-11T15:10:41.8662389Z [62/83] perl-Getopt-Std-0:1.14-519.fc42 100% | 337.3 KiB/s |  15.5 KiB |  00m00s
+2026-02-11T15:10:41.8686477Z [63/83] perl-B-0:1.89-519.fc42.x86_64   100% |   3.6 MiB/s | 176.5 KiB |  00m00s
+2026-02-11T15:10:41.8809045Z [64/83] expat-0:2.7.3-1.fc42.x86_64     100% |   2.5 MiB/s | 119.9 KiB |  00m00s
+2026-02-11T15:10:41.9131864Z [65/83] mpdecimal-0:4.0.1-1.fc42.x86_64 100% |   2.1 MiB/s |  97.1 KiB |  00m00s
+2026-02-11T15:10:41.9272953Z [66/83] perl-mro-0:1.29-519.fc42.x86_64 100% | 646.1 KiB/s |  29.7 KiB |  00m00s
+2026-02-11T15:10:41.9310954Z [67/83] python-pip-wheel-0:24.3.1-5.fc4 100% |  19.4 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:10:41.9593501Z [68/83] perl-overloading-0:0.02-519.fc4 100% | 276.9 KiB/s |  12.7 KiB |  00m00s
+2026-02-11T15:10:41.9736265Z [69/83] perl-locale-0:1.12-519.fc42.noa 100% | 299.0 KiB/s |  13.5 KiB |  00m00s
+2026-02-11T15:10:41.9775856Z [70/83] perl-File-stat-0:1.14-519.fc42. 100% | 366.9 KiB/s |  16.9 KiB |  00m00s
+2026-02-11T15:10:42.0063377Z [71/83] perl-SelectSaver-0:1.02-519.fc4 100% | 251.1 KiB/s |  11.6 KiB |  00m00s
+2026-02-11T15:10:42.0196627Z [72/83] perl-Class-Struct-0:0.68-519.fc 100% | 486.7 KiB/s |  21.9 KiB |  00m00s
+2026-02-11T15:10:42.0259449Z [73/83] less-0:679-1.fc42.x86_64        100% |   4.0 MiB/s | 195.3 KiB |  00m00s
+2026-02-11T15:10:42.0572164Z [74/83] openssh-clients-0:9.9p1-12.fc42 100% |  15.0 MiB/s | 766.9 KiB |  00m00s
+2026-02-11T15:10:42.0670098Z [75/83] libfido2-0:1.15.0-3.fc42.x86_64 100% |   2.4 MiB/s |  98.4 KiB |  00m00s
+2026-02-11T15:10:42.0687935Z [76/83] openssh-0:9.9p1-12.fc42.x86_64  100% |   7.1 MiB/s | 350.8 KiB |  00m00s
+2026-02-11T15:10:42.0969103Z [77/83] libcbor-0:0.11.0-3.fc42.x86_64  100% | 853.3 KiB/s |  33.3 KiB |  00m00s
+2026-02-11T15:10:42.1134561Z [78/83] perl-lib-0:0.65-519.fc42.x86_64 100% | 328.5 KiB/s |  14.8 KiB |  00m00s
+2026-02-11T15:10:42.1155983Z [79/83] libedit-0:3.1-56.20251016cvs.fc 100% |   2.2 MiB/s | 105.1 KiB |  00m00s
+2026-02-11T15:10:42.1589595Z [80/83] util-linux-0:2.40.4-8.fc42.x86_ 100% |  18.9 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:10:42.1605069Z [81/83] libfdisk-0:2.40.4-8.fc42.x86_64 100% |   3.4 MiB/s | 158.0 KiB |  00m00s
+2026-02-11T15:10:42.1617277Z [82/83] python-unversioned-command-0:3. 100% | 283.4 KiB/s |  12.8 KiB |  00m00s
+2026-02-11T15:10:42.2059539Z [83/83] perl-NDBM_File-0:1.17-519.fc42. 100% | 488.1 KiB/s |  22.5 KiB |  00m00s
+2026-02-11T15:10:42.2060170Z --------------------------------------------------------------------------------
+2026-02-11T15:10:42.2060658Z [83/83] Total                           100% |  15.4 MiB/s |  32.7 MiB |  00m02s
+2026-02-11T15:10:42.2071252Z Running transaction
+2026-02-11T15:10:42.9076000Z [ 1/85] Verify package files            100% | 680.0   B/s |  83.0   B |  00m00s
+2026-02-11T15:10:42.9150963Z [ 2/85] Prepare transaction             100% | 988.0   B/s |  83.0   B |  00m00s
+2026-02-11T15:10:42.9316230Z [ 3/85] Installing expat-0:2.7.3-1.fc42 100% |  14.8 MiB/s | 303.2 KiB |  00m00s
+2026-02-11T15:10:43.0024779Z [ 4/85] Installing libfdisk-0:2.40.4-8. 100% |  72.9 MiB/s | 373.4 KiB |  00m00s
+2026-02-11T15:10:43.0326344Z [ 5/85] Installing util-linux-0:2.40.4- 100% |  38.1 MiB/s |   3.5 MiB |  00m00s
+2026-02-11T15:10:43.0484920Z [ 6/85] Installing openssh-0:9.9p1-12.f 100% |  69.1 MiB/s |   1.4 MiB |  00m00s
+2026-02-11T15:10:43.0526936Z [ 7/85] Installing libedit-0:3.1-56.202 100% |  78.7 MiB/s | 241.9 KiB |  00m00s
+2026-02-11T15:10:43.0562338Z [ 8/85] Installing libcbor-0:0.11.0-3.f 100% |  38.7 MiB/s |  79.2 KiB |  00m00s
+2026-02-11T15:10:43.0718645Z [ 9/85] Installing libfido2-0:1.15.0-3. 100% |  79.3 MiB/s | 243.6 KiB |  00m00s
+2026-02-11T15:10:43.0980240Z [10/85] Installing openssh-clients-0:9. 100% |  77.3 MiB/s |   2.7 MiB |  00m00s
+2026-02-11T15:10:43.1496738Z [11/85] Installing less-0:679-1.fc42.x8 100% |  20.0 MiB/s | 409.4 KiB |  00m00s
+2026-02-11T15:10:43.2149109Z [12/85] Installing git-core-0:2.53.0-1. 100% | 280.2 MiB/s |  24.1 MiB |  00m00s
+2026-02-11T15:10:43.2236723Z [13/85] Installing git-core-doc-0:2.53. 100% | 985.9 MiB/s |  18.7 MiB |  00m00s
+2026-02-11T15:10:43.2272118Z [14/85] Installing python-pip-wheel-0:2 100% | 311.1 MiB/s |   1.2 MiB |  00m00s
+2026-02-11T15:10:43.2332420Z [15/85] Installing mpdecimal-0:4.0.1-1. 100% |  71.2 MiB/s | 218.8 KiB |  00m00s
+2026-02-11T15:10:43.2570090Z [16/85] Installing ncurses-0:6.5-5.2025 100% |  22.2 MiB/s | 614.7 KiB |  00m00s
+2026-02-11T15:10:43.3187747Z [17/85] Installing groff-base-0:1.23.0- 100% |  64.9 MiB/s |   3.9 MiB |  00m00s
+2026-02-11T15:10:43.3219686Z [18/85] Installing perl-Digest-0:1.20-5 100% |  18.1 MiB/s |  37.1 KiB |  00m00s
+2026-02-11T15:10:43.3273046Z [19/85] Installing perl-Digest-MD5-0:2. 100% |  20.0 MiB/s |  61.6 KiB |  00m00s
+2026-02-11T15:10:43.3298934Z [20/85] Installing perl-B-0:1.89-519.fc 100% |  97.9 MiB/s | 501.3 KiB |  00m00s
+2026-02-11T15:10:43.3320430Z [21/85] Installing perl-FileHandle-0:2. 100% |   9.5 MiB/s |   9.8 KiB |  00m00s
+2026-02-11T15:10:43.3354348Z [22/85] Installing perl-MIME-Base32-0:1 100% |  15.7 MiB/s |  32.2 KiB |  00m00s
+2026-02-11T15:10:43.3403082Z [23/85] Installing perl-Data-Dumper-0:2 100% |  38.2 MiB/s | 117.5 KiB |  00m00s
+2026-02-11T15:10:43.3429521Z [24/85] Installing perl-libnet-0:3.15-5 100% |  57.6 MiB/s | 294.7 KiB |  00m00s
+2026-02-11T15:10:43.3453047Z [25/85] Installing perl-AutoLoader-0:5. 100% |  20.5 MiB/s |  20.9 KiB |  00m00s
+2026-02-11T15:10:43.3535603Z [26/85] Installing perl-IO-Socket-IP-0: 100% |  49.9 MiB/s | 102.2 KiB |  00m00s
+2026-02-11T15:10:43.3574861Z [27/85] Installing perl-URI-0:5.31-2.fc 100% |  29.3 MiB/s | 269.6 KiB |  00m00s
+2026-02-11T15:10:43.3589699Z [28/85] Installing perl-Time-Local-2:1. 100% |  34.5 MiB/s |  70.6 KiB |  00m00s
+2026-02-11T15:10:43.3616958Z [29/85] Installing perl-Text-Tabs+Wrap- 100% |  11.7 MiB/s |  23.9 KiB |  00m00s
+2026-02-11T15:10:43.3637242Z [30/85] Installing perl-File-Path-0:2.1 100% |  31.5 MiB/s |  64.5 KiB |  00m00s
+2026-02-11T15:10:43.3652445Z [31/85] Installing perl-Pod-Escapes-1:1 100% |  25.3 MiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:10:43.3783610Z [32/85] Installing perl-if-0:0.61.000-5 100% |   3.0 MiB/s |   6.2 KiB |  00m00s
+2026-02-11T15:10:43.3815796Z [33/85] Installing perl-Net-SSLeay-0:1. 100% |  97.1 MiB/s |   1.4 MiB |  00m00s
+2026-02-11T15:10:43.3855618Z [34/85] Installing perl-locale-0:1.12-5 100% |   6.7 MiB/s |   6.9 KiB |  00m00s
+2026-02-11T15:10:43.3885950Z [35/85] Installing perl-IO-Socket-SSL-0 100% | 172.7 MiB/s | 707.4 KiB |  00m00s
+2026-02-11T15:10:43.3907884Z [36/85] Installing perl-Term-ANSIColor- 100% |  48.4 MiB/s |  99.2 KiB |  00m00s
+2026-02-11T15:10:43.3964968Z [37/85] Installing perl-Term-Cap-0:1.18 100% |  14.9 MiB/s |  30.6 KiB |  00m00s
+2026-02-11T15:10:43.4003899Z [38/85] Installing perl-Pod-Simple-1:3. 100% |  92.8 MiB/s | 570.4 KiB |  00m00s
+2026-02-11T15:10:43.4033398Z [39/85] Installing perl-POSIX-0:2.20-51 100% |  75.6 MiB/s | 232.3 KiB |  00m00s
+2026-02-11T15:10:43.4065790Z [40/85] Installing perl-File-Temp-1:0.2 100% |  80.1 MiB/s | 164.1 KiB |  00m00s
+2026-02-11T15:10:43.4086729Z [41/85] Installing perl-HTTP-Tiny-0:0.0 100% |  50.9 MiB/s | 156.4 KiB |  00m00s
+2026-02-11T15:10:43.4106567Z [42/85] Installing perl-IPC-Open3-0:1.2 100% |  11.4 MiB/s |  23.3 KiB |  00m00s
+2026-02-11T15:10:43.4137304Z [43/85] Installing perl-Class-Struct-0: 100% |  25.3 MiB/s |  25.9 KiB |  00m00s
+2026-02-11T15:10:43.4161173Z [44/85] Installing perl-Socket-4:2.038- 100% |  39.7 MiB/s | 122.0 KiB |  00m00s
+2026-02-11T15:10:43.4177562Z [45/85] Installing perl-Symbol-0:1.09-5 100% |   7.0 MiB/s |   7.2 KiB |  00m00s
+2026-02-11T15:10:43.4213381Z [46/85] Installing perl-SelectSaver-0:1 100% |   2.5 MiB/s |   2.6 KiB |  00m00s
+2026-02-11T15:10:43.4391442Z [47/85] Installing perl-podlators-1:6.0 100% |  18.5 MiB/s | 321.4 KiB |  00m00s
+2026-02-11T15:10:43.4547054Z [48/85] Installing perl-Pod-Perldoc-0:3 100% |   9.7 MiB/s | 169.2 KiB |  00m00s
+2026-02-11T15:10:43.4566804Z [49/85] Installing perl-File-stat-0:1.1 100% |   6.4 MiB/s |  13.1 KiB |  00m00s
+2026-02-11T15:10:43.4594149Z [50/85] Installing perl-Text-ParseWords 100% |  14.2 MiB/s |  14.6 KiB |  00m00s
+2026-02-11T15:10:43.4610561Z [51/85] Installing perl-Fcntl-0:1.18-51 100% |  24.4 MiB/s |  50.0 KiB |  00m00s
+2026-02-11T15:10:43.4640575Z [52/85] Installing perl-base-0:2.27-519 100% |  12.6 MiB/s |  12.9 KiB |  00m00s
+2026-02-11T15:10:43.4662638Z [53/85] Installing perl-mro-0:1.29-519. 100% |  13.9 MiB/s |  42.6 KiB |  00m00s
+2026-02-11T15:10:43.4686562Z [54/85] Installing perl-overloading-0:0 100% |   5.4 MiB/s |   5.5 KiB |  00m00s
+2026-02-11T15:10:43.4861507Z [55/85] Installing perl-Pod-Usage-4:2.0 100% |   5.7 MiB/s |  87.9 KiB |  00m00s
+2026-02-11T15:10:43.4886842Z [56/85] Installing perl-IO-0:1.55-519.f 100% |  36.9 MiB/s | 151.3 KiB |  00m00s
+2026-02-11T15:10:43.4903336Z [57/85] Installing perl-constant-0:1.33 100% |  26.7 MiB/s |  27.4 KiB |  00m00s
+2026-02-11T15:10:43.4931211Z [58/85] Installing perl-parent-1:0.244- 100% |  10.7 MiB/s |  11.0 KiB |  00m00s
+2026-02-11T15:10:43.4951294Z [59/85] Installing perl-MIME-Base64-0:3 100% |  14.4 MiB/s |  44.3 KiB |  00m00s
+2026-02-11T15:10:43.4968219Z [60/85] Installing perl-File-Basename-0 100% |  14.2 MiB/s |  14.6 KiB |  00m00s
+2026-02-11T15:10:43.5014809Z [61/85] Installing perl-Errno-0:1.38-51 100% |   8.5 MiB/s |   8.7 KiB |  00m00s
+2026-02-11T15:10:43.5035125Z [62/85] Installing perl-Scalar-List-Uti 100% |  29.0 MiB/s | 148.6 KiB |  00m00s
+2026-02-11T15:10:43.5052890Z [63/85] Installing perl-vars-0:1.05-519 100% |   4.2 MiB/s |   4.3 KiB |  00m00s
+2026-02-11T15:10:43.5070250Z [64/85] Installing perl-Getopt-Std-0:1. 100% |  11.5 MiB/s |  11.7 KiB |  00m00s
+2026-02-11T15:10:43.5103322Z [65/85] Installing perl-overload-0:1.37 100% |  70.3 MiB/s |  71.9 KiB |  00m00s
+2026-02-11T15:10:43.5135071Z [66/85] Installing perl-Storable-1:3.32 100% |  76.1 MiB/s | 233.9 KiB |  00m00s
+2026-02-11T15:10:43.5157276Z [67/85] Installing perl-Getopt-Long-1:2 100% |  71.9 MiB/s | 147.2 KiB |  00m00s
+2026-02-11T15:10:43.5178156Z [68/85] Installing perl-Exporter-0:5.78 100% |  27.2 MiB/s |  55.6 KiB |  00m00s
+2026-02-11T15:10:43.5219760Z [69/85] Installing perl-Carp-0:1.54-512 100% |  23.3 MiB/s |  47.7 KiB |  00m00s
+2026-02-11T15:10:43.5247234Z [70/85] Installing perl-PathTools-0:3.9 100% |  45.1 MiB/s | 184.5 KiB |  00m00s
+2026-02-11T15:10:43.5494129Z [71/85] Installing perl-DynaLoader-0:1. 100% |  15.9 MiB/s |  32.5 KiB |  00m00s
+2026-02-11T15:10:43.5673033Z [72/85] Installing perl-Encode-4:3.21-5 100% | 117.3 MiB/s |   4.7 MiB |  00m00s
+2026-02-11T15:10:43.6748971Z [73/85] Installing perl-libs-4:5.40.3-5 100% |  92.4 MiB/s |   9.9 MiB |  00m00s
+2026-02-11T15:10:43.6932682Z [74/85] Installing perl-interpreter-4:5 100% |   7.3 MiB/s | 120.1 KiB |  00m00s
+2026-02-11T15:10:43.6962789Z [75/85] Installing perl-TermReadKey-0:2 100% |  21.5 MiB/s |  66.2 KiB |  00m00s
+2026-02-11T15:10:43.6981851Z [76/85] Installing perl-Error-1:0.17030 100% |  39.0 MiB/s |  80.0 KiB |  00m00s
+2026-02-11T15:10:43.7004647Z [77/85] Installing perl-lib-0:0.65-519. 100% |   8.7 MiB/s |   8.9 KiB |  00m00s
+2026-02-11T15:10:43.7028476Z [78/85] Installing perl-Git-0:2.53.0-1. 100% |  31.9 MiB/s |  65.4 KiB |  00m00s
+2026-02-11T15:10:43.7053341Z [79/85] Installing git-0:2.53.0-1.fc42. 100% |  28.2 MiB/s |  57.7 KiB |  00m00s
+2026-02-11T15:10:43.7759520Z [80/85] Installing libb2-0:0.98.1-13.fc 100% |   6.6 MiB/s |  47.2 KiB |  00m00s
+2026-02-11T15:10:44.0389478Z [81/85] Installing python3-libs-0:3.13. 100% | 124.6 MiB/s |  40.5 MiB |  00m00s
+2026-02-11T15:10:44.1274824Z [82/85] Installing python3-0:3.13.11-2. 100% |   1.7 MiB/s |  30.5 KiB |  00m00s
+2026-02-11T15:10:44.2353702Z [83/85] Installing python3-pip-0:24.3.1 100% |  65.3 MiB/s |  11.6 MiB |  00m00s
+2026-02-11T15:10:44.2510656Z [84/85] Installing python-unversioned-c 100% |  29.6 KiB/s | 424.0   B |  00m00s
+2026-02-11T15:10:44.4482245Z [85/85] Installing perl-NDBM_File-0:1.1 100% | 149.4 KiB/s |  29.6 KiB |  00m00s
+2026-02-11T15:10:44.4482832Z Complete!
+2026-02-11T15:10:44.4938131Z ##[group]Run actions/checkout@v6
+2026-02-11T15:10:44.4938391Z with:
+2026-02-11T15:10:44.4938581Z   submodules: recursive
+2026-02-11T15:10:44.4938808Z   repository: gabrielima7/ImunoEdge
+2026-02-11T15:10:44.4939210Z   token: ***
+2026-02-11T15:10:44.4939402Z   ssh-strict: true
+2026-02-11T15:10:44.4939591Z   ssh-user: git
+2026-02-11T15:10:44.4939787Z   persist-credentials: true
+2026-02-11T15:10:44.4940001Z   clean: true
+2026-02-11T15:10:44.4940200Z   sparse-checkout-cone-mode: true
+2026-02-11T15:10:44.4940431Z   fetch-depth: 1
+2026-02-11T15:10:44.4940613Z   fetch-tags: false
+2026-02-11T15:10:44.4940792Z   show-progress: true
+2026-02-11T15:10:44.4940977Z   lfs: false
+2026-02-11T15:10:44.4941150Z   set-safe-directory: true
+2026-02-11T15:10:44.4941359Z env:
+2026-02-11T15:10:44.4941526Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:44.4941985Z ##[endgroup]
+2026-02-11T15:10:44.4984268Z ##[command]/usr/bin/docker exec  2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 sh -c "cat /etc/*release | grep ^ID"
+2026-02-11T15:10:44.6919374Z Syncing repository: gabrielima7/ImunoEdge
+2026-02-11T15:10:44.6921289Z ##[group]Getting Git version info
+2026-02-11T15:10:44.6921858Z Working directory is '/__w/ImunoEdge/ImunoEdge'
+2026-02-11T15:10:44.6922466Z [command]/usr/sbin/git version
+2026-02-11T15:10:44.6922694Z git version 2.53.0
+2026-02-11T15:10:44.6923505Z ##[endgroup]
+2026-02-11T15:10:44.6936671Z Temporarily overriding HOME='/__w/_temp/c2f268f0-df3a-499d-b92e-5f6f2f7907e3' before making global git config changes
+2026-02-11T15:10:44.6937849Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:10:44.6942252Z [command]/usr/sbin/git config --global --add safe.directory /__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:44.6976824Z Deleting the contents of '/__w/ImunoEdge/ImunoEdge'
+2026-02-11T15:10:44.6980473Z ##[group]Initializing the repository
+2026-02-11T15:10:44.6984263Z [command]/usr/sbin/git init /__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:44.7026638Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-02-11T15:10:44.7027554Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-02-11T15:10:44.7028400Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-02-11T15:10:44.7028961Z hint: call:
+2026-02-11T15:10:44.7029200Z hint:
+2026-02-11T15:10:44.7029576Z hint: 	git config --global init.defaultBranch <name>
+2026-02-11T15:10:44.7030034Z hint:
+2026-02-11T15:10:44.7030318Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-02-11T15:10:44.7030874Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-02-11T15:10:44.7031451Z hint:
+2026-02-11T15:10:44.7031862Z hint: 	git branch -m <name>
+2026-02-11T15:10:44.7032176Z hint:
+2026-02-11T15:10:44.7032466Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-02-11T15:10:44.7033151Z Initialized empty Git repository in /__w/ImunoEdge/ImunoEdge/.git/
+2026-02-11T15:10:44.7039762Z [command]/usr/sbin/git remote add origin https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:10:44.7071042Z ##[endgroup]
+2026-02-11T15:10:44.7071604Z ##[group]Disabling automatic garbage collection
+2026-02-11T15:10:44.7076113Z [command]/usr/sbin/git config --local gc.auto 0
+2026-02-11T15:10:44.7103369Z ##[endgroup]
+2026-02-11T15:10:44.7103871Z ##[group]Setting up auth
+2026-02-11T15:10:44.7105017Z Removing SSH command configuration
+2026-02-11T15:10:44.7110684Z [command]/usr/sbin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:10:44.7142393Z [command]/usr/sbin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:10:44.7444550Z Removing HTTP extra header
+2026-02-11T15:10:44.7448455Z [command]/usr/sbin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:10:44.7478494Z [command]/usr/sbin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:10:44.7770535Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:10:44.7775636Z [command]/usr/sbin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:44.7806835Z [command]/usr/sbin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:44.8113808Z [command]/usr/sbin/git config --file /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:10:44.8150991Z [command]/usr/sbin/git config --local includeIf.gitdir:/__w/ImunoEdge/ImunoEdge/.git.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:44.8180155Z [command]/usr/sbin/git config --local includeIf.gitdir:/__w/ImunoEdge/ImunoEdge/.git/worktrees/*.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:44.8209629Z [command]/usr/sbin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:44.8240871Z [command]/usr/sbin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:44.8267547Z ##[endgroup]
+2026-02-11T15:10:44.8268038Z ##[group]Fetching the repository
+2026-02-11T15:10:44.8276663Z [command]/usr/sbin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +986309715c873a9d0321898c95101bb9865bc9d0:refs/remotes/origin/main
+2026-02-11T15:10:45.0960666Z From https://github.com/gabrielima7/ImunoEdge
+2026-02-11T15:10:45.0961419Z  * [new ref]         986309715c873a9d0321898c95101bb9865bc9d0 -> origin/main
+2026-02-11T15:10:45.0996961Z [command]/usr/sbin/git branch --list --remote origin/main
+2026-02-11T15:10:45.1022359Z   origin/main
+2026-02-11T15:10:45.1031207Z [command]/usr/sbin/git rev-parse refs/remotes/origin/main
+2026-02-11T15:10:45.1053719Z 986309715c873a9d0321898c95101bb9865bc9d0
+2026-02-11T15:10:45.1059240Z ##[endgroup]
+2026-02-11T15:10:45.1059764Z ##[group]Determining the checkout info
+2026-02-11T15:10:45.1061325Z ##[endgroup]
+2026-02-11T15:10:45.1068296Z [command]/usr/sbin/git sparse-checkout disable
+2026-02-11T15:10:45.1107292Z [command]/usr/sbin/git config --local --unset-all extensions.worktreeConfig
+2026-02-11T15:10:45.1137666Z ##[group]Checking out the ref
+2026-02-11T15:10:45.1141022Z [command]/usr/sbin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-02-11T15:10:45.1198168Z Switched to a new branch 'main'
+2026-02-11T15:10:45.1201247Z branch 'main' set up to track 'origin/main'.
+2026-02-11T15:10:45.1206828Z ##[endgroup]
+2026-02-11T15:10:45.1207357Z ##[group]Setting up auth for fetching submodules
+2026-02-11T15:10:45.1212533Z [command]/usr/sbin/git config --file /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-02-11T15:10:45.1247665Z [command]/usr/sbin/git config --global include.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:45.1279440Z [command]/usr/sbin/git config --global --unset-all url.https://github.com/.insteadOf
+2026-02-11T15:10:45.1309615Z [command]/usr/sbin/git config --global --add url.https://github.com/.insteadOf git@github.com:
+2026-02-11T15:10:45.1341532Z [command]/usr/sbin/git config --global --add url.https://github.com/.insteadOf org-230595838@github.com:
+2026-02-11T15:10:45.1369032Z ##[endgroup]
+2026-02-11T15:10:45.1369602Z ##[group]Fetching submodules
+2026-02-11T15:10:45.1373157Z [command]/usr/sbin/git submodule sync --recursive
+2026-02-11T15:10:45.1686197Z [command]/usr/sbin/git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+2026-02-11T15:10:45.1987627Z Submodule 'TaipanStack' (https://github.com/gabrielima7/TaipanStack.git) registered for path 'TaipanStack'
+2026-02-11T15:10:45.2014712Z Cloning into '/__w/ImunoEdge/ImunoEdge/TaipanStack'...
+2026-02-11T15:10:49.0359920Z Submodule path 'TaipanStack': checked out '788267ef00de0831d0cbe7423802ecc040dd79f8'
+2026-02-11T15:10:49.0391547Z [command]/usr/sbin/git submodule foreach --recursive git config --local gc.auto 0
+2026-02-11T15:10:49.0694672Z Entering 'TaipanStack'
+2026-02-11T15:10:49.0745480Z ##[endgroup]
+2026-02-11T15:10:49.0746001Z ##[group]Persisting credentials for submodules
+2026-02-11T15:10:49.0752355Z [command]/usr/sbin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'url\.https\:\/\/github\.com\/\.insteadOf' && git config --local --unset-all 'url.https://github.com/.insteadOf' || :"
+2026-02-11T15:10:49.1052381Z Entering 'TaipanStack'
+2026-02-11T15:10:49.1120429Z [command]/usr/sbin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:49.1417991Z Entering 'TaipanStack'
+2026-02-11T15:10:49.1442120Z file:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:10:49.1474069Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:49.1507428Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config includeIf.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:49.1540025Z [command]/usr/sbin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'git@github.com:'
+2026-02-11T15:10:49.1840136Z Entering 'TaipanStack'
+2026-02-11T15:10:49.1897555Z [command]/usr/sbin/git submodule foreach --recursive git config --local --add 'url.https://github.com/.insteadOf' 'org-230595838@github.com:'
+2026-02-11T15:10:49.2193950Z Entering 'TaipanStack'
+2026-02-11T15:10:49.2247263Z ##[endgroup]
+2026-02-11T15:10:49.2285364Z [command]/usr/sbin/git log -1 --format=%H
+2026-02-11T15:10:49.2310464Z 986309715c873a9d0321898c95101bb9865bc9d0
+2026-02-11T15:10:49.2461222Z ##[group]Run python3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true
+2026-02-11T15:10:49.2462428Z [36;1mpython3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true[0m
+2026-02-11T15:10:49.2463108Z [36;1mpython3 -m pip install -e . --break-system-packages || python3 -m pip install -e .[0m
+2026-02-11T15:10:49.2463605Z shell: sh -e {0}
+2026-02-11T15:10:49.2463803Z env:
+2026-02-11T15:10:49.2463987Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:49.2464211Z ##[endgroup]
+2026-02-11T15:10:49.5395624Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:49.5806815Z Requirement already satisfied: pip in /usr/lib/python3.13/site-packages (24.3.1)
+2026-02-11T15:10:49.6831859Z Collecting pip
+2026-02-11T15:10:49.7319638Z   Downloading pip-26.0.1-py3-none-any.whl.metadata (4.7 kB)
+2026-02-11T15:10:49.7482469Z Downloading pip-26.0.1-py3-none-any.whl (1.8 MB)
+2026-02-11T15:10:49.8117909Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 54.6 MB/s eta 0:00:00
+2026-02-11T15:10:49.8252355Z Installing collected packages: pip
+2026-02-11T15:10:50.5746173Z Successfully installed pip-26.0.1
+2026-02-11T15:10:50.5748543Z WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable.It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-02-11T15:10:50.9449266Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:50.9785478Z Obtaining file:///__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:50.9804063Z   Installing build dependencies: started
+2026-02-11T15:10:51.6516234Z   Installing build dependencies: finished with status 'done'
+2026-02-11T15:10:51.6521951Z   Checking if build backend supports build_editable: started
+2026-02-11T15:10:51.8995653Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-02-11T15:10:51.9883434Z ERROR: Exception:
+2026-02-11T15:10:51.9883793Z Traceback (most recent call last):
+2026-02-11T15:10:51.9884553Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+2026-02-11T15:10:51.9885075Z     status = _inner_run()
+2026-02-11T15:10:51.9885532Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+2026-02-11T15:10:51.9886027Z     return self.run(options, args)
+2026-02-11T15:10:51.9886252Z            ~~~~~~~~^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9886703Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/req_command.py", line 96, in wrapper
+2026-02-11T15:10:51.9887149Z     return func(self, options, args)
+2026-02-11T15:10:51.9887585Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/commands/install.py", line 392, in run
+2026-02-11T15:10:51.9888010Z     requirement_set = resolver.resolve(
+2026-02-11T15:10:51.9888612Z         reqs, check_supported_wheels=not options.target_dir
+2026-02-11T15:10:51.9888886Z     )
+2026-02-11T15:10:51.9889300Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 79, in resolve
+2026-02-11T15:10:51.9889886Z     collected = self.factory.collect_root_requirements(root_reqs)
+2026-02-11T15:10:51.9890497Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 538, in collect_root_requirements
+2026-02-11T15:10:51.9891243Z     reqs = list(
+2026-02-11T15:10:51.9891453Z         self._make_requirements_from_install_req(
+2026-02-11T15:10:51.9891953Z     ...<2 lines>...
+2026-02-11T15:10:51.9892127Z         )
+2026-02-11T15:10:51.9892288Z     )
+2026-02-11T15:10:51.9892797Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 494, in _make_requirements_from_install_req
+2026-02-11T15:10:51.9893380Z     cand = self._make_base_candidate_from_link(
+2026-02-11T15:10:51.9893642Z         ireq.link,
+2026-02-11T15:10:51.9893809Z     ...<2 lines>...
+2026-02-11T15:10:51.9893984Z         version=None,
+2026-02-11T15:10:51.9894163Z     )
+2026-02-11T15:10:51.9894631Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 205, in _make_base_candidate_from_link
+2026-02-11T15:10:51.9895238Z     self._editable_candidate_cache[link] = EditableCandidate(
+2026-02-11T15:10:51.9895548Z                                            ~~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:51.9895790Z         link,
+2026-02-11T15:10:51.9895949Z         ^^^^^
+2026-02-11T15:10:51.9896148Z     ...<3 lines>...
+2026-02-11T15:10:51.9896323Z         version=version,
+2026-02-11T15:10:51.9896518Z         ^^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9896687Z     )
+2026-02-11T15:10:51.9896836Z     ^
+2026-02-11T15:10:51.9897245Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 343, in __init__
+2026-02-11T15:10:51.9897714Z     super().__init__(
+2026-02-11T15:10:51.9897903Z     ~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:51.9898070Z         link=link,
+2026-02-11T15:10:51.9898242Z         ^^^^^^^^^^
+2026-02-11T15:10:51.9898397Z     ...<4 lines>...
+2026-02-11T15:10:51.9898570Z         version=version,
+2026-02-11T15:10:51.9898749Z         ^^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9898925Z     )
+2026-02-11T15:10:51.9899063Z     ^
+2026-02-11T15:10:51.9899453Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 161, in __init__
+2026-02-11T15:10:51.9899940Z     self.dist = self._prepare()
+2026-02-11T15:10:51.9900143Z                 ~~~~~~~~~~~~~^^
+2026-02-11T15:10:51.9900576Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 238, in _prepare
+2026-02-11T15:10:51.9901063Z     dist = self._prepare_distribution()
+2026-02-11T15:10:51.9901598Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 353, in _prepare_distribution
+2026-02-11T15:10:51.9902364Z     return self._factory.preparer.prepare_editable_requirement(self._ireq)
+2026-02-11T15:10:51.9902753Z            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+2026-02-11T15:10:51.9903298Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/operations/prepare.py", line 713, in prepare_editable_requirement
+2026-02-11T15:10:51.9903809Z     dist = _get_prepared_distribution(
+2026-02-11T15:10:51.9904041Z         req,
+2026-02-11T15:10:51.9904209Z     ...<3 lines>...
+2026-02-11T15:10:51.9904406Z         self.check_build_deps,
+2026-02-11T15:10:51.9904604Z     )
+2026-02-11T15:10:51.9905021Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/operations/prepare.py", line 77, in _get_prepared_distribution
+2026-02-11T15:10:51.9905547Z     abstract_dist.prepare_distribution_metadata(
+2026-02-11T15:10:51.9905810Z     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:51.9906107Z         build_env_installer, build_isolation, check_build_deps
+2026-02-11T15:10:51.9906597Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9906842Z     )
+2026-02-11T15:10:51.9906989Z     ^
+2026-02-11T15:10:51.9907413Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/distributions/sdist.py", line 53, in prepare_distribution_metadata
+2026-02-11T15:10:51.9907928Z     self.req.editable_sanity_check()
+2026-02-11T15:10:51.9908148Z     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-02-11T15:10:51.9908717Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/req/req_install.py", line 501, in editable_sanity_check
+2026-02-11T15:10:51.9909253Z     if self.editable and not self.supports_pyproject_editable:
+2026-02-11T15:10:51.9909572Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9909897Z   File "/usr/lib64/python3.13/functools.py", line 1025, in __get__
+2026-02-11T15:10:51.9910201Z     val = self.func(instance)
+2026-02-11T15:10:51.9910664Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/req/req_install.py", line 237, in supports_pyproject_editable
+2026-02-11T15:10:51.9911238Z     return "build_editable" in self.pep517_backend._supported_features()
+2026-02-11T15:10:51.9911596Z                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-02-11T15:10:51.9912203Z   File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 180, in _supported_features
+2026-02-11T15:10:51.9912728Z     return self._call_hook("_supported_features", {})
+2026-02-11T15:10:51.9913018Z            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:51.9913456Z   File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
+2026-02-11T15:10:51.9913906Z     raise BackendUnavailable(
+2026-02-11T15:10:51.9914115Z     ...<4 lines>...
+2026-02-11T15:10:51.9914295Z     )
+2026-02-11T15:10:51.9914657Z pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'setuptools.backends._legacy'
+2026-02-11T15:10:52.2730191Z WARNING: The directory '/github/home/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+2026-02-11T15:10:52.3067023Z Obtaining file:///__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:52.3085492Z   Installing build dependencies: started
+2026-02-11T15:10:52.9484965Z   Installing build dependencies: finished with status 'done'
+2026-02-11T15:10:52.9490296Z   Checking if build backend supports build_editable: started
+2026-02-11T15:10:53.2012937Z   Checking if build backend supports build_editable: finished with status 'done'
+2026-02-11T15:10:53.2982728Z ERROR: Exception:
+2026-02-11T15:10:53.2983118Z Traceback (most recent call last):
+2026-02-11T15:10:53.2983877Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/base_command.py", line 107, in _run_wrapper
+2026-02-11T15:10:53.2984626Z     status = _inner_run()
+2026-02-11T15:10:53.2985305Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/base_command.py", line 98, in _inner_run
+2026-02-11T15:10:53.2986015Z     return self.run(options, args)
+2026-02-11T15:10:53.2986362Z            ~~~~~~~~^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.2987005Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/cli/req_command.py", line 96, in wrapper
+2026-02-11T15:10:53.2987705Z     return func(self, options, args)
+2026-02-11T15:10:53.2988368Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/commands/install.py", line 392, in run
+2026-02-11T15:10:53.2989063Z     requirement_set = resolver.resolve(
+2026-02-11T15:10:53.2989523Z         reqs, check_supported_wheels=not options.target_dir
+2026-02-11T15:10:53.2989949Z     )
+2026-02-11T15:10:53.2990590Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/resolver.py", line 79, in resolve
+2026-02-11T15:10:53.2991504Z     collected = self.factory.collect_root_requirements(root_reqs)
+2026-02-11T15:10:53.2993154Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 538, in collect_root_requirements
+2026-02-11T15:10:53.2994006Z     reqs = list(
+2026-02-11T15:10:53.2994330Z         self._make_requirements_from_install_req(
+2026-02-11T15:10:53.2994719Z     ...<2 lines>...
+2026-02-11T15:10:53.2994986Z         )
+2026-02-11T15:10:53.2995207Z     )
+2026-02-11T15:10:53.2996184Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 494, in _make_requirements_from_install_req
+2026-02-11T15:10:53.2997125Z     cand = self._make_base_candidate_from_link(
+2026-02-11T15:10:53.2997517Z         ireq.link,
+2026-02-11T15:10:53.2997786Z     ...<2 lines>...
+2026-02-11T15:10:53.2998039Z         version=None,
+2026-02-11T15:10:53.2998311Z     )
+2026-02-11T15:10:53.2999049Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/factory.py", line 205, in _make_base_candidate_from_link
+2026-02-11T15:10:53.3000049Z     self._editable_candidate_cache[link] = EditableCandidate(
+2026-02-11T15:10:53.3000535Z                                            ~~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:53.3000904Z         link,
+2026-02-11T15:10:53.3001136Z         ^^^^^
+2026-02-11T15:10:53.3001377Z     ...<3 lines>...
+2026-02-11T15:10:53.3001641Z         version=version,
+2026-02-11T15:10:53.3002095Z         ^^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.3002371Z     )
+2026-02-11T15:10:53.3002584Z     ^
+2026-02-11T15:10:53.3003254Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 343, in __init__
+2026-02-11T15:10:53.3004024Z     super().__init__(
+2026-02-11T15:10:53.3004304Z     ~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:53.3004563Z         link=link,
+2026-02-11T15:10:53.3004823Z         ^^^^^^^^^^
+2026-02-11T15:10:53.3005065Z     ...<4 lines>...
+2026-02-11T15:10:53.3005342Z         version=version,
+2026-02-11T15:10:53.3005625Z         ^^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.3005940Z     )
+2026-02-11T15:10:53.3006166Z     ^
+2026-02-11T15:10:53.3006809Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 161, in __init__
+2026-02-11T15:10:53.3007612Z     self.dist = self._prepare()
+2026-02-11T15:10:53.3007932Z                 ~~~~~~~~~~~~~^^
+2026-02-11T15:10:53.3008653Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 238, in _prepare
+2026-02-11T15:10:53.3009450Z     dist = self._prepare_distribution()
+2026-02-11T15:10:53.3010311Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/resolution/resolvelib/candidates.py", line 353, in _prepare_distribution
+2026-02-11T15:10:53.3011363Z     return self._factory.preparer.prepare_editable_requirement(self._ireq)
+2026-02-11T15:10:53.3012133Z            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+2026-02-11T15:10:53.3013017Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/operations/prepare.py", line 713, in prepare_editable_requirement
+2026-02-11T15:10:53.3013861Z     dist = _get_prepared_distribution(
+2026-02-11T15:10:53.3014206Z         req,
+2026-02-11T15:10:53.3014458Z     ...<3 lines>...
+2026-02-11T15:10:53.3014735Z         self.check_build_deps,
+2026-02-11T15:10:53.3015049Z     )
+2026-02-11T15:10:53.3015699Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/operations/prepare.py", line 77, in _get_prepared_distribution
+2026-02-11T15:10:53.3016556Z     abstract_dist.prepare_distribution_metadata(
+2026-02-11T15:10:53.3016981Z     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+2026-02-11T15:10:53.3017441Z         build_env_installer, build_isolation, check_build_deps
+2026-02-11T15:10:53.3017929Z         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.3018317Z     )
+2026-02-11T15:10:53.3018538Z     ^
+2026-02-11T15:10:53.3019242Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/distributions/sdist.py", line 53, in prepare_distribution_metadata
+2026-02-11T15:10:53.3020307Z     self.req.editable_sanity_check()
+2026-02-11T15:10:53.3020652Z     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-02-11T15:10:53.3021358Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/req/req_install.py", line 501, in editable_sanity_check
+2026-02-11T15:10:53.3022443Z     if self.editable and not self.supports_pyproject_editable:
+2026-02-11T15:10:53.3022930Z                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.3023672Z   File "/usr/lib64/python3.13/functools.py", line 1025, in __get__
+2026-02-11T15:10:53.3024150Z     val = self.func(instance)
+2026-02-11T15:10:53.3024882Z   File "/usr/local/lib/python3.13/site-packages/pip/_internal/req/req_install.py", line 237, in supports_pyproject_editable
+2026-02-11T15:10:53.3025809Z     return "build_editable" in self.pep517_backend._supported_features()
+2026-02-11T15:10:53.3026368Z                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+2026-02-11T15:10:53.3027168Z   File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 180, in _supported_features
+2026-02-11T15:10:53.3028003Z     return self._call_hook("_supported_features", {})
+2026-02-11T15:10:53.3028452Z            ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2026-02-11T15:10:53.3029164Z   File "/usr/local/lib/python3.13/site-packages/pip/_vendor/pyproject_hooks/_impl.py", line 402, in _call_hook
+2026-02-11T15:10:53.3029893Z     raise BackendUnavailable(
+2026-02-11T15:10:53.3030199Z     ...<4 lines>...
+2026-02-11T15:10:53.3030462Z     )
+2026-02-11T15:10:53.3031039Z pip._vendor.pyproject_hooks._impl.BackendUnavailable: Cannot import 'setuptools.backends._legacy'
+2026-02-11T15:10:53.3598644Z ##[error]Process completed with exit code 2.
+2026-02-11T15:10:53.3698348Z Post job cleanup.
+2026-02-11T15:10:53.3703194Z ##[command]/usr/bin/docker exec  2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960 sh -c "cat /etc/*release | grep ^ID"
+2026-02-11T15:10:53.5558406Z [command]/usr/sbin/git version
+2026-02-11T15:10:53.5593785Z git version 2.53.0
+2026-02-11T15:10:53.5638502Z Temporarily overriding HOME='/__w/_temp/de0021e2-5fe8-4451-8a16-17066d2a9bad' before making global git config changes
+2026-02-11T15:10:53.5640576Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:10:53.5644341Z [command]/usr/sbin/git config --global --add safe.directory /__w/ImunoEdge/ImunoEdge
+2026-02-11T15:10:53.5674988Z Removing SSH command configuration
+2026-02-11T15:10:53.5682946Z [command]/usr/sbin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:10:53.5718876Z [command]/usr/sbin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:10:53.6034891Z Entering 'TaipanStack'
+2026-02-11T15:10:53.6111396Z Removing HTTP extra header
+2026-02-11T15:10:53.6117628Z [command]/usr/sbin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:10:53.6153905Z [command]/usr/sbin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:10:53.6462938Z Entering 'TaipanStack'
+2026-02-11T15:10:53.6529228Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:10:53.6536333Z [command]/usr/sbin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:53.6561227Z includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:53.6563245Z includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:53.6564169Z includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:53.6564766Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:53.6573395Z [command]/usr/sbin/git config --local --get-all includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:53.6597341Z /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6608228Z [command]/usr/sbin/git config --local --unset includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6643348Z [command]/usr/sbin/git config --local --get-all includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:53.6665444Z /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6676058Z [command]/usr/sbin/git config --local --unset includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/worktrees/*.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6707611Z [command]/usr/sbin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:53.6731198Z /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6772499Z [command]/usr/sbin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6804915Z [command]/usr/sbin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:53.6825736Z /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6834282Z [command]/usr/sbin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.6865805Z [command]/usr/sbin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:53.7155834Z Entering 'TaipanStack'
+2026-02-11T15:10:53.7180673Z file:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:10:53.7212495Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:53.7234835Z includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:53.7235331Z includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:53.7243647Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:53.7263668Z /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.7272685Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.7303834Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:53.7324229Z /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.7332145Z [command]/usr/sbin/git config --file /__w/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config
+2026-02-11T15:10:53.7360855Z Removing credentials config '/__w/_temp/git-credentials-2229874f-ad33-4fb9-8678-2a611c754ab5.config'
+2026-02-11T15:10:53.7501973Z Stop and remove container: 3e11c9bb748c4be0888286ee5cf1b915_fedora42_324f0e
+2026-02-11T15:10:53.7506734Z ##[command]/usr/bin/docker rm --force 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:54.0729434Z 2e0a882d4de1f67a73c48d9d0e629065020efaf542715f285e07d7a66ebb3960
+2026-02-11T15:10:54.0764873Z Remove container network: github_network_c11392d78317481dbe812148704437ad
+2026-02-11T15:10:54.0769089Z ##[command]/usr/bin/docker network rm github_network_c11392d78317481dbe812148704437ad
+2026-02-11T15:10:54.2016220Z github_network_c11392d78317481dbe812148704437ad
+2026-02-11T15:10:54.2077647Z Cleaning up orphan processes

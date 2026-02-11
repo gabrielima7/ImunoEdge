@@ -1,0 +1,45 @@
+﻿2026-02-11T15:10:21.8131297Z Post job cleanup.
+2026-02-11T15:10:21.8891847Z [command]/usr/bin/git version
+2026-02-11T15:10:21.8927591Z git version 2.52.0
+2026-02-11T15:10:21.8966438Z Temporarily overriding HOME='/home/runner/work/_temp/5defd7e5-55bf-4de9-b293-bb2530f39954' before making global git config changes
+2026-02-11T15:10:21.8968182Z Adding repository directory to the temporary git global config as a safe directory
+2026-02-11T15:10:21.8972841Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ImunoEdge/ImunoEdge
+2026-02-11T15:10:21.9003804Z Removing SSH command configuration
+2026-02-11T15:10:21.9010295Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-02-11T15:10:21.9042916Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-02-11T15:10:21.9257832Z Entering 'TaipanStack'
+2026-02-11T15:10:21.9312624Z Removing HTTP extra header
+2026-02-11T15:10:21.9317253Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-02-11T15:10:21.9348795Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-02-11T15:10:21.9558123Z Entering 'TaipanStack'
+2026-02-11T15:10:21.9610423Z Removing includeIf entries pointing to credentials config files
+2026-02-11T15:10:21.9615908Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:21.9638028Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:21.9638870Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:21.9639705Z includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:21.9640382Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:21.9648566Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path
+2026-02-11T15:10:21.9669234Z /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9679986Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git.path /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9711718Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path
+2026-02-11T15:10:21.9732700Z /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9742457Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9771931Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-02-11T15:10:21.9792187Z /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9800292Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9829136Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-02-11T15:10:21.9849029Z /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9857231Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:21.9886840Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-02-11T15:10:22.0094272Z Entering 'TaipanStack'
+2026-02-11T15:10:22.0114164Z file:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config	remote.origin.url
+2026-02-11T15:10:22.0145584Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --name-only --get-regexp ^includeIf\.gitdir:
+2026-02-11T15:10:22.0167609Z includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.0168587Z includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.0211205Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.0231094Z /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:22.0239728Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack.path /home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:22.0270824Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --get-all includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path
+2026-02-11T15:10:22.0290903Z /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:22.0299961Z [command]/usr/bin/git config --file /home/runner/work/ImunoEdge/ImunoEdge/.git/modules/TaipanStack/config --unset includeif.gitdir:/github/workspace/.git/modules/TaipanStack.path /github/runner_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config
+2026-02-11T15:10:22.0328674Z Removing credentials config '/home/runner/work/_temp/git-credentials-2dd7fddb-cbf2-40f9-b22e-8563e90b1cf0.config'

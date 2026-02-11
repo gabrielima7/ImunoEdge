@@ -1,0 +1,40 @@
+﻿2026-02-11T15:10:15.8512693Z ##[group]Checking docker version
+2026-02-11T15:10:15.8526059Z ##[command]/usr/bin/docker version --format '{{.Server.APIVersion}}'
+2026-02-11T15:10:15.9357862Z '1.48'
+2026-02-11T15:10:15.9370217Z Docker daemon API version: '1.48'
+2026-02-11T15:10:15.9370998Z ##[command]/usr/bin/docker version --format '{{.Client.APIVersion}}'
+2026-02-11T15:10:15.9568124Z '1.48'
+2026-02-11T15:10:15.9582554Z Docker client API version: '1.48'
+2026-02-11T15:10:15.9588740Z ##[endgroup]
+2026-02-11T15:10:15.9592130Z ##[group]Clean up resources from previous jobs
+2026-02-11T15:10:15.9597637Z ##[command]/usr/bin/docker ps --all --quiet --no-trunc --filter "label=2b8d3b"
+2026-02-11T15:10:15.9743824Z ##[command]/usr/bin/docker network prune --force --filter "label=2b8d3b"
+2026-02-11T15:10:15.9883113Z ##[endgroup]
+2026-02-11T15:10:15.9883649Z ##[group]Create local container network
+2026-02-11T15:10:15.9894284Z ##[command]/usr/bin/docker network create --label 2b8d3b github_network_eec7ef5239e24c7e8e5e8e89fd705e51
+2026-02-11T15:10:16.0403285Z a3db4b19dbd1e68b6ffdccff6363b30c6e1fca1a2e37fc68c1cd953b3db9382e
+2026-02-11T15:10:16.0423636Z ##[endgroup]
+2026-02-11T15:10:16.0446987Z ##[group]Starting job container
+2026-02-11T15:10:16.0469764Z ##[command]/usr/bin/docker pull ubuntu:24.04
+2026-02-11T15:10:16.9615245Z 24.04: Pulling from library/ubuntu
+2026-02-11T15:10:17.2313129Z a3629ac5b9f4: Pulling fs layer
+2026-02-11T15:10:17.6145243Z a3629ac5b9f4: Verifying Checksum
+2026-02-11T15:10:17.6145964Z a3629ac5b9f4: Download complete
+2026-02-11T15:10:18.6712354Z a3629ac5b9f4: Pull complete
+2026-02-11T15:10:18.6794772Z Digest: sha256:cd1dba651b3080c3686ecf4e3c4220f026b521fb76978881737d24f200828b2b
+2026-02-11T15:10:18.6808639Z Status: Downloaded newer image for ubuntu:24.04
+2026-02-11T15:10:18.6818441Z docker.io/library/ubuntu:24.04
+2026-02-11T15:10:18.6904634Z ##[command]/usr/bin/docker create --name 2b5466ff6ae6406b88df783154e68218_ubuntu2404_3abde4 --label 2b8d3b --workdir /__w/ImunoEdge/ImunoEdge --network github_network_eec7ef5239e24c7e8e5e8e89fd705e51  -e "HOME=/github/home" -e GITHUB_ACTIONS=true -e CI=true -v "/var/run/docker.sock":"/var/run/docker.sock" -v "/home/runner/work":"/__w" -v "/home/runner/actions-runner/cached/externals":"/__e":ro -v "/home/runner/work/_temp":"/__w/_temp" -v "/home/runner/work/_actions":"/__w/_actions" -v "/opt/hostedtoolcache":"/__t" -v "/home/runner/work/_temp/_github_home":"/github/home" -v "/home/runner/work/_temp/_github_workflow":"/github/workflow" --entrypoint "tail" ubuntu:24.04 "-f" "/dev/null"
+2026-02-11T15:10:18.7600874Z f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687
+2026-02-11T15:10:18.7626966Z ##[command]/usr/bin/docker start f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687
+2026-02-11T15:10:19.0211034Z f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687
+2026-02-11T15:10:19.0230370Z ##[command]/usr/bin/docker ps --all --filter id=f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687 --filter status=running --no-trunc --format "{{.ID}} {{.Status}}"
+2026-02-11T15:10:19.0346820Z f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687 Up Less than a second
+2026-02-11T15:10:19.0367122Z ##[command]/usr/bin/docker inspect --format "{{range .Config.Env}}{{println .}}{{end}}" f9bdd445f4c07e5da815c94474198d7462175107fe2d7a13abfe609070309687
+2026-02-11T15:10:19.0493546Z GITHUB_ACTIONS=true
+2026-02-11T15:10:19.0494242Z CI=true
+2026-02-11T15:10:19.0494577Z HOME=/github/home
+2026-02-11T15:10:19.0495162Z PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+2026-02-11T15:10:19.0516862Z ##[endgroup]
+2026-02-11T15:10:19.0526283Z ##[group]Waiting for all services to be ready
+2026-02-11T15:10:19.0527999Z ##[endgroup]

@@ -1,0 +1,39 @@
+﻿2026-02-11T15:10:29.6737309Z ##[group]Run bandit -r src/imunoedge/ -ll --skip B603,B311
+2026-02-11T15:10:29.6737785Z [36;1mbandit -r src/imunoedge/ -ll --skip B603,B311[0m
+2026-02-11T15:10:29.6769670Z shell: /usr/bin/bash -e {0}
+2026-02-11T15:10:29.6769911Z env:
+2026-02-11T15:10:29.6770086Z   PYTHON_VERSION_DEFAULT: 3.11
+2026-02-11T15:10:29.6770390Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:10:29.6770827Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib/pkgconfig
+2026-02-11T15:10:29.6771250Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:10:29.6771602Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:10:29.6771992Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.14/x64
+2026-02-11T15:10:29.6772371Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.14/x64/lib
+2026-02-11T15:10:29.6772669Z ##[endgroup]
+2026-02-11T15:10:29.8746808Z [main]	INFO	profile include tests: None
+2026-02-11T15:10:29.8747405Z [main]	INFO	profile exclude tests: None
+2026-02-11T15:10:29.8747979Z [main]	INFO	cli include tests: None
+2026-02-11T15:10:29.8748441Z [main]	INFO	cli exclude tests: B603,B311
+2026-02-11T15:10:29.8749786Z [main]	INFO	running on Python 3.11.14
+2026-02-11T15:10:29.9597172Z Run started:2026-02-11 15:10:29.959449+00:00
+2026-02-11T15:10:29.9597683Z 
+2026-02-11T15:10:29.9597793Z Test results:
+2026-02-11T15:10:29.9598040Z 	No issues identified.
+2026-02-11T15:10:29.9598624Z 
+2026-02-11T15:10:29.9598713Z Code scanned:
+2026-02-11T15:10:29.9598959Z 	Total lines of code: 1201
+2026-02-11T15:10:29.9599242Z 	Total lines skipped (#nosec): 1
+2026-02-11T15:10:29.9599772Z 	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+2026-02-11T15:10:29.9600221Z 
+2026-02-11T15:10:29.9600306Z Run metrics:
+2026-02-11T15:10:29.9600542Z 	Total issues (by severity):
+2026-02-11T15:10:29.9600802Z 		Undefined: 0
+2026-02-11T15:10:29.9601017Z 		Low: 1
+2026-02-11T15:10:29.9601204Z 		Medium: 0
+2026-02-11T15:10:29.9601402Z 		High: 0
+2026-02-11T15:10:29.9601642Z 	Total issues (by confidence):
+2026-02-11T15:10:29.9601905Z 		Undefined: 0
+2026-02-11T15:10:29.9602113Z 		Low: 0
+2026-02-11T15:10:29.9602295Z 		Medium: 0
+2026-02-11T15:10:29.9602490Z 		High: 1
+2026-02-11T15:10:29.9602685Z Files skipped (0):

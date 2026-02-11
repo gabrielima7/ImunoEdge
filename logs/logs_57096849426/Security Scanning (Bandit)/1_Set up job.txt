@@ -1,0 +1,33 @@
+﻿2026-02-11T15:10:14.4301232Z Current runner version: '2.331.0'
+2026-02-11T15:10:14.4327953Z ##[group]Runner Image Provisioner
+2026-02-11T15:10:14.4328833Z Hosted Compute Agent
+2026-02-11T15:10:14.4329421Z Version: 20260123.484
+2026-02-11T15:10:14.4330034Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+2026-02-11T15:10:14.4330683Z Build Date: 2026-01-23T19:41:17Z
+2026-02-11T15:10:14.4331373Z Worker ID: {3c76bf0a-b548-417b-8601-511d40d2e9a8}
+2026-02-11T15:10:14.4332075Z Azure Region: westus
+2026-02-11T15:10:14.4332624Z ##[endgroup]
+2026-02-11T15:10:14.4334409Z ##[group]Operating System
+2026-02-11T15:10:14.4335028Z Ubuntu
+2026-02-11T15:10:14.4335502Z 24.04.3
+2026-02-11T15:10:14.4335903Z LTS
+2026-02-11T15:10:14.4336476Z ##[endgroup]
+2026-02-11T15:10:14.4336948Z ##[group]Runner Image
+2026-02-11T15:10:14.4337491Z Image: ubuntu-24.04
+2026-02-11T15:10:14.4338032Z Version: 20260201.15.1
+2026-02-11T15:10:14.4339042Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260201.15/images/ubuntu/Ubuntu2404-Readme.md
+2026-02-11T15:10:14.4340842Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260201.15
+2026-02-11T15:10:14.4341757Z ##[endgroup]
+2026-02-11T15:10:14.4342881Z ##[group]GITHUB_TOKEN Permissions
+2026-02-11T15:10:14.4345355Z Contents: read
+2026-02-11T15:10:14.4345924Z Metadata: read
+2026-02-11T15:10:14.4346545Z Packages: read
+2026-02-11T15:10:14.4347014Z ##[endgroup]
+2026-02-11T15:10:14.4349386Z Secret source: Actions
+2026-02-11T15:10:14.4350170Z Prepare workflow directory
+2026-02-11T15:10:14.4743703Z Prepare all required actions
+2026-02-11T15:10:14.4781245Z Getting action download info
+2026-02-11T15:10:15.0504482Z Download action repository 'actions/checkout@v6' (SHA:de0fac2e4500dabe0009e67214ff5f5447ce83dd)
+2026-02-11T15:10:15.1704136Z Download action repository 'actions/setup-python@v6' (SHA:a309ff8b426b58ec0e2a45f0f869d46889d02405)
+2026-02-11T15:10:16.2688044Z Download action repository 'semgrep/semgrep-action@v1' (SHA:713efdd345f3035192eaa63f56867b88e63e4e5d)
+2026-02-11T15:10:17.1849785Z Complete job name: Security Scanning (Bandit)
