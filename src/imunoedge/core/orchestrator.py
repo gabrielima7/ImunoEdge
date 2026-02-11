@@ -174,7 +174,7 @@ class ProcessOrchestrator:
             env = os.environ.copy()
 
             if worker.enable_heartbeat:
-                # Use tempfile to avoid security issues with hardcoded /tmp (Bandit B108)
+                # Use tempfile to avoid security issues (Bandit B108)
                 import tempfile
 
                 temp_dir = Path(tempfile.gettempdir())
