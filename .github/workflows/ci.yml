@@ -199,22 +199,23 @@ jobs:
 
       - name: Install dependencies (apk)
         if: matrix.pkg_manager == 'apk'
-        run: apk add --no-cache python3 py3-pip py3-virtualenv py3-setuptools py3-wheel git bash
+        run: apk add --no-cache python3 py3-pip py3-venv py3-virtualenv py3-setuptools py3-wheel git bash
 
       - name: Check out code
         uses: actions/checkout@v6
         with:
           submodules: recursive
 
-      - name: Install project
+      - name: Create and configure venv
         run: |
-          python3 -m pip install --upgrade pip --break-system-packages || python3 -m pip install --upgrade pip || true
-          python3 -m pip install setuptools wheel --break-system-packages || python3 -m pip install setuptools wheel || true
-          python3 -m pip install -e . --break-system-packages || python3 -m pip install -e .
+          python3 -m venv .venv
+          .venv/bin/pip install --upgrade pip
+          .venv/bin/pip install setuptools wheel
+          .venv/bin/pip install -e .
 
       - name: Run smoke test
         run: |
-          PYTHONPATH=src:TaipanStack/src python3 -c "
+          PYTHONPATH=src:TaipanStack/src .venv/bin/python -c "
           import os
           os.environ['IMUNOEDGE_LOG_LEVEL'] = 'CRITICAL'
           from imunoedge.core.orchestrator import ProcessOrchestrator

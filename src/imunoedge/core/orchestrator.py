@@ -115,7 +115,6 @@ class ProcessOrchestrator:
         name: str,
         command: list[str],
         *,
-
         essential: bool = False,
         max_restarts: int = 10,
         enable_heartbeat: bool = False,
