@@ -1,0 +1,63 @@
+# ═══════════════════════════════════════════════════════════════
+# ImunoEdge — Systemd Service Unit
+# ═══════════════════════════════════════════════════════════════
+#
+# Instalação:
+#   sudo cp imunoedge.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable imunoedge.service
+#   sudo systemctl start imunoedge.service
+#
+# Verificação:
+#   sudo systemctl status imunoedge
+#   journalctl -u imunoedge -f
+#
+# ═══════════════════════════════════════════════════════════════
+
+[Unit]
+Description=ImunoEdge - IoT Runtime com Autocura
+Documentation=https://github.com/gabrielima7/ImunoEdge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/opt/imunoedge
+EnvironmentFile=/opt/imunoedge/.env
+
+# Executar usando o Python do venv do projeto
+ExecStart=/opt/imunoedge/.venv/bin/python3 -m imunoedge.main
+
+# ─── Graceful Shutdown ───────────────────────────────────────
+# Envia SIGTERM primeiro, espera 30s para shutdown gracioso,
+# depois SIGKILL se necessário.
+KillSignal=SIGTERM
+TimeoutStopSec=30
+KillMode=mixed
+
+# ─── Restart automático ─────────────────────────────────────
+Restart=always
+RestartSec=5
+
+# ─── Limites de Recursos ────────────────────────────────────
+# Para dispositivos edge com recursos limitados
+MemoryMax=256M
+CPUQuota=80%
+
+# ─── Segurança ───────────────────────────────────────────────
+# Hardening (ajuste conforme necessidade de acesso a hardware)
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/imunoedge /tmp/imunoedge_telemetry_buffer
+PrivateTmp=false
+
+# ─── Logging ─────────────────────────────────────────────────
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=imunoedge
+
+[Install]
+WantedBy=multi-user.target

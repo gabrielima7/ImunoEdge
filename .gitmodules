@@ -1,0 +1,3 @@
+[submodule "TaipanStack"]
+	path = TaipanStack
+	url = https://github.com/gabrielima7/TaipanStack.git
