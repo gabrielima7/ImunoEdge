@@ -1,10 +1,14 @@
 """
-Telemetria Resiliente com Autocura (Store-and-Forward).
+Telemetria Resiliente com Autocura (Store-and-Forward via SQLite).
 
 Envia dados de telemetria para a nuvem com proteção via @retry
 e CircuitBreaker do TaipanStack. Quando o circuito abre (nuvem
-indisponível), armazena os dados localmente e tenta reenviar
-quando o circuito voltar a fechar.
+indisponível), armazena os dados em banco SQLite local (WAL mode)
+e tenta reenviar quando o circuito voltar a fechar.
+
+O uso de SQLite reduz drasticamente o IOPS comparado a arquivos
+JSON individuais, prolongando a vida útil de SD cards em hardware
+embarcado (Raspberry Pi, etc.).
 """
 
 from __future__ import annotations
@@ -12,6 +16,7 @@ from __future__ import annotations
 import json
 import logging
 import os
+import sqlite3
 import threading
 import time
 import uuid
@@ -28,8 +33,16 @@ from taipanstack.utils.metrics import MetricsCollector
 
 logger = logging.getLogger("imunoedge.core.telemetry")
 
-# Diretório de buffer local para store-and-forward
-DEFAULT_BUFFER_DIR = Path("/tmp/imunoedge_telemetry_buffer")  # noqa: S108  # nosec
+# Caminho padrão FHS para o banco de telemetria
+DEFAULT_DB_PATH = (
+    Path(os.getenv("IMUNOEDGE_DATA_DIR", "/var/lib/imunoedge")) / "buffer.db"
+)
+
+# Limite máximo de linhas no buffer (FIFO)
+MAX_BUFFER_ROWS = int(os.getenv("IMUNOEDGE_MAX_BUFFER_ROWS", "10000"))
+
+# Quantidade de payloads por ciclo de flush
+FLUSH_BATCH_SIZE = 10
 
 
 @dataclass(frozen=True)
@@ -55,11 +68,11 @@ class CloudConnectionError(Exception):
 
 
 class TelemetryClient:
-    """Cliente de telemetria resiliente com circuit breaker e store-and-forward.
+    """Cliente de telemetria resiliente com circuit breaker e SQLite buffer.
 
     Faz envio de dados para a nuvem protegido por @retry e CircuitBreaker.
-    Quando o circuito abre, salva os dados em disco e tenta reenviar
-    posteriormente via flush loop.
+    Quando o circuito abre, salva os dados em banco SQLite local (WAL mode)
+    e tenta reenviar posteriormente via flush loop.
 
     Example:
         >>> client = TelemetryClient(
@@ -76,7 +89,7 @@ class TelemetryClient:
         *,
         device_id: str = "imunoedge-default",
         endpoint: str = "https://localhost/telemetry",
-        buffer_dir: Path | str = DEFAULT_BUFFER_DIR,
+        db_path: Path | str = DEFAULT_DB_PATH,
         flush_interval: float = 30.0,
         circuit_failure_threshold: int = 3,
         circuit_timeout: float = 60.0,
@@ -89,8 +102,8 @@ class TelemetryClient:
         Args:
             device_id: Identificador do dispositivo.
             endpoint: URL do endpoint de telemetria na nuvem.
-            buffer_dir: Diretório para armazenamento local de fallback.
-            flush_interval: Intervalo em segundos para tentar reenviar buffer.
+            db_path: Caminho do banco SQLite de buffer.
+            flush_interval: Intervalo em segundos para reenviar buffer.
             circuit_failure_threshold: Falhas antes de abrir o circuito.
             circuit_timeout: Segundos antes de tentar half-open.
             retry_max_attempts: Tentativas por envio.
@@ -100,7 +113,7 @@ class TelemetryClient:
         """
         self._device_id = device_id
         self._endpoint = endpoint
-        self._buffer_dir = Path(buffer_dir)
+        self._db_path = Path(db_path)
         self._flush_interval = flush_interval
         self._metrics = MetricsCollector()
 
@@ -124,8 +137,40 @@ class TelemetryClient:
         self._running = False
         self._lock = threading.Lock()
 
-        # Garante que o diretório de buffer existe
-        self._buffer_dir.mkdir(parents=True, exist_ok=True)
+        # Inicializa o banco SQLite
+        self._conn = self._init_db()
+
+    def _init_db(self) -> sqlite3.Connection:
+        """Inicializa o banco SQLite com WAL mode.
+
+        Returns:
+            Conexão SQLite configurada.
+
+        """
+        # Garante que o diretório pai existe
+        self._db_path.parent.mkdir(parents=True, exist_ok=True)
+
+        conn = sqlite3.connect(
+            str(self._db_path),
+            timeout=5.0,
+            check_same_thread=False,
+        )
+        conn.execute("PRAGMA journal_mode=WAL;")
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS telemetry_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                payload_json TEXT NOT NULL,
+                created_at REAL NOT NULL
+            )
+            """
+        )
+        conn.commit()
+        logger.info(
+            "SQLite buffer inicializado: %s (WAL mode)",
+            self._db_path,
+        )
+        return conn
 
     @property
     def circuit_state(self) -> CircuitState:
@@ -134,10 +179,13 @@ class TelemetryClient:
 
     @property
     def buffered_count(self) -> int:
-        """Retorna a quantidade de payloads armazenados localmente."""
+        """Retorna a quantidade de payloads no buffer SQLite."""
         try:
-            return len(list(self._buffer_dir.glob("*.json")))
-        except OSError:
+            with self._lock:
+                cursor = self._conn.execute("SELECT COUNT(*) FROM telemetry_queue")
+                row = cursor.fetchone()
+                return int(row[0]) if row else 0
+        except sqlite3.Error:
             return 0
 
     def _default_send(self, payload: TelemetryPayload) -> bool:
@@ -162,9 +210,6 @@ class TelemetryClient:
             payload.device_id,
             payload.payload_id,
         )
-        # Em um cenário real, aqui teria:
-        # response = httpx.post(self._endpoint, json=asdict(payload))
-        # response.raise_for_status()
         return True
 
     def _send_with_retry(self, payload: TelemetryPayload) -> bool:
@@ -181,7 +226,6 @@ class TelemetryClient:
 
         for attempt in range(1, self._retry_max_attempts + 1):
             try:
-                # Circuit breaker protege a chamada
                 if not self._circuit_breaker._should_attempt():
                     raise CircuitBreakerError(
                         f"Circuit {self._circuit_breaker.name} is open",
@@ -195,7 +239,12 @@ class TelemetryClient:
             except CircuitBreakerError:
                 raise
 
-            except (CloudConnectionError, ConnectionError, TimeoutError, OSError) as e:
+            except (
+                CloudConnectionError,
+                ConnectionError,
+                TimeoutError,
+                OSError,
+            ) as e:
                 self._circuit_breaker._record_failure(e)
                 last_exc = e
 
@@ -214,10 +263,10 @@ class TelemetryClient:
         raise ConnectionError(msg) from last_exc
 
     def send(self, data: dict[str, Any]) -> bool:
-        """Envia dados de telemetria (ou armazena localmente se falhar).
+        """Envia dados de telemetria (ou armazena em SQLite se falhar).
 
         Este é o método principal. Tenta enviar via retry+circuit_breaker.
-        Se o circuito estiver aberto, armazena localmente para reenvio.
+        Se o circuito estiver aberto, armazena em SQLite para reenvio.
 
         Args:
             data: Dados de telemetria a enviar.
@@ -239,113 +288,70 @@ class TelemetryClient:
             return True
 
         except CircuitBreakerError:
-            # Circuito aberto — armazena localmente
             self._store_locally(payload)
             self._metrics.increment("telemetry_circuit_open")
             logger.warning(
-                "Circuito aberto — telemetria armazenada localmente: %s",
+                "Circuito aberto — telemetria armazenada em SQLite: %s",
                 payload.payload_id,
             )
             return False
 
         except Exception:
-            # Retry exauriu — armazena localmente também
             self._store_locally(payload)
             self._metrics.increment("telemetry_send_failed")
             logger.exception(
-                "Falha no envio de telemetria — armazenado localmente: %s",
+                "Falha no envio — armazenado em SQLite: %s",
                 payload.payload_id,
             )
             return False
 
     def _store_locally(self, payload: TelemetryPayload) -> None:
-        """Armazena payload em arquivo JSON local.
+        """Armazena payload no banco SQLite local.
 
         Args:
             payload: Dados a armazenar.
 
         """
         try:
+            payload_json = json.dumps(asdict(payload), default=str)
+            with self._lock:
+                self._conn.execute(
+                    "INSERT INTO telemetry_queue "
+                    "(payload_json, created_at) VALUES (?, ?)",
+                    (payload_json, time.time()),
+                )
+                self._conn.commit()
             self._enforce_buffer_limit()
-            filepath = self._buffer_dir / f"{payload.payload_id}.json"
-            filepath.write_text(
-                json.dumps(asdict(payload), indent=2, default=str),
-                encoding="utf-8",
-            )
             self._metrics.increment("telemetry_buffered")
-            logger.debug("Payload armazenado em %s", filepath)
-        except OSError:
-            logger.exception("Erro ao armazenar payload localmente")
+            logger.debug("Payload armazenado em SQLite: %s", payload.payload_id)
+        except sqlite3.Error:
+            logger.exception("Erro ao armazenar payload em SQLite")
 
     def _enforce_buffer_limit(self) -> None:
-        """Enforce log rotation (FIFO) to keep buffer size under limit.
-
-        If buffer exceeds 50MB, removes oldest .json files until size drops
-        below 45MB (hysteresis to prevent constant deletion/writing).
-        """
-        max_size_mb = float(os.getenv("IMUNOEDGE_MAX_BUFFER_MB", "50"))
-        cleanup_target_mb = max(0.0, max_size_mb - 5.0)  # Target 45MB
-
-        max_size_bytes = int(max_size_mb * 1024 * 1024)
-        target_size_bytes = int(cleanup_target_mb * 1024 * 1024)
-
+        """Mantém o buffer dentro do limite de linhas (FIFO)."""
         try:
-            # 1. List all files and calculate total size
-            files = list(self._buffer_dir.glob("*.json"))
-            if not files:
-                return
-
-            # Stat once to avoid race conditions/multiple calls
-            file_stats = []
-            total_size = 0
-            for p in files:
-                try:
-                    st = p.stat()
-                    file_stats.append((p, st.st_size, st.st_mtime))
-                    total_size += st.st_size
-                except OSError:
-                    # File might have been deleted
-                    pass
-
-            if total_size <= max_size_bytes:
-                return
-
-            # 2. Sort by mtime (oldest first)
-            file_stats.sort(key=lambda x: x[2])
-
-            bytes_to_free = total_size - target_size_bytes
-            freed = 0
-            deleted_count = 0
-
-            # 3. Delete files until target reached
-            for p, size, _ in file_stats:
-                if freed >= bytes_to_free:
-                    break
-
-                try:
-                    p.unlink()
-                    freed += size
-                    deleted_count += 1
-                except OSError:
-                    continue
-
-            if deleted_count > 0:
-                logger.warning(
-                    "HARDENING: Rotação de buffer acionada. "
-                    "Tamanho: %.2fMB > %.2fMB. "
-                    "Removidos %d arquivos (%.2fMB). Nova ocupação: %.2fMB.",
-                    total_size / (1024 * 1024),
-                    max_size_mb,
-                    deleted_count,
-                    freed / (1024 * 1024),
-                    (total_size - freed) / (1024 * 1024),
-                )
-
-        except Exception:
-            logger.exception("Erro crítico durante rotação de buffer (Hardening)")
+            with self._lock:
+                cursor = self._conn.execute("SELECT COUNT(*) FROM telemetry_queue")
+                count = cursor.fetchone()[0]
+                if count > MAX_BUFFER_ROWS:
+                    excess = count - MAX_BUFFER_ROWS
+                    self._conn.execute(
+                        "DELETE FROM telemetry_queue WHERE id IN "
+                        "(SELECT id FROM telemetry_queue "
+                        "ORDER BY created_at ASC LIMIT ?)",
+                        (excess,),
+                    )
+                    self._conn.commit()
+                    logger.warning(
+                        "Buffer FIFO: removidos %d payloads antigos (limite: %d)",
+                        excess,
+                        MAX_BUFFER_ROWS,
+                    )
+        except sqlite3.Error:
+            logger.exception("Erro na rotação do buffer SQLite")
 
     def _flush_buffer(self) -> int:
-        """Tenta reenviar todos os payloads armazenados.
+        """Tenta reenviar payloads armazenados no SQLite.
 
         Returns:
             Quantidade de payloads reenviados com sucesso.
@@ -357,20 +363,31 @@ class TelemetryClient:
 
         flushed = 0
         try:
-            buffer_files = sorted(self._buffer_dir.glob("*.json"))
-        except OSError:
+            with self._lock:
+                cursor = self._conn.execute(
+                    "SELECT id, payload_json FROM telemetry_queue "
+                    "ORDER BY created_at ASC LIMIT ?",
+                    (FLUSH_BATCH_SIZE,),
+                )
+                rows = cursor.fetchall()
+        except sqlite3.Error:
+            logger.exception("Erro ao ler buffer para flush")
             return 0
 
-        for filepath in buffer_files:
+        for row_id, payload_json in rows:
             try:
-                raw = filepath.read_text(encoding="utf-8")
-                data = json.loads(raw)
+                data = json.loads(payload_json)
                 payload = TelemetryPayload(**data)
 
                 self._send_with_retry(payload)
 
-                # Sucesso — remove o arquivo
-                filepath.unlink(missing_ok=True)
+                # Sucesso — remove do banco
+                with self._lock:
+                    self._conn.execute(
+                        "DELETE FROM telemetry_queue WHERE id = ?",
+                        (row_id,),
+                    )
+                    self._conn.commit()
                 flushed += 1
                 self._metrics.increment("telemetry_flushed")
                 logger.info(
@@ -383,7 +400,7 @@ class TelemetryClient:
                 break
 
             except Exception:
-                logger.exception("Erro ao reenviar %s", filepath.name)
+                logger.exception("Erro ao reenviar payload id=%d", row_id)
 
         if flushed > 0:
             logger.info("Flush concluído: %d payloads reenviados", flushed)
@@ -391,7 +408,7 @@ class TelemetryClient:
         return flushed
 
     def _flush_loop(self) -> None:
-        """Loop periódico de flush do buffer local."""
+        """Loop periódico de flush do buffer SQLite."""
         while self._running:
             time.sleep(self._flush_interval)
 
@@ -417,16 +434,25 @@ class TelemetryClient:
         )
         self._flush_thread.start()
         logger.info(
-            "Telemetry client iniciado (device=%s, flush_interval=%.0fs)",
+            "Telemetry client iniciado (device=%s, flush_interval=%.0fs, db=%s)",
             self._device_id,
             self._flush_interval,
+            self._db_path,
         )
 
     def stop(self) -> None:
-        """Para a thread de flush."""
+        """Para a thread de flush e fecha o banco SQLite."""
         self._running = False
         if self._flush_thread and self._flush_thread.is_alive():
             self._flush_thread.join(timeout=self._flush_interval + 2)
+
+        # Fecha conexão SQLite
+        try:
+            self._conn.close()
+            logger.info("SQLite buffer fechado: %s", self._db_path)
+        except sqlite3.Error:
+            logger.exception("Erro ao fechar SQLite")
+
         logger.info("Telemetry client parado")
 
     def get_stats(self) -> dict[str, Any]:
@@ -441,6 +467,7 @@ class TelemetryClient:
             "endpoint": self._endpoint,
             "circuit_state": self._circuit_breaker.state.value,
             "buffered_payloads": self.buffered_count,
+            "db_path": str(self._db_path),
             "counters": {
                 "sent_ok": self._metrics.get_counter("telemetry_sent_ok"),
                 "send_failed": self._metrics.get_counter("telemetry_send_failed"),

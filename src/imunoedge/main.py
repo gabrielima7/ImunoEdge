@@ -23,6 +23,10 @@ from taipanstack.utils.metrics import MetricsCollector
 
 logger = logging.getLogger("imunoedge.main")
 
+# ─── Caminhos FHS ────────────────────────────────────────────
+FHS_DATA_DIR = Path(os.getenv("IMUNOEDGE_DATA_DIR", "/var/lib/imunoedge"))
+FHS_LOG_DIR = Path(os.getenv("IMUNOEDGE_LOG_DIR", "/var/log/imunoedge"))
+
 # ─── Banner ──────────────────────────────────────────────────────
 BANNER = r"""
 ╔══════════════════════════════════════════════════════════╗
@@ -143,12 +147,16 @@ class ImunoEdgeRuntime:
             memory_threshold=_env_float("IMUNOEDGE_MEMORY_THRESHOLD", 90.0),
         )
 
+        # Garante que o diretório de dados existe
+        FHS_DATA_DIR.mkdir(parents=True, exist_ok=True)
+
         self._telemetry = TelemetryClient(
             device_id=self._device_id,
             endpoint=_env(
                 "IMUNOEDGE_TELEMETRY_ENDPOINT",
                 "https://localhost/telemetry",
             ),
+            db_path=FHS_DATA_DIR / "buffer.db",
             flush_interval=_env_float("IMUNOEDGE_FLUSH_INTERVAL", 30.0),
             circuit_failure_threshold=_env_int(
                 "IMUNOEDGE_CIRCUIT_FAILURE_THRESHOLD",

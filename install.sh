@@ -23,7 +23,8 @@ set -euo pipefail
 readonly INSTALL_DIR="/opt/imunoedge"
 readonly SERVICE_NAME="imunoedge"
 readonly SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
-readonly BUFFER_DIR="/tmp/imunoedge_telemetry_buffer"
+readonly BUFFER_DIR="/var/lib/imunoedge"
+readonly LOG_DIR="/var/log/imunoedge"
 readonly SERVICE_USER="imunoedge"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly SCRIPT_DIR
@@ -258,11 +259,17 @@ setup_permissions() {
     chmod 750 "${INSTALL_DIR}"
     success "Permissões do diretório de instalação configuradas"
 
-    # Diretório de buffer de telemetria
+    # Diretório de dados (FHS: /var/lib/imunoedge)
     mkdir -p "${BUFFER_DIR}"
     chown "${SERVICE_USER}:${SERVICE_USER}" "${BUFFER_DIR}"
     chmod 750 "${BUFFER_DIR}"
-    success "Diretório de buffer de telemetria criado: ${BUFFER_DIR}"
+    success "Diretório de dados FHS criado: ${BUFFER_DIR}"
+
+    # Diretório de logs (FHS: /var/log/imunoedge)
+    mkdir -p "${LOG_DIR}"
+    chown "${SERVICE_USER}:${SERVICE_USER}" "${LOG_DIR}"
+    chmod 750 "${LOG_DIR}"
+    success "Diretório de logs FHS criado: ${LOG_DIR}"
 
     # Protege o .env (contém credenciais)
     if [[ -f "${INSTALL_DIR}/.env" ]]; then
@@ -351,7 +358,8 @@ systemctl daemon-reload
 
 echo "Removendo arquivos..."
 rm -rf "${INSTALL_DIR}"
-rm -rf "/tmp/imunoedge_telemetry_buffer"
+rm -rf "/var/lib/imunoedge"
+rm -rf "/var/log/imunoedge"
 
 echo "Removendo usuário..."
 userdel "${SERVICE_USER}" 2>/dev/null || true
