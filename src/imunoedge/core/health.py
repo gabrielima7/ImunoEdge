@@ -22,6 +22,15 @@ from taipanstack.utils.metrics import MetricsCollector
 logger = logging.getLogger("imunoedge.core.health")
 
 
+# Sensores conhecidos, em ordem de prioridade de leitura.
+PREFERRED_SENSORS: tuple[str, ...] = (
+    "cpu_thermal",
+    "thermal_zone0",
+    "coretemp",
+    "k10temp",
+)
+
+
 @dataclass(frozen=True)
 class HealthStatus:
     """Snapshot do estado de saúde do sistema.
@@ -29,7 +38,7 @@ class HealthStatus:
     Attributes:
         cpu_percent: Uso de CPU em percentual.
         memory_percent: Uso de memória RAM em percentual.
-        temperature_celsius: Temperatura do sistema em °C (None se indisponível).
+        temperature_celsius: Temperatura do CPU em °C (0.0 se indisponível).
         is_overheating: Se True, a temperatura ultrapassou o threshold.
         disk_usage_percent: Uso do disco principal em percentual.
         timestamp: Timestamp do snapshot em epoch seconds.
@@ -38,7 +47,7 @@ class HealthStatus:
 
     cpu_percent: float
     memory_percent: float
-    temperature_celsius: float | None
+    temperature_celsius: float
     is_overheating: bool
     disk_usage_percent: float
     timestamp: float
@@ -95,6 +104,9 @@ class HealthMonitor:
         self._is_overheating = False
         self._last_status: HealthStatus | None = None
 
+        # Flag para logar aviso de sensor ausente apenas uma vez
+        self._temp_warning_logged = False
+
         # Callbacks configuráveis externamente
         self.on_overheat: OnOverheatCallback | None = None
         self.on_recover: OnRecoverCallback | None = None
@@ -111,30 +123,57 @@ class HealthMonitor:
         with self._lock:
             return self._is_overheating
 
-    def _collect_temperature(self) -> float | None:
-        """Coleta a temperatura do sistema via psutil.
+    def _get_cpu_temperature(self) -> float:
+        """Lê a temperatura da CPU de forma resiliente.
+
+        Tenta sensores conhecidos em ordem de prioridade.
+        Se nenhum for encontrado (VM, WSL, etc.), retorna 0.0
+        e emite um aviso *uma única vez*.
 
         Returns:
-            Temperatura máxima em °C ou None se não disponível.
+            Temperatura em °C ou 0.0 se indisponível.
 
         """
         try:
             temps = psutil.sensors_temperatures()
             if not temps:
-                return None
+                return self._handle_no_sensor()
 
-            # Pega a temperatura máxima de todos os sensores
+            # 1) Tenta sensores conhecidos na ordem de prioridade
+            for sensor_name in PREFERRED_SENSORS:
+                if sensor_name in temps:
+                    readings = temps[sensor_name]
+                    if readings:
+                        return float(readings[0].current)
+
+            # 2) Fallback: maior temperatura entre todos os sensores
             max_temp = 0.0
             for sensor_readings in temps.values():
                 for reading in sensor_readings:
                     if reading.current > max_temp:
                         max_temp = reading.current
 
-            return max_temp if max_temp > 0 else None
+            return max_temp if max_temp > 0 else self._handle_no_sensor()
 
-        except (AttributeError, OSError):
-            # psutil.sensors_temperatures() não disponível em todos os OS
-            return None
+        except (
+            AttributeError,
+            OSError,
+            IndexError,
+            KeyError,
+            RuntimeError,
+        ):
+            return self._handle_no_sensor()
+
+    def _handle_no_sensor(self) -> float:
+        """Retorna valor seguro e loga aviso apenas uma vez."""
+        if not self._temp_warning_logged:
+            logger.warning(
+                "⚠️  Sensor de temperatura não encontrado "
+                "(VM/WSL/hardware incompatível). "
+                "Usando 0.0°C como fallback.",
+            )
+            self._temp_warning_logged = True
+        return 0.0
 
     def _collect_metrics(self) -> HealthStatus:
         """Coleta todas as métricas do sistema.
@@ -146,9 +185,9 @@ class HealthMonitor:
         cpu = psutil.cpu_percent(interval=1)
         memory = psutil.virtual_memory().percent
         disk = psutil.disk_usage("/").percent
-        temperature = self._collect_temperature()
+        temperature = self._get_cpu_temperature()
 
-        is_overheating = temperature is not None and temperature >= self._temp_threshold
+        is_overheating = temperature > 0 and temperature >= self._temp_threshold
 
         status = HealthStatus(
             cpu_percent=cpu,
@@ -163,8 +202,7 @@ class HealthMonitor:
         self._metrics.gauge("system_cpu_percent", cpu)
         self._metrics.gauge("system_memory_percent", memory)
         self._metrics.gauge("system_disk_percent", disk)
-        if temperature is not None:
-            self._metrics.gauge("system_temperature_celsius", temperature)
+        self._metrics.gauge("system_temperature_celsius", temperature)
 
         return status
 
@@ -230,12 +268,10 @@ class HealthMonitor:
                 self._check_thresholds(status)
 
                 logger.debug(
-                    "Health: CPU=%.1f%% RAM=%.1f%% Temp=%s Disk=%.1f%%",
+                    "Health: CPU=%.1f%% RAM=%.1f%% Temp=%.1f°C Disk=%.1f%%",
                     status.cpu_percent,
                     status.memory_percent,
-                    f"{status.temperature_celsius:.1f}°C"
-                    if status.temperature_celsius
-                    else "N/A",
+                    status.temperature_celsius,
                     status.disk_usage_percent,
                 )
 

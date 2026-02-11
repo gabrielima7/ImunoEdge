@@ -170,6 +170,23 @@ class ImunoEdgeRuntime:
         self._health_monitor.on_overheat = self._on_overheat
         self._health_monitor.on_recover = self._on_recover
 
+        # Validação de configuração
+        self._validate_config()
+
+    def _validate_config(self) -> None:
+        """Valida configurações críticas e emite alertas."""
+        endpoint = _env(
+            "IMUNOEDGE_TELEMETRY_ENDPOINT",
+            "https://localhost/telemetry",
+        )
+        if "localhost" in endpoint or "127.0.0.1" in endpoint:
+            logger.warning(
+                "⚠️  ALERTA: Rodando com endpoint de "
+                "telemetria local (%s). "
+                "Isso não funcionará em produção real!",
+                endpoint,
+            )
+
     def _setup_signal_handlers(self) -> None:
         """Registra handlers para SIGINT e SIGTERM."""
         signal.signal(signal.SIGINT, self._handle_shutdown_signal)
