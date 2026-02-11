@@ -174,8 +174,12 @@ class ProcessOrchestrator:
             env = os.environ.copy()
 
             if worker.enable_heartbeat:
-                beat_path = f"/tmp/imunoedge_{worker.name}.beat"  # noqa: S108
-                worker.heartbeat_file = Path(beat_path)
+                # Use tempfile to avoid security issues with hardcoded /tmp (Bandit B108)
+                import tempfile
+
+                temp_dir = Path(tempfile.gettempdir())
+                beat_path = temp_dir / f"imunoedge_{worker.name}.beat"
+                worker.heartbeat_file = beat_path
 
                 # Cleanup old heartbeat file to ensure fresh start
                 with contextlib.suppress(OSError):
