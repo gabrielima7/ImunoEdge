@@ -305,6 +305,31 @@ run_migration() {
     fi
 }
 
+# ─── Configuração de Logrotate ───────────────────────────────
+setup_logrotate() {
+    step "Configurando rotação de logs"
+    local logrotate_file="/etc/logrotate.d/imunoedge"
+
+    if [[ -d "/etc/logrotate.d" ]]; then
+        info "Criando arquivo de configuração em ${logrotate_file}"
+        cat <<EOF > "${logrotate_file}"
+/var/log/imunoedge/*.log {
+    daily
+    rotate 7
+    compress
+    missingok
+    notifempty
+    copytruncate
+    su imunoedge imunoedge
+}
+EOF
+        chmod 644 "${logrotate_file}"
+        success "Logrotate configurado"
+    else
+        warn "Diretório /etc/logrotate.d não encontrado. Puleando configuração."
+    fi
+}
+
 # ─── Iniciar Serviço ────────────────────────────────────────
 start_service() {
     step "Iniciando serviço"
@@ -418,6 +443,7 @@ main() {
     setup_systemd
     setup_permissions
     run_migration
+    setup_logrotate
     create_uninstall_hint
     start_service
     print_summary
