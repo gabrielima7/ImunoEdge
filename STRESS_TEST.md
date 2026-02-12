@@ -156,14 +156,14 @@ journalctl -u imunoedge -f
 
 ```
 📡 Tentativa 1/1 falhou: Connection refused. Retry em 2.0s...
-⚠️ Circuito aberto — telemetria armazenada localmente: <payload-id>
+⚠️ Circuito aberto — telemetria armazenada em SQLite: <payload-id>
 ```
 
 ```bash
-# 5. Verifique os arquivos de buffer
-ls -la /tmp/imunoedge_telemetry_buffer/
-# Deve haver arquivos .json com os payloads armazenados
-cat /tmp/imunoedge_telemetry_buffer/*.json | head -20
+# 5. Verifique o banco SQLite de buffer (necessita sqlite3 instalado)
+# O buffer fica em /var/lib/imunoedge/buffer.db
+sudo sqlite3 /var/lib/imunoedge/buffer.db "SELECT COUNT(*) FROM telemetry_queue;"
+# Deve retornar um número > 0
 ```
 
 ```bash
@@ -174,7 +174,7 @@ sudo systemctl restart imunoedge
 ```
 
 > [!NOTE]
-> Com o endpoint padrão (localhost), o flush loop tentará reenviar os payloads armazenados. Os arquivos `.json` serão removidos do buffer conforme são reenviados.
+> Com o endpoint padrão (localhost), o flush loop tentará reenviar os payloads armazenados. As linhas serão removidas da tabela `telemetry_queue` conforme são reenviadas.
 
 ---
 
@@ -241,7 +241,7 @@ sudo systemctl stop imunoedge
 ps aux | grep imunoedge
 
 # Buffer de telemetria
-ls -la /tmp/imunoedge_telemetry_buffer/
+sudo sqlite3 /var/lib/imunoedge/buffer.db "SELECT * FROM telemetry_queue LIMIT 5;"
 
 # Editar configuração
 sudo nano /opt/imunoedge/.env

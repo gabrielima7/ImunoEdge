@@ -7,7 +7,8 @@ import os
 import time
 import shutil
 import logging
-import threading
+import sqlite3
+import tempfile
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -16,69 +17,63 @@ import sys
 sys.path.insert(0, str(Path.cwd() / "src"))
 sys.path.insert(0, str(Path.cwd() / "TaipanStack" / "src"))
 
+import imunoedge.core.telemetry
 from imunoedge.core.telemetry import TelemetryClient
-from imunoedge.core.orchestrator import ProcessOrchestrator, WorkerProcess
+from imunoedge.core.orchestrator import ProcessOrchestrator, WorkerProcess, WorkerState
 
 # Configura logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("VERIFY_HARDENING")
 
 def test_disk_hardening():
-    """Teste 1: Verifica se o TelemetryClient limpa o disco."""
-    logger.info(">>> INICIANDO TESTE DE DISCO (LOG ROTATION) <<<")
+    """Teste 1: Verifica se o TelemetryClient limpa o buffer SQLite (FIFO)."""
+    logger.info(">>> INICIANDO TESTE DE BUFFER FIFO (SQLITE) <<<")
     
-    buffer_dir = Path("/tmp/imunoedge_verify_buffer")
-    if buffer_dir.exists():
-        shutil.rmtree(buffer_dir)
-    buffer_dir.mkdir(parents=True)
-
-    # 1. Encher o buffer com 60MB (arquivos de 1MB)
-    logger.info("Gerando 60MB de lixo...")
-    for i in range(60):
-        p = buffer_dir / f"garbage_{i}.json"
-        # Cria arquivo de 1MB
-        with p.open("wb") as f:
-            f.write(b"0" * 1024 * 1024)
-        # Ajusta mtime para simular antiguidade (os primeiros são mais velhos)
-        os.utime(p, (time.time() - 100 + i, time.time() - 100 + i))
-
-    initial_size = sum(f.stat().st_size for f in buffer_dir.glob("*.json")) / (1024 * 1024)
-    logger.info(f"Tamanho inicial do buffer: {initial_size:.2f} MB")
+    # Cria diretório temporário para o banco
+    temp_dir = Path(tempfile.mkdtemp())
+    db_path = temp_dir / "buffer.db"
     
-    if initial_size < 59:
-        logger.error("FALHA: Não conseguiu gerar 60MB de teste.")
-        return False
-
-    # 2. Instanciar TelemetryClient e forçar escrita (que deve disparar limpeza)
-    # Configura limite de 50MB via env
-    os.environ["IMUNOEDGE_MAX_BUFFER_MB"] = "50"
+    # Patch MAX_BUFFER_ROWS directly in the module
+    original_max = imunoedge.core.telemetry.MAX_BUFFER_ROWS
+    imunoedge.core.telemetry.MAX_BUFFER_ROWS = 50
+    logger.info(f"Patched MAX_BUFFER_ROWS to {imunoedge.core.telemetry.MAX_BUFFER_ROWS}")
     
     # Mock send_fn que falha sempre
     def fail_send(payload):
         raise ConnectionError("Simulated failure")
 
-    client = TelemetryClient(
-        buffer_dir=buffer_dir,
-        endpoint="http://invalid-endpoint",
-        circuit_timeout=0.1,
-        send_fn=fail_send,
-    )
-    
-    # Simula envio que falha e salva localmente
-    # Isso deve acionar _enforce_buffer_limit ANTES de salvar
-    logger.info("Tentando enviar payload (deve falhar e acionar limpeza)...")
-    success = client.send({"test": "data"})
-    
-    # 3. Verificar tamanho final
-    final_size = sum(f.stat().st_size for f in buffer_dir.glob("*.json")) / (1024 * 1024)
-    logger.info(f"Tamanho final do buffer: {final_size:.2f} MB")
-    
-    if final_size < 50:
-        logger.info("SUCESSO: Buffer foi reduzido para < 50MB!")
-        return True
-    else:
-        logger.error(f"FALHA: Buffer continua com {final_size:.2f} MB (Esperado < 50MB)")
-        return False
+    client = None
+    try:
+        client = TelemetryClient(
+            db_path=db_path,
+            endpoint="http://invalid-endpoint",
+            circuit_timeout=0.1,
+            retry_max_attempts=1, # No retry to be faster
+            send_fn=fail_send,
+        )
+
+        # Inserir 60 payloads (10 a mais que o limite)
+        logger.info("Inserindo 60 payloads no buffer (limite configurado: 50)...")
+        for i in range(60):
+            client.send({"msg": f"payload_{i}", "val": i})
+
+        # Verificar contagem no banco
+        count = client.buffered_count
+        logger.info(f"Contagem final no buffer: {count}")
+
+        if count <= 50:
+            logger.info("SUCESSO: Buffer respeitou o limite de 50 linhas!")
+            return True
+        else:
+            logger.error(f"FALHA: Buffer tem {count} linhas (Esperado <= 50)")
+            return False
+
+    finally:
+        if client:
+            client.stop()
+        # Restore original value
+        imunoedge.core.telemetry.MAX_BUFFER_ROWS = original_max
+        shutil.rmtree(temp_dir)
 
 def test_zombie_hardening():
     """Teste 2: Verifica detecção de Zumbis via Heartbeat."""
@@ -98,7 +93,7 @@ def test_zombie_hardening():
         name="mock_zombie",
         command=["echo", "zombie"],
         enable_heartbeat=True,
-        state="running"
+        state=WorkerState.RUNNING
     )
     worker.heartbeat_file = beat_file
     
@@ -107,13 +102,17 @@ def test_zombie_hardening():
     worker.process.poll.return_value = None # Processo está "rodando" (None) no SO
     worker.pid = 12345
     
-    # Injeta worker no orquestrador (hack para teste unitário)
+    # Injeta worker no orquestrador
     orch._workers["mock_zombie"] = worker
     
-    # Executa _is_alive
+    # Executa _is_alive (método privado, mas acessível para teste)
     logger.info("Verificando se worker zumbi é detectado...")
     is_alive = orch._is_alive(worker)
     
+    # Limpa arquivo
+    if beat_file.exists():
+        beat_file.unlink()
+
     if is_alive is False:
         logger.info("SUCESSO: Worker Zumbi detectado e marcado como morto!")
         return True

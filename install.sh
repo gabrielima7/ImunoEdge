@@ -241,13 +241,18 @@ setup_systemd() {
 
     success "Service unit instalado em ${SERVICE_FILE}"
 
-    # Recarrega o daemon
-    systemctl daemon-reload
-    success "Systemd daemon recarregado"
+    if [[ -d /run/systemd/system ]]; then
+        # Recarrega o daemon
+        systemctl daemon-reload
+        success "Systemd daemon recarregado"
 
-    # Habilita no boot
-    systemctl enable "${SERVICE_NAME}.service" --quiet
-    success "Serviço habilitado no boot"
+        # Habilita no boot
+        systemctl enable "${SERVICE_NAME}.service" --quiet
+        success "Serviço habilitado no boot"
+    else
+        warn "Systemd não detectado ou não ativo. Puleando reload/enable."
+        warn "Você precisará iniciar o serviço manualmente se estiver em um container."
+    fi
 }
 
 # ─── Configuração de Permissões ──────────────────────────────
@@ -303,6 +308,11 @@ run_migration() {
 # ─── Iniciar Serviço ────────────────────────────────────────
 start_service() {
     step "Iniciando serviço"
+
+    if [[ ! -d /run/systemd/system ]]; then
+        warn "Systemd não disponível. Serviço não iniciado automaticamente."
+        return
+    fi
 
     if systemctl is-active --quiet "${SERVICE_NAME}"; then
         info "Serviço já está rodando, reiniciando..."
@@ -372,10 +382,13 @@ INSTALL_DIR="/opt/imunoedge"
 SERVICE_USER="imunoedge"
 
 echo "Parando e desabilitando serviço..."
-systemctl stop "${SERVICE_NAME}" 2>/dev/null || true
-systemctl disable "${SERVICE_NAME}" 2>/dev/null || true
+if [[ -d /run/systemd/system ]]; then
+    systemctl stop "${SERVICE_NAME}" 2>/dev/null || true
+    systemctl disable "${SERVICE_NAME}" 2>/dev/null || true
+    systemctl daemon-reload
+fi
+
 rm -f "/etc/systemd/system/${SERVICE_NAME}.service"
-systemctl daemon-reload
 
 echo "Removendo arquivos..."
 rm -rf "${INSTALL_DIR}"
