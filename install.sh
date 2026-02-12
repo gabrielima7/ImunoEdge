@@ -279,6 +279,27 @@ setup_permissions() {
     fi
 }
 
+# ─── Migração de Dados ───────────────────────────────────────
+run_migration() {
+    step "Executando migração de dados (Legacy -> SQLite)"
+    local venv_python="${INSTALL_DIR}/.venv/bin/python3"
+    local migration_script="${INSTALL_DIR}/scripts/migrate_v1_to_v2.py"
+
+    if [[ -f "${migration_script}" ]]; then
+        info "Rodando script de migração..."
+        if "${venv_python}" "${migration_script}"; then
+            success "Migração concluída"
+        else
+            warn "Script de migração falhou. Verifique os logs."
+        fi
+
+        # Garante permissões corretas no banco criado (root -> imunoedge)
+        chown -R "${SERVICE_USER}:${SERVICE_USER}" "${BUFFER_DIR}"
+    else
+        warn "Script de migração não encontrado em ${migration_script}"
+    fi
+}
+
 # ─── Iniciar Serviço ────────────────────────────────────────
 start_service() {
     step "Iniciando serviço"
@@ -383,6 +404,7 @@ main() {
     setup_env
     setup_systemd
     setup_permissions
+    run_migration
     create_uninstall_hint
     start_service
     print_summary

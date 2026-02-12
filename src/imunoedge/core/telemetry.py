@@ -164,7 +164,7 @@ class TelemetryClient:
 
         conn = sqlite3.connect(
             str(self._db_path),
-            timeout=5.0,
+            timeout=30.0,
             check_same_thread=False,
         )
         conn.execute("PRAGMA journal_mode=WAL;")
