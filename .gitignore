@@ -29,3 +29,10 @@ Thumbs.db
 
 # Telemetry buffer (store-and-forward temp files)
 /tmp/imunoedge_telemetry_buffer/
+
+# SQLite buffer
+data/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
